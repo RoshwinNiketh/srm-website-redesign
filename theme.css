@@ -3,13 +3,13 @@
   --ground: #faf7ee;
   --surface: #f2ecdf;
   --surface-light: #e9e0cf;
-  --ink: #142620;
-  --muted: #47564f;
+  --ink: #172943;
+  --muted: #475a73;
   --accent: #e6b975;
   --accent-hover: #f5ce97;
   --accent-ink: #80531c;
   --focus: #80531c;
-  --dark: #14221e;
+  --dark: #034DA1;
   --on-dark: #faf7ee;
   --intro-paper: #faf6eb;
   --header-height: 94px;
@@ -19,11 +19,11 @@
 
 /* Keep text and controls readable over the existing campus photography. */
 :where(.hero, .campus-stage, .tilt-card, .life) {
-  --ground: #101e1d;
-  --surface: #162724;
-  --surface-light: #20332e;
+  --ground: #102440;
+  --surface: #182f50;
+  --surface-light: #244165;
   --ink: var(--on-dark);
-  --muted: #d6ded7;
+  --muted: #d6e1f0;
   --accent-ink: var(--accent);
   --focus: var(--accent);
   color: var(--ink);

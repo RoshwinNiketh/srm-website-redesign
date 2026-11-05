@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { pages } from "./site-pages.mjs";
 import { universityDirectory } from "./university-directory.mjs";
+import { homeHighlights, pageHighlights } from "./institutional-highlights.mjs";
 
 const root = import.meta.dirname;
 export const pageRoutes = ["/", "/admissions", ...Object.keys(pages), "/more"];
@@ -39,8 +40,24 @@ function renderDirectory(route) {
   </section>`;
 }
 
+function renderHighlights({ label, title, intro, metrics = [], links }, home = false) {
+  return `<section id="highlights" class="highlights${home ? " highlights-home" : ""}" aria-labelledby="highlights-title">
+    <div class="highlights-heading">
+      <p class="directory-kicker">${label}</p>
+      <div><h2 id="highlights-title">${title}</h2><p>${intro}</p></div>
+    </div>
+    ${metrics.length ? `<div class="highlights-evidence">
+      ${home ? '<img src="/assets/images/engineering.webp" alt="Architectural concept of the SRM engineering campus" width="1672" height="941" loading="lazy" decoding="async" />' : ""}
+      <dl class="highlights-metrics">${metrics.map(([value, description, period, [source, href]]) => `<div class="highlights-metric">
+        <dt>${description}</dt><dd><strong>${value}</strong><span>${period}</span><a href="${href}">${source} <span aria-hidden="true">↗</span></a></dd>
+      </div>`).join("")}</dl>
+    </div>` : ""}
+    <div class="highlights-links">${links.map(([label, href]) => `<a class="text-link" href="${href}">${label} <span aria-hidden="true">↗</span></a>`).join("")}</div>
+  </section>`;
+}
+
 function renderInnerPage(page, route) {
-  const image = page.image ? `<img class="inner-image" src="/assets/images/${page.image}" alt="${page.imageAlt}" />` : "";
+  const image = page.image ? `<img class="inner-image" src="/assets/images/${page.image}" alt="${page.imageAlt}" width="1672" height="941" loading="lazy" decoding="async" />` : "";
   return `<section class="inner-lead${image ? " inner-lead-with-image" : ""}">
     <div>
       <h1>${page.title}</h1>
@@ -48,6 +65,7 @@ function renderInnerPage(page, route) {
       <a class="inner-jump" href="#page-details">Explore this page <span aria-hidden="true">↓</span></a>
     </div>${image}
   </section>
+  ${renderHighlights(pageHighlights[route])}
 ${route === "/contact" ? `  <section id="page-details" class="inner-topics" aria-labelledby="inner-topics-title">
     <h2 id="inner-topics-title">${page.topicHeading}</h2>
     <dl>${page.topics.map(([title, description, href, label]) => `<div>
@@ -85,9 +103,11 @@ export function renderPage(pathname) {
   const home = read("index.html");
   const nav = sharedNavigation(home, isHome ? "/" : route);
   if (isHome) {
-    return home.replace(/<!-- Shared navigation start -->[\s\S]*?<!-- Shared navigation end -->/, () => nav);
+    return home.replace(/<!-- Shared navigation start -->[\s\S]*?<!-- Shared navigation end -->/, () => nav)
+      .replace("<!-- Homepage highlights -->", () => renderHighlights(homeHighlights, true));
   }
-  const template = isAdmissions ? read("admissions.html").replace("<!-- Admissions directory -->", () => renderDirectory(route)) : read("inner-page.html")
+  const template = isAdmissions ? read("admissions.html")
+    .replace("<!-- Admissions directory -->", () => renderHighlights(pageHighlights[route]) + renderDirectory(route)) : read("inner-page.html")
     .replace("<!-- Page title -->", () => innerPage.title)
     .replace("<!-- Page content -->", () => renderInnerPage(innerPage, route));
   return template.replace("<!-- Shared navigation -->", () => nav);

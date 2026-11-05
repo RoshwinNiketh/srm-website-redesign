@@ -20,7 +20,7 @@
         display: grid;
         place-items: center;
         background: #faf7ee;
-        color: #142620;
+        color: #172943;
         font: 16px system-ui, sans-serif;
       }
     </style>
@@ -183,6 +183,7 @@
         </div>
       </section>
 
+      <!-- Homepage highlights -->
       <section id="schools" class="schools-section section-space">
         <div class="section-heading">
           <h2>Different paths.<br />Shared possibility.</h2>
@@ -270,6 +271,8 @@
           id="destination-image"
           src="assets/images/engineering.webp"
           alt=""
+          loading="lazy"
+          decoding="async"
         />
         <div class="destination-scrim"></div>
         <button class="close-dialog" aria-label="Return to campus">
@@ -300,7 +303,7 @@
       </div>
     </dialog>
     <div class="journey-transition" aria-hidden="true">
-      <img src="assets/images/archgate.webp" alt="" />
+      <img src="assets/images/archgate.webp" alt="" loading="lazy" decoding="async" />
       <div></div>
       <span
         >Through the archgate.<br /><strong id="journey-destination"

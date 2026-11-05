@@ -9,6 +9,7 @@
       content="Discover a new perspective on SRM. Explore a cinematic campus concept and find your place in engineering, medicine, arts and science."
     />
     <title>SRM — A world of possibilities</title>
+    <script src="/assistant-prefs.js"></script>
     <style>
       #intro-loading { display: none; }
       html.intro-pending body > :not(#intro-loading) { visibility: hidden; }
@@ -26,6 +27,7 @@
     <script>
       try {
         if (!location.hash && !matchMedia("(prefers-reduced-motion: reduce)").matches &&
+            document.documentElement.dataset.a11yMotion !== "off" &&
             Element.prototype.animate && sessionStorage.getItem("srm-landing-intro-v1") !== "played") {
           document.documentElement.classList.add("intro-pending");
           setTimeout(() => document.documentElement.classList.remove("intro-pending"), 20000);
@@ -40,10 +42,13 @@
     <link rel="stylesheet" href="/site-pages.css" />
     <link rel="stylesheet" href="/campus-explorer.css" />
     <link rel="stylesheet" href="/landing-intro.css" />
+    <link rel="stylesheet" href="/assistant.css" />
     <script src="/navigation.js" defer></script>
     <script src="app.js" defer></script>
     <script type="module" src="/landing-intro.js"></script>
     <script type="module" src="/campus-explorer.js"></script>
+    <script type="module" src="/assistant.js"></script>
+    <script type="module" src="/campus-guide.js"></script>
   </head>
   <body>
     <div id="intro-loading" role="status">Loading the SRM experience…</div>

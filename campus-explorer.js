@@ -77,7 +77,7 @@ const schools = {
 };
 const FLOORS = ["Programmes", "Fees", "Labs", "Faculty", "Placements", "Apply"];
 
-const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.dataset.a11yMotion === "off";
 const $ = (selector) => document.querySelector(selector);
 /* ---------- 3D campus ---------- */
 const panel = $("#building-panel");
@@ -170,6 +170,7 @@ function openPanel() {
   floorContent(0);
   panel.hidden = false;
   panel.focus({ preventScroll: true });
+  document.dispatchEvent(new CustomEvent("srm:campus-arrive", { detail: { school: activeKey } }));
 }
 
 async function visitSchool(key, trigger) {
@@ -197,7 +198,10 @@ function closeVisit() {
   activeKey = null;
   campus?.leave();
   lastTrigger?.focus({ preventScroll: true });
+  document.dispatchEvent(new CustomEvent("srm:campus-leave"));
 }
+
+document.addEventListener("srm:campus-visit", ({ detail }) => visitSchool(detail.school, null));
 
 $("#campus").addEventListener("click", (event) => {
   const button = event.target.closest("[data-school]");

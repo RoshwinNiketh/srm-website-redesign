@@ -3,5 +3,8 @@
   "framework": null,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "functions": {
+    "api/*.mjs": { "includeFiles": "knowledge/**" }
+  }
 }

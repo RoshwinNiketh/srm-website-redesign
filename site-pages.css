@@ -14,6 +14,7 @@
 .inner-topics dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 24px 44px; margin: 32px 0; }
 .inner-topics dt { font-size: 18px; font-weight: 750; }
 .inner-topics dd { margin: 6px 0 0; max-width: 36ch; line-height: 1.6; color: var(--muted); }
+.inner-topic-link { display: flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 4px; text-decoration: underline; text-underline-offset: 4px; color: var(--ink); }
 .inner-actions, .inner-footer { display: flex; flex-wrap: wrap; gap: 12px 24px; }
 .inner-actions a { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; }
 .inner-actions a:first-child { padding: 10px 16px; background: var(--ink); color: var(--on-dark); text-decoration: none; }

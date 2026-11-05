@@ -65,6 +65,8 @@
 .admissions-link { display: inline-flex; gap: 14px; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; }
 .admissions-apply { padding-block: clamp(74px, 10vw, 160px); background: var(--ground); color: var(--ink); }
 .admissions-apply > div { grid-column: 2; }
+.admissions-steps { padding-inline-start: 22px; margin: 24px 0; max-width: 58ch; line-height: 1.65; }
+.admissions-steps li + li { margin-top: 12px; }
 .admissions-apply .admissions-button { background: var(--accent); color: var(--dark); }
 .admissions-apply .admissions-button:hover { background: var(--accent-hover); }
 .admissions-footer {

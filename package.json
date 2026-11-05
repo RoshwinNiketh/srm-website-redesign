@@ -5,6 +5,7 @@
   "description": "A cinematic SRM campus design prototype",
   "scripts": {
     "dev": "node server.mjs",
-    "start": "node server.mjs"
+    "start": "node server.mjs",
+    "build": "node build.mjs"
   }
 }

@@ -855,6 +855,11 @@ a {
   max-width: 600px;
 }
 
+#life .life-copy h2,
+#life .life-copy p {
+  color: #fff;
+}
+
 .life-copy h2 {
   font-size: clamp(44px, 5.8vw, 86px);
 }

@@ -13,11 +13,12 @@
   --on-dark: #faf7ee;
   --intro-paper: #faf6eb;
   --header-height: 94px;
+  --space: clamp(24px, 4.2vw, 72px);
   --brand-width: clamp(140px, 15vw, 200px);
 }
 
 /* Keep text and controls readable over the existing campus photography. */
-:where(.hero, .gateway-image, .campus-map, .life-section, .destination-visual, .journey-transition) {
+:where(.hero, .gateway, .campus-stage, .tilt-card, .life) {
   --ground: #101e1d;
   --surface: #162724;
   --surface-light: #20332e;

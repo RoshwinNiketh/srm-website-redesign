@@ -49,7 +49,7 @@ function playIntro() {
   let stop = false;
   const listeners = new AbortController();
   const covered = [...document.body.children].filter((element) =>
-    element.matches("header, nav, main, footer") && !element.inert);
+    element.matches("header, nav, main, footer, .skip-link") && !element.inert);
   const resizeObserver = new ResizeObserver(measure);
 
   function finish(moveFocus = true) {

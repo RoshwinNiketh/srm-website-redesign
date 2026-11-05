@@ -13,6 +13,7 @@ const types = {
   ".svg": "image/svg+xml",
   ".woff2": "font/woff2",
   ".glb": "model/gltf-binary",
+  ".json": "application/json; charset=utf-8",
 };
 
 createServer((request, response) => {
@@ -25,9 +26,8 @@ createServer((request, response) => {
       const nav = home
         .split("<!-- Shared navigation start -->")[1]
         .split("<!-- Shared navigation end -->")[0]
-        .replace('class="nav-active" ', "")
         .replaceAll('href="/admissions"', 'href="/admissions" class="nav-active" aria-current="page"')
-        .replace('class="header-action" href="#schools"', 'class="header-action" href="#apply"')
+        .replace('class="header-action" href="/#campus"', 'class="header-action" href="#apply"')
         .replace("Find your future", "How to apply");
       const page = readFileSync(resolve(root, "admissions.html"), "utf8")
         .replace("<!-- Shared navigation -->", () => nav);

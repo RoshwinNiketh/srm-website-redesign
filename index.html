@@ -13,6 +13,7 @@
     <link rel="preload" href="assets/images/campus-aerial.webp" as="image" />
     <link rel="stylesheet" href="/theme.css" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/site-pages.css" />
     <link rel="stylesheet" href="/campus-explorer.css" />
     <link rel="stylesheet" href="/landing-intro.css" />
     <script src="/navigation.js" defer></script>
@@ -27,13 +28,13 @@
         <img src="/assets/brand/srm-logo.png" alt="" width="544" height="184" />
       </a>
       <nav class="desktop-nav" aria-label="Main navigation">
-        <a class="nav-active" href="/#campus">The campus</a
-        ><a href="/#schools">Find your school</a><a href="/#life">Life at SRM</a>
         <a href="/admissions">Admissions</a>
+        <a href="/academics">Academics</a>
+        <a href="/campus-life">Campus Life</a>
+        <a href="/research">Research</a>
+        <a href="/about">About SRM</a>
+        <a href="/contact">Contact</a>
       </nav>
-      <a class="header-action" href="#schools"
-        >Find your future <span aria-hidden="true">↗</span></a
-      >
       <button
         class="menu-button"
         aria-label="Open navigation"
@@ -49,8 +50,7 @@
       aria-label="Mobile navigation"
       hidden
     >
-      <a href="/#campus">The campus</a><a href="/#schools">Find your school</a
-      ><a href="/#life">Life at SRM</a><a href="/admissions">Admissions</a>
+      <!-- Mobile page links -->
     </nav>
     <!-- Shared navigation end -->
     <main>
@@ -67,6 +67,7 @@
         <div class="hero-shade"></div>
         <div class="hero-content">
           <h1 id="landing-title" tabindex="-1">A world of<br />possibilities.</h1>
+          <p class="hero-motto">Learn. Leap. Lead.</p>
           <p>Your future has a place.<br />Come discover it at SRM.</p>
           <a href="#campus" class="primary-button"
             >Explore the campus
@@ -89,7 +90,7 @@
             ></span
           >
         </div>
-        <a class="scroll-cue" href="#gateway"
+        <a class="scroll-cue" href="#campus"
           ><span class="mouse" aria-hidden="true"></span>Scroll to discover<span
             aria-hidden="true"
             >↓</span
@@ -114,36 +115,6 @@
             >Choose yours <span aria-hidden="true">↘</span></a
           >
         </div>
-      </section>
-
-      <section id="gateway" class="gateway section-space">
-        <div class="section-heading">
-          <h2>Every journey<br />has a beginning.</h2>
-          <div>
-            <p>
-              Yours starts at the archgate. Step inside a campus built for
-              curious minds and see where your ambition takes you.
-            </p>
-            <a class="text-link" href="#campus"
-              >Step into SRM <span aria-hidden="true">↘</span></a
-            >
-          </div>
-        </div>
-        <a
-          class="gateway-image"
-          href="#campus"
-          aria-label="Enter the campus from the archgate"
-          ><img
-            src="assets/images/archgate.webp"
-            alt="Concept view through a stone archgate toward a palm-lined university boulevard"
-            width="1672"
-            height="941"
-            loading="lazy"
-          /><span class="gateway-enter"
-            >Begin your journey
-            <span class="circle-arrow" aria-hidden="true">↗</span></span
-          ><span class="image-note">The archgate · Your starting point</span></a
-        >
       </section>
 
       <section id="campus" class="campus" aria-label="3D campus explorer">

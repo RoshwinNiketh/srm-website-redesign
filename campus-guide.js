@@ -152,7 +152,8 @@ if (stage) {
 
   // Arriving from another page: land on the 3D section once the layout has settled.
   const landOnCampus = () => {
-    if (location.hash === "#campus") stage.scrollIntoView({ behavior: "instant", block: "start" });
+    // Measure the section: the stage is shifted by its entrance animation while scrolling.
+    if (location.hash === "#campus") scrollTo({ top: document.querySelector("#campus").getBoundingClientRect().top + scrollY, behavior: "instant" });
   };
   if (document.readyState === "complete") landOnCampus();
   else addEventListener("load", landOnCampus, { once: true });

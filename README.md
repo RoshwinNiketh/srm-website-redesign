@@ -23,7 +23,7 @@ A chatbot, 3D campus guide and accessibility tools, powered by Gemini.
 **Setup**
 
 1. Copy `.env.example` to `.env` and paste your key after `GEMINI_API_KEY=`. `.env` is ignored by git.
-2. Run `npm run index:embed` once, so questions match by meaning as well as by keyword.
+2. Optional: run `npm run index:embed`, so questions match by meaning as well as by keyword. The free tier allows 1,000 embedding requests a day, so a full run takes two days. Run it again to carry on. Keyword search works until then. Re-run it whenever `npm run index` changes the content.
 3. Run `npm run dev`. On Vercel, add `GEMINI_API_KEY` under Project Settings → Environment Variables.
 
 **How it stays accurate**

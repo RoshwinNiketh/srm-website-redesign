@@ -12,6 +12,7 @@ export const ROUTES = [
   { id: "research", label: "Research", href: "/research", aliases: ["research"] },
   { id: "about", label: "About SRM", href: "/about", aliases: ["about", "about us", "about srm", "history"] },
   { id: "contact", label: "Contact", href: "/contact", aliases: ["contact", "contact us", "contacts", "phone number", "address"] },
+  { id: "more", label: "More from SRMIST", href: "/more", aliases: ["more", "more resources", "alumni", "international relations"] },
   { id: "campus", label: "3D campus", href: "/#campus", aliases: ["campus", "3d campus", "campus explorer", "3d explorer", "campus map", "campus tour", "pick a building", "3d"] },
   { id: "schools", label: "Schools", href: "/#schools", aliases: ["schools", "school list", "paths"] },
   { id: "portal", label: "Application portal", href: "https://applications.srmist.edu.in/", external: true, aliases: ["application portal", "apply now", "application form", "admission portal"] },

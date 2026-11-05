@@ -328,29 +328,6 @@ a {
   transform: rotate(45deg);
 }
 
-.hero-marker {
-  position: absolute;
-  top: 48%;
-  left: 66%;
-  background: none;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 13px;
-  z-index: 2;
-  animation: marker-arrival 1.2s 0.5s both;
-}
-
-.hero-marker > span:last-child {
-  background: var(--ground);
-  padding: 13px 17px;
-  display: flex;
-  gap: 22px;
-  align-items: center;
-}
-
-.marker-dot,
 .pin-node {
   display: flex;
   align-items: center;
@@ -363,7 +340,6 @@ a {
   position: relative;
 }
 
-.marker-dot::before,
 .gate-node::before {
   position: absolute;
   content: "";
@@ -825,61 +801,7 @@ a {
   color: var(--accent-ink);
 }
 
-.life-section {
-  height: 740px;
-  position: relative;
-  overflow: hidden;
-}
-
-.life-section > img {
-  object-position: center;
-}
-
 /* taste-skill-ignore: neutral scrim over photography */
-.life-shade {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient( /* taste-skill-ignore: neutral photo scrim for legibility */
-    90deg,
-    rgba(0, 0, 0, 0.9),
-    rgba(0, 0, 0, 0.15) 85%
-  );
-}
-
-.life-copy {
-  width: 600px;
-  position: absolute;
-  left: var(--space);
-  top: 50%;
-  transform: translateY(-50%);
-  max-width: 600px;
-}
-
-#life .life-copy h2,
-#life .life-copy p {
-  color: #fff;
-}
-
-.life-copy h2 {
-  font-size: clamp(44px, 5.8vw, 86px);
-}
-
-.life-copy p {
-  margin-top: 30px;
-  max-width: 350px;
-}
-
-.life-copy .primary-button {
-  margin-top: 35px;
-}
-
-.life-caption {
-  position: absolute;
-  right: var(--space);
-  bottom: 36px;
-  font-size: 13px;
-}
-
 .closing {
   min-height: 580px;
   position: relative;
@@ -1185,18 +1107,6 @@ dialog[open] {
   }
 }
 
-@keyframes marker-arrival {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes pulse {
   0%,
   100% {
@@ -1265,10 +1175,6 @@ dialog[open] {
     top: 17%;
   }
 
-  .hero-marker {
-    top: 49%;
-  }
-
   .hero-media img {
     object-position: center 56%;
   }
@@ -1280,15 +1186,6 @@ dialog[open] {
   }
 
   .header-action { gap: 12px; }
-
-  .hero-marker {
-    left: 61%;
-    font-size: 13px;
-  }
-
-  .hero-marker > span:last-child {
-    gap: 12px;
-  }
 
   .section-heading {
     gap: 40px;
@@ -1372,13 +1269,6 @@ dialog[open] {
 
   .hero-content .primary-button {
     margin-top: 24px;
-  }
-
-  .hero-marker {
-    left: auto;
-    right: 24px;
-    top: 58%;
-    font-size: 13px;
   }
 
   .hero-caption {
@@ -1561,33 +1451,6 @@ dialog[open] {
 
   .school-preview-copy p {
     font-size: 16px;
-  }
-
-  .life-section {
-    height: 700px;
-  }
-
-  .life-section > img {
-    object-position: 65% center;
-  }
-
-  .life-copy {
-    width: auto;
-    right: 24px;
-  }
-
-  .life-copy h2 {
-    font-size: 56px;
-  }
-
-  .life-copy p {
-    max-width: 310px;
-  }
-
-  .life-caption {
-    font-size: 13px;
-    left: 24px;
-    right: auto;
   }
 
   .closing {

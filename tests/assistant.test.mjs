@@ -10,6 +10,7 @@ const commands = [
   ["Take me to admission", { type: "navigate", route: "admissions" }],
   ["please open the contact page", { type: "navigate", route: "contact" }],
   ["go to research", { type: "navigate", route: "research" }],
+  ["open the alumni page", { type: "navigate", route: "more" }],
   ["admissions", { type: "navigate", route: "admissions" }],
   ["open the hostels page", { type: "navigate", route: "hostels" }],
   ["show me the law school", { type: "campus", school: "law" }],

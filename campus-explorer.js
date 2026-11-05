@@ -177,7 +177,8 @@ async function visitSchool(key, trigger) {
   if (!schools[key]) return;
   lastTrigger = trigger;
   activeKey = key;
-  stage.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+  // Measure the section: the stage is shifted by its entrance animation while scrolling.
+  scrollTo({ top: $("#campus").getBoundingClientRect().top + scrollY, behavior: reduced ? "auto" : "smooth" });
   panel.hidden = true;
   stage.classList.add("visiting");
   await loadCampus();

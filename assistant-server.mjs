@@ -1,6 +1,7 @@
 // Retrieval and answering for the SRM assistant. The Gemini key stays on the
 // server. An answer only reaches a visitor if it cites retrieved SRM content
 // and every number, email and link in it appears in the content it cites.
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { DISPLAY_ACTIONS, ROUTES, SCHOOLS } from "./assistant-intents.mjs";
@@ -35,7 +36,8 @@ const tokenise = (text) => (text.toLowerCase().match(/[\p{L}\p{N}]+/gu) || [])
 let index = null;
 
 export function loadIndex(directory = join(root, "knowledge")) {
-  const chunks = JSON.parse(readFileSync(join(directory, "chunks.json"), "utf8"));
+  const raw = readFileSync(join(directory, "chunks.json"), "utf8");
+  const chunks = JSON.parse(raw);
   const docs = chunks.map((chunk) => tokenise(`${chunk.title} ${chunk.section} ${chunk.text}`));
   const frequency = new Map();
   docs.forEach((words) => new Set(words).forEach((word) => frequency.set(word, (frequency.get(word) || 0) + 1)));
@@ -50,7 +52,8 @@ export function loadIndex(directory = join(root, "knowledge")) {
   const metaPath = join(directory, "embeddings.json");
   if (existsSync(metaPath)) {
     const meta = JSON.parse(readFileSync(metaPath, "utf8"));
-    if (meta.count === chunks.length) {
+    // Vectors built from older content would point at the wrong passages.
+    if (meta.hash === createHash("sha1").update(raw).digest("hex")) {
       const bytes = readFileSync(join(directory, "embeddings.bin"));
       vectors = new Float32Array(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength));
       dim = meta.dim;

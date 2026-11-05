@@ -4,6 +4,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { pages } from "../site-pages.mjs";
+import { pageRoutes, renderPage } from "../render-pages.mjs";
 
 const root = join(import.meta.dirname, "..");
 const cache = join(import.meta.dirname, ".crawl-cache");
@@ -81,24 +82,16 @@ function addPage({ prefix, title, url, route, parts }) {
 }
 
 /* ---------- this site ---------- */
-const plain = (html) => tidy(html.replace(/<[^>]+>/g, " "));
+// Reads each page as visitors get it, so the assistant matches what is on screen.
+const TITLES = { "/admissions": "Admissions", "/more": "More from SRMIST" };
+const LINK_LABELS = /^(Official SRMIST resource|Related SRMIST resource|Contact directory|Explore this page)\b/;
 
-for (const [route, page] of Object.entries(pages)) {
-  addPage({
-    prefix: `site${route.replace(/\//g, "-")}`,
-    title: plain(page.title),
-    url: route,
-    route,
-    parts: [
-      { section: plain(page.title), lines: [plain(page.lead)] },
-      ...page.topics.map(([name, description]) => ({ section: plain(name), lines: [`${plain(name)}: ${plain(description)}`] })),
-      { section: plain(page.nextHeading), lines: [plain(page.nextText)] },
-    ],
-  });
+for (const route of pageRoutes.filter((item) => item !== "/")) {
+  const main = renderPage(route).match(/<main[^>]*>([\s\S]*)<\/main>/)[1];
+  const title = TITLES[route] || tidy(pages[route].title);
+  const lines = htmlToLines(main).map((line) => line.replace(/\s*[↗↓↘]\s*/g, " ").trim()).filter((line) => line && !LINK_LABELS.test(line));
+  addPage({ prefix: `site${route.replace(/\//g, "-")}`, title, url: route, route, parts: sections(lines, title) });
 }
-
-const admissions = readFileSync(join(root, "admissions.html"), "utf8").match(/<main[^>]*>([\s\S]*)<\/main>/)[1];
-addPage({ prefix: "site-admissions", title: "Admissions", url: "/admissions", route: "/admissions", parts: sections(htmlToLines(admissions), "Admissions") });
 
 const home = readFileSync(join(root, "index.html"), "utf8");
 const homeParts = [];

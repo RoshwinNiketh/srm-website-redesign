@@ -117,7 +117,21 @@ new IntersectionObserver(
   ([entry], observer) => {
     if (entry.isIntersecting) {
       observer.disconnect();
-      loadCampus();
+      const introBusy = () =>
+        document.documentElement.classList.contains("intro-pending") ||
+        document.body.classList.contains("landing-intro-active");
+      if (!introBusy()) {
+        loadCampus();
+        return;
+      }
+      // WebGL setup competes with the SVG intro for the main thread.
+      const introObserver = new MutationObserver(() => {
+        if (introBusy()) return;
+        introObserver.disconnect();
+        loadCampus();
+      });
+      introObserver.observe(document.documentElement, { attributeFilter: ["class"] });
+      introObserver.observe(document.body, { attributeFilter: ["class"] });
     }
   },
   { rootMargin: "120%" },

@@ -258,7 +258,7 @@ function crowd(mobile) {
 
 function airborneCaps(mobile) {
   const r = rng(752);
-  return Array.from({ length: mobile ? 21 : 37 }, (_, i) => {
+  return Array.from({ length: mobile ? 18 : 32 }, (_, i) => {
     const near = i < 6;
     const x = 600 + (r() > .5 ? 1 : -1) * (96 + r() * (mobile ? 258 : 532));
     const y = (near ? 555 : 421) + r() * 100;

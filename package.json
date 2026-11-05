@@ -4,8 +4,12 @@
   "private": true,
   "description": "A cinematic SRM campus design prototype",
   "scripts": {
-    "dev": "node server.mjs",
-    "start": "node server.mjs",
-    "build": "node build.mjs"
+    "dev": "node --use-system-ca server.mjs",
+    "start": "node --use-system-ca server.mjs",
+    "build": "node build.mjs",
+    "test": "node --test \"tests/*.test.mjs\"",
+    "index": "node tools/build_knowledge.mjs",
+    "index:crawl": "node tools/crawl_official.mjs",
+    "index:embed": "node --use-system-ca tools/embed_knowledge.mjs"
   }
 }

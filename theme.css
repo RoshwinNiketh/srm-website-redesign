@@ -1,0 +1,42 @@
+:root {
+  color-scheme: light;
+  --ground: #faf7ee;
+  --surface: #f2ecdf;
+  --surface-light: #e9e0cf;
+  --ink: #142620;
+  --muted: #47564f;
+  --accent: #e6b975;
+  --accent-hover: #f5ce97;
+  --accent-ink: #80531c;
+  --focus: #80531c;
+  --dark: #14221e;
+  --on-dark: #faf7ee;
+  --intro-paper: #faf6eb;
+  --header-height: 94px;
+  --space: clamp(24px, 4.2vw, 72px);
+  --brand-width: clamp(140px, 15vw, 200px);
+}
+
+/* Keep text and controls readable over the existing campus photography. */
+:where(.hero, .gateway, .campus-stage, .tilt-card, .life) {
+  --ground: #101e1d;
+  --surface: #162724;
+  --surface-light: #20332e;
+  --ink: var(--on-dark);
+  --muted: #d6ded7;
+  --accent-ink: var(--accent);
+  --focus: var(--accent);
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  :root {
+    --header-height: 82px;
+    --brand-width: clamp(118px, 34vw, 145px);
+  }
+}
+
+@media (max-width: 360px) {
+  .site-header { column-gap: 10px; }
+  .site-header .header-action span { display: none; }
+}

@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import { createReadStream, existsSync, statSync } from "node:fs";
+import { createReadStream, existsSync, readFileSync, statSync } from "node:fs";
 import { resolve, extname, sep } from "node:path";
 
 const root = resolve(import.meta.dirname);
@@ -21,6 +21,20 @@ createServer((request, response) => {
     const pathname = decodeURIComponent(
       new URL(request.url, "http://localhost").pathname,
     );
+    if (["/admissions", "/admissions/", "/admissions.html"].includes(pathname)) {
+      const home = readFileSync(resolve(root, "index.html"), "utf8");
+      const nav = home
+        .split("<!-- Shared navigation start -->")[1]
+        .split("<!-- Shared navigation end -->")[0]
+        .replaceAll('href="/admissions"', 'href="/admissions" class="nav-active" aria-current="page"')
+        .replace('class="header-action" href="/#campus"', 'class="header-action" href="#apply"')
+        .replace("Find your future", "How to apply");
+      const page = readFileSync(resolve(root, "admissions.html"), "utf8")
+        .replace("<!-- Shared navigation -->", () => nav);
+      response.writeHead(200, { "Content-Type": types[".html"] });
+      response.end(request.method === "HEAD" ? undefined : page);
+      return;
+    }
     const file = resolve(
       root,
       `.${pathname === "/" ? "/index.html" : pathname}`,

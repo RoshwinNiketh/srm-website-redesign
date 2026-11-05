@@ -3,34 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#070d1a" />
+    <meta name="theme-color" content="#faf7ee" />
     <meta
       name="description"
       content="Enter SRM. Walk through the archgate, explore a 3D campus, and open any building to find your programme. A design challenge concept."
     />
     <title>Enter SRM</title>
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/assets/brand/srm-logo.png" type="image/png" />
     <link rel="preload" href="assets/images/campus-aerial.webp" as="image" />
+    <link rel="stylesheet" href="/theme.css" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/landing-intro.css" />
+    <script type="module" src="/landing-intro.js"></script>
     <script src="app.js" type="module"></script>
   </head>
   <body>
-    <a class="skip-link" href="#campus">Skip to the campus</a>
+    <a class="skip-link" href="/#campus">Skip to the campus</a>
+    <!-- Shared navigation start -->
     <header class="site-header">
-      <a class="brand" href="#home" aria-label="SRM home">
-        <img src="assets/srm-logo.svg" alt="SRM Institute of Science and Technology" width="600" height="203" />
+      <a class="brand" href="/" aria-label="SRM home">
+        <img src="/assets/brand/srm-logo.png" alt="SRM Institute of Science and Technology" width="544" height="184" />
       </a>
       <nav class="desktop-nav" aria-label="Main navigation">
-        <a href="#campus">The campus</a><a href="#schools">Schools</a><a href="#life">Life at SRM</a>
+        <a href="/#campus">The campus</a><a href="/#schools">Schools</a><a href="/#life">Life at SRM</a><a href="/admissions">Admissions</a>
       </nav>
-      <a class="header-action" href="#campus">Find your future <span aria-hidden="true">↗</span></a>
+      <a class="header-action" href="/#campus">Find your future <span aria-hidden="true">↗</span></a>
       <button class="menu-button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-menu">
         <span></span><span></span>
       </button>
     </header>
     <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" hidden>
-      <a href="#campus">The campus</a><a href="#schools">Schools</a><a href="#life">Life at SRM</a>
+      <a href="/#campus">The campus</a><a href="/#schools">Schools</a><a href="/#life">Life at SRM</a><a href="/admissions">Admissions</a>
     </nav>
+    <!-- Shared navigation end -->
 
     <main>
       <section id="home" class="hero">
@@ -39,7 +44,7 @@
         </div>
         <div class="hero-shade"></div>
         <div class="hero-content">
-          <h1 class="lift-title"><span>Enter</span><span>SRM.</span></h1>
+          <h1 class="lift-title" id="landing-title" tabindex="-1"><span>Enter</span><span>SRM.</span></h1>
           <p>A campus you can walk into, before you ever visit.</p>
           <div class="button-row">
             <a href="#gateway" class="primary-button">Scroll to enter <span aria-hidden="true">↓</span></a>
@@ -142,16 +147,16 @@
 
       <section class="closing">
         <h2 class="lift-title"><span>Your story</span><span>starts here.</span></h2>
-        <a class="primary-button" href="#campus">Find your place at SRM <span aria-hidden="true">↗</span></a>
+        <a class="primary-button" href="/#campus">Find your place at SRM <span aria-hidden="true">↗</span></a>
       </section>
     </main>
 
     <footer>
-      <div class="footer-brand"><img src="assets/srm-logo.svg" alt="SRM Institute of Science and Technology" width="600" height="203" /></div>
+      <div class="footer-brand"><img src="/assets/brand/srm-logo.png" alt="SRM Institute of Science and Technology" width="544" height="184" /></div>
       <div class="footer-bottom">
         <span>Kattankulathur, Tamil Nadu, India</span>
         <p>Design challenge concept, not an official SRM website.<br />Photo scenes are AI-generated architectural visualizations. Campus footprints © OpenStreetMap contributors.</p>
-        <a href="#home">Back to the beginning ↑</a>
+        <a href="/">Back to the beginning ↑</a>
       </div>
     </footer>
     <div id="toast" role="status"></div>

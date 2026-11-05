@@ -16,28 +16,28 @@
   --ease: cubic-bezier(0.2, 0, 0, 1);
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--night); color: var(--ice); font: 400 16px/1.5 Manrope, "Helvetica Neue", Arial, sans-serif; overflow-x: clip; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; background: var(--ground); }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 400 16px/1.5 Manrope, "Helvetica Neue", Arial, sans-serif; overflow-x: clip; }
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
 button { font: inherit; color: inherit; cursor: pointer; }
 h1, h2, h3, p { margin: 0; }
-:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 .skip-link { position: fixed; left: 16px; top: -80px; z-index: 100; background: var(--gold); color: var(--night); padding: 10px 16px; font-weight: 700; }
 .skip-link:focus { top: 8px; }
 
 /* header */
-.site-header { position: fixed; inset: 0 0 auto; z-index: 40; display: flex; align-items: center; gap: 32px; padding: 12px var(--gut); background: linear-gradient(#070d1ad9, #070d1a00); }
-.brand { display: block; background: #fff; padding: 6px 10px; border-radius: 2px; line-height: 0; }
-.brand img { height: 42px; width: auto; }
+.site-header { position: fixed; inset: 0 0 auto; z-index: 40; display: flex; align-items: center; gap: 32px; height: var(--header-height); padding: 0 var(--gut); background: var(--ground); }
+.brand { display: block; flex: 0 0 auto; width: var(--brand-width); line-height: 0; }
+.brand img { width: 100%; height: auto; }
 .desktop-nav { display: flex; gap: 28px; margin-left: auto; }
 .desktop-nav a { text-decoration: none; font-weight: 600; font-size: 15px; padding: 8px 0; border-bottom: 2px solid transparent; transition: border-color 0.12s var(--ease); }
-.desktop-nav a:hover { border-color: var(--gold); }
+.desktop-nav a:hover, .desktop-nav a[aria-current="page"] { border-color: var(--accent-ink); }
 .header-action { background: var(--gold); color: var(--night); font-weight: 700; font-size: 14px; text-decoration: none; padding: 12px 18px; border-radius: 2px; }
-.menu-button { display: none; margin-left: auto; width: 48px; height: 48px; background: #070d1ab3; border: 1px solid var(--mist); border-radius: 2px; padding: 15px 12px; }
-.menu-button span { display: block; height: 2px; background: var(--ice); margin-bottom: 7px; }
-.mobile-menu { position: fixed; inset: 76px 0 auto; z-index: 39; background: var(--night); border-bottom: 2px solid var(--gold); padding: 8px var(--gut) 16px; }
-.mobile-menu a { display: flex; align-items: center; min-height: 52px; font-size: 20px; font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--line); }
+.menu-button { display: none; margin-left: auto; width: 48px; height: 48px; background: var(--surface); border: 1px solid var(--muted); border-radius: 2px; padding: 15px 12px; }
+.menu-button span { display: block; height: 2px; background: var(--ink); margin-bottom: 7px; }
+.mobile-menu { position: fixed; inset: var(--header-height) 0 auto; z-index: 39; background: var(--surface); border-bottom: 2px solid var(--accent); padding: 8px var(--gut) 16px; }
+.mobile-menu a { display: flex; align-items: center; min-height: 52px; font-size: 20px; font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--surface-light); }
 
 /* shared */
 .primary-button, .ghost-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 2px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform 0.15s var(--ease), background 0.15s var(--ease); }
@@ -128,12 +128,12 @@ h1, h2, h3, p { margin: 0; }
 .schools { padding: clamp(64px, 9vw, 120px) var(--gut); }
 .section-heading { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; align-items: end; margin-bottom: 48px; }
 .section-heading h2 { font-size: clamp(2.4rem, 5.6vw, 5rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1; }
-.section-heading p { color: var(--mist); font-size: 18px; }
+.section-heading p { color: var(--muted); font-size: 18px; }
 .schools-layout { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(24px, 4vw, 64px); align-items: center; }
 .school-row { width: 100%; display: grid; grid-template-columns: 36px 1fr auto; gap: 8px; align-items: baseline; background: none; border: 0; border-top: 1px solid var(--line); padding: 20px 0; text-align: left; font-size: clamp(19px, 2vw, 27px); font-weight: 700; letter-spacing: -0.02em; transition: padding 0.15s var(--ease), color 0.15s var(--ease); }
 .school-row:last-child { border-bottom: 1px solid var(--line); }
-.row-num { font-size: 12px; color: var(--mist); letter-spacing: 0; }
-.school-row:hover, .school-row.selected { color: var(--gold); padding-left: 10px; }
+.row-num { font-size: 12px; color: var(--muted); letter-spacing: 0; }
+.school-row:hover, .school-row.selected { color: var(--accent-ink); padding-left: 10px; }
 .tilt-card { position: relative; aspect-ratio: 16 / 11; transform-style: preserve-3d; transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 0.2s var(--ease); box-shadow: 0 40px 80px #0009; }
 .tilt-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .tilt-shade { position: absolute; inset: 0; background: linear-gradient(0deg, #070d1af2, #070d1a00 66%); }
@@ -147,12 +147,12 @@ h1, h2, h3, p { margin: 0; }
 .life-copy { position: relative; padding: 0 var(--gut); max-width: 700px; }
 .life-copy h2 { font-size: clamp(2.8rem, 7vw, 6.4rem); font-weight: 800; letter-spacing: -0.05em; line-height: 0.98; }
 .life-copy p { margin: 18px 0 24px; font-size: 19px; max-width: 42ch; }
-.closing { padding: clamp(90px, 14vw, 180px) var(--gut); text-align: center; background: radial-gradient(ellipse at 50% 40%, #0f2c63, var(--night) 70%); }
+.closing { padding: clamp(90px, 14vw, 180px) var(--gut); text-align: center; background: var(--surface); }
 .closing h2 { font-size: clamp(3.4rem, 11vw, 10rem); margin-bottom: 40px; }
-footer { padding: 40px var(--gut) 28px; background: var(--navy); }
-.footer-brand { display: inline-block; background: #fff; padding: 10px 14px; line-height: 0; border-radius: 2px; }
+footer { padding: 40px var(--gut) 28px; background: var(--ground); }
+.footer-brand { display: inline-block; line-height: 0; }
 .footer-brand img { height: 64px; width: auto; }
-.footer-bottom { display: grid; grid-template-columns: 1fr 2fr auto; gap: 24px; margin-top: 28px; font-size: 13px; color: #dbe3ee; }
+.footer-bottom { display: grid; grid-template-columns: 1fr 2fr auto; gap: 24px; margin-top: 28px; font-size: 13px; color: var(--muted); }
 .reveal { opacity: 0; transform: perspective(900px) translateY(36px) rotateX(10deg); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
 .reveal.shown { opacity: 1; transform: none; }
 #toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--panel); border: 1px solid var(--gold); padding: 10px 16px; opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 60; }
@@ -160,7 +160,7 @@ footer { padding: 40px var(--gut) 28px; background: var(--navy); }
 
 @media (max-width: 900px) {
   .desktop-nav, .header-action { display: none; }
-  .brand img { height: 38px; }
+  .menu-button { display: block; }
   .section-heading, .schools-layout { grid-template-columns: 1fr; }
   .tilt-card { aspect-ratio: 4 / 5; }
   .tilt-copy { transform: none; left: 18px; right: 18px; }
@@ -182,3 +182,12 @@ footer { padding: 40px var(--gut) 28px; background: var(--navy); }
   .gateway { height: auto; }
   .gateway-pin { position: relative; }
 }
+
+/* Paper surfaces around the immersive campus scenes. */
+.admissions .site-header { position: relative; }
+.mobile-menu [aria-current="page"] { color: var(--accent-ink); }
+.hero h1:focus { outline: none; }
+.school-bar { background: var(--surface); border-color: var(--surface-light); }
+.school-bar button, .school-row, .school-row:last-child { border-color: var(--surface-light); }
+.closing .lift-title span { text-shadow: none; }
+#toast { background: var(--surface); }

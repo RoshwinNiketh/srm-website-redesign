@@ -1,0 +1,83 @@
+/* The animated brand is a copy of the actual header contents. */
+.landing-intro-active { overflow: hidden; }
+.landing-intro-active .site-header .brand { visibility: hidden; }
+.landing-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  isolation: isolate;
+  overflow: hidden;
+  color: #202c3c;
+}
+.intro-paper {
+  position: absolute;
+  inset: 0;
+  background: var(--intro-paper);
+  overflow: hidden;
+}
+.intro-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: calc(100% - clamp(85px, 13vh, 148px));
+}
+.intro-caption {
+  position: absolute;
+  inset: auto var(--space) max(5.5vh, 30px);
+  pointer-events: none;
+  color: #202c3c;
+  display: grid;
+}
+.intro-caption span {
+  grid-area: 2 / 1;
+  font: italic clamp(29px, 4.7vw, 72px)/1.12 Georgia, serif;
+  letter-spacing: -.055em;
+}
+.intro-caption .intro-credit {
+  grid-row: 1;
+  font: 650 14px/1.4 Manrope, sans-serif;
+  letter-spacing: 0;
+  margin-bottom: 8px;
+}
+.intro-skip {
+  position: absolute;
+  top: max(20px, env(safe-area-inset-top));
+  right: max(24px, env(safe-area-inset-right));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 46px;
+  padding-inline: 15px;
+  border: 1px solid #c2bba8;
+  background: var(--intro-paper);
+  color: #202c3c;
+  font-size: 14px;
+  font-weight: 750;
+}
+.intro-skip:hover { background: #ede3ca; }
+.intro-skip:focus-visible { outline-color: #856024; }
+.intro-brand {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transform-origin: 0 0;
+}
+.intro-art .ink { stroke: #263244; stroke-linecap: round; stroke-linejoin: round; }
+.intro-art .camera { transform-origin: 50% 72.222%; transform-box: view-box; }
+.intro-art .moving-part { transform-box: fill-box; transform-origin: center; }
+.intro-art [data-cheer] { transform-origin: center bottom; }
+.intro-art .draw-line { stroke-dasharray: 1; stroke-dashoffset: 1; }
+
+@media (max-width: 760px) {
+  .intro-art { height: calc(100% - 55px); }
+  .intro-caption { bottom: max(7vh, calc(env(safe-area-inset-bottom) + 24px)); }
+  .intro-caption .intro-credit { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-intro { display: none; }
+  .landing-intro-active { overflow: visible; }
+  .landing-intro-active .site-header .brand { visibility: visible; }
+}
+

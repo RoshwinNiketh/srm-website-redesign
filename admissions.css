@@ -1,0 +1,92 @@
+.admissions {
+  --axis: 38%;
+}
+
+.admissions-masthead {
+  height: clamp(240px, 46svh, 610px);
+  margin: 0;
+  background: #c9c5ad;
+}
+
+.admissions-masthead img { object-position: 50% 54%; }
+
+.admissions-layout {
+  display: grid;
+  grid-template-columns: var(--axis) minmax(0, 1fr);
+  gap: 0;
+  padding-inline: var(--space);
+}
+
+.admissions-title { padding-block: clamp(40px, 5vw, 84px) clamp(80px, 9vw, 150px); }
+.admissions-title h1 { font-size: clamp(58px, 8.8vw, 136px); line-height: .94; }
+.admissions-title p:not(.admissions-place), .admissions-apply p {
+  font-size: clamp(17px, 1.55vw, 22px);
+  line-height: 1.55;
+  max-width: 39ch;
+  margin-top: 24px;
+}
+
+.admissions-place {
+  padding-top: 12px;
+  max-width: 25ch;
+  font-size: 14px;
+}
+
+.admissions-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 24px;
+  padding: 12px 18px;
+  min-height: 52px;
+  background: var(--ink);
+  color: var(--on-dark);
+  font-weight: 650;
+}
+
+.admissions-button:hover { background: #31483c; }
+.admissions-study { padding-block: clamp(60px, 8vw, 120px); background: var(--surface); }
+.admissions-study figure {
+  align-self: start;
+  width: 80%;
+  margin: 0;
+  aspect-ratio: 1.18;
+  background: #bec8bb;
+  display: grid;
+  grid-template: repeat(2, minmax(0, 1fr)) / minmax(0, 1.15fr) minmax(0, 1fr);
+  overflow: hidden;
+}
+.admissions-study figure img:first-child { grid-row: span 2; }
+.admissions-study dl { margin: 32px 0 20px; }
+.admissions-study dl div + div { margin-top: 24px; }
+.admissions-study dt { font-size: 18px; font-weight: 750; }
+.admissions-study dd { margin: 5px 0 0; line-height: 1.55; }
+.admissions-link { display: inline-flex; gap: 14px; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; }
+.admissions-apply { padding-block: clamp(74px, 10vw, 160px); background: var(--ground); color: var(--ink); }
+.admissions-apply > div { grid-column: 2; }
+.admissions-apply .admissions-button { background: var(--accent); color: var(--dark); }
+.admissions-apply .admissions-button:hover { background: var(--accent-hover); }
+.admissions-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px 32px;
+  padding: 30px var(--space);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+}
+
+@media (max-width: 760px) {
+  .admissions-layout { grid-template-columns: 1fr; }
+  .admissions-place { order: 1; padding-top: 0; margin-top: 35px; max-width: none; }
+  .admissions-study figure { width: 100%; margin-bottom: 38px; aspect-ratio: 1.7; }
+  .admissions-apply > div { grid-column: auto; }
+}
+
+@media (max-width: 360px) {
+  .admissions-title h1 { font-size: 54px; }
+}
+
+

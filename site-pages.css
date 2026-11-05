@@ -28,3 +28,64 @@
   .inner-lead-with-image, .inner-topics dl, .inner-next { grid-template-columns: 1fr; }
   .inner-image { aspect-ratio: 16 / 10; }
 }
+
+.site-header { gap: clamp(8px, 1.4vw, 24px); }
+.site-header .desktop-nav { gap: clamp(10px, 1.2vw, 20px); font-size: clamp(12px, 1.1vw, 14px); }
+.site-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1 1 180px;
+  min-width: 0;
+  max-width: 260px;
+  border: 1px solid var(--surface-light);
+  background: var(--surface);
+}
+.search-label { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; }
+.site-search input { width: 100%; min-width: 0; min-height: 42px; padding: 0 0 0 10px; border: 0; font: inherit; font-size: 14px; color: var(--ink); background: transparent; }
+.site-search button { flex: 0 0 40px; height: 42px; display: grid; place-items: center; background: transparent; }
+.search-results, .desktop-nav .nav-panel { background: var(--ground); border: 1px solid var(--surface-light); box-shadow: 0 12px 26px #14262020; }
+.search-results { position: absolute; z-index: 3; top: calc(100% + 6px); left: 0; width: min(320px, 75vw); max-height: min(440px, 65dvh); overflow: auto; padding: 12px; }
+.search-results p { color: var(--muted); font-size: 13px; }
+.search-results ul { list-style: none; padding: 0; margin: 4px 0 0; }
+.search-results a { display: flex; align-items: center; min-height: 44px; padding: 4px 8px; }
+.nav-group { position: relative; }
+.nav-group summary { display: flex; align-items: center; min-height: 44px; gap: 6px; cursor: pointer; white-space: nowrap; list-style: none; }
+.nav-group summary::-webkit-details-marker { display: none; }
+.nav-group summary::after { content: ""; width: 5px; height: 5px; border: solid currentColor; border-width: 0 1px 1px 0; transform: translateY(-2px) rotate(45deg); }
+.nav-group[open] summary::after { transform: translateY(1px) rotate(225deg); }
+.nav-group summary[aria-current] { color: var(--accent-ink); }
+.desktop-nav .nav-panel { position: absolute; z-index: 2; top: 100%; right: 0; width: 245px; padding: 6px; }
+.desktop-nav .nav-panel a, .mobile-menu .nav-panel a { display: flex; align-items: center; min-height: 44px; white-space: normal; padding: 8px 10px; }
+.nav-panel a:first-child { font-weight: 750; }
+.nav-panel a:hover, .search-results a:hover { background: var(--surface-light); }
+.mobile-menu .nav-panel { border-left: 1px solid var(--surface-light); padding-left: 10px; }
+@media (min-width: 1051px) { .mobile-menu { display: none; } }
+@media (max-width: 1050px) {
+  .site-header .desktop-nav { display: none; }
+  .site-header .menu-button { display: block; flex: 0 0 44px; }
+}
+@media (max-width: 760px) {
+  .site-header .search-results { left: auto; right: -44px; }
+}
+@media (max-width: 360px) {
+  .site-search input { font-size: 12px; padding-left: 6px; }
+  .site-search button { flex-basis: 28px; }
+}
+
+.directory-kicker { margin: 0 0 12px; color: var(--accent-ink); font-size: 13px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.directory-list { margin: 32px 0 0; padding: 0; list-style: none; counter-reset: directory; }
+.directory-list li { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr) minmax(0, 1.45fr); gap: 8px clamp(12px, 3vw, 42px); padding: 24px 0; border-top: 1px solid var(--surface-light); scroll-margin-top: 24px; counter-increment: directory; }
+.directory-list li::before { content: counter(directory, decimal-leading-zero); color: var(--accent-ink); font-weight: 750; }
+.directory-list li:target { border-color: var(--accent-ink); }
+.directory-list h3 { margin: 0; font-size: clamp(19px, 2.2vw, 28px); line-height: 1.2; }
+.directory-list p { margin: 0; max-width: 62ch; color: var(--muted); line-height: 1.6; }
+.directory-sources { grid-column: 3; display: flex; flex-wrap: wrap; gap: 0 18px; }
+.directory-sources a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 760px) {
+  .directory-list li { grid-template-columns: 2rem minmax(0, 1fr); }
+  .directory-list p, .directory-sources { grid-column: 2; }
+}
+
+.faculty-list > div { scroll-margin-top: 24px; }
+.faculty-list > div:target dt { color: var(--accent-ink); }

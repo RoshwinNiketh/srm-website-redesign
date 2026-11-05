@@ -163,7 +163,7 @@ document.querySelectorAll("[data-preview]").forEach((button) => {
       school.tagline;
     document.querySelector("#school-preview-description").textContent =
       school.description;
-    document.querySelector("#preview-explore").dataset.school = key;
+    document.querySelector("#preview-explore").href = `/academics#${key}`;
   });
   button.setAttribute(
     "aria-pressed",

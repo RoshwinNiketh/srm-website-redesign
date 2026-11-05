@@ -52,14 +52,19 @@
       <a class="brand" href="/" aria-label="SRM home">
         <img src="/assets/brand/srm-logo.png" alt="" width="544" height="184" />
       </a>
+      <form class="site-search" role="search">
+        <label class="search-label" for="site-search-input">Search SRMIST</label>
+        <input id="site-search-input" type="search" placeholder="Search SRMIST" autocomplete="off" aria-controls="site-search-results" />
+        <button type="submit" aria-label="Find pages">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4 4"/></svg>
+        </button>
+        <div class="search-results" id="site-search-results" hidden>
+          <p role="status"></p>
+          <ul></ul>
+        </div>
+      </form>
       <nav class="desktop-nav" aria-label="Main navigation">
-        <a href="/">Home</a>
-        <a href="/admissions">Admissions</a>
-        <a href="/academics">Academics</a>
-        <a href="/campus-life">Campus Life</a>
-        <a href="/research">Research</a>
-        <a href="/about">About SRM</a>
-        <a href="/contact">Contact</a>
+        <!-- Desktop page links -->
       </nav>
       <button
         class="menu-button"
@@ -215,13 +220,13 @@
                 From the first line of code to the next breakthrough. Explore a
                 world of engineering, technology and hands-on discovery.
               </p>
-              <button
+              <a
                 class="text-link"
                 id="preview-explore"
-                data-school="engineering"
+                href="/academics#engineering"
               >
-                Explore the school <span aria-hidden="true">↗</span>
-              </button>
+                Explore Schools <span aria-hidden="true">↗</span>
+              </a>
             </div>
           </article>
         </div>

@@ -11,5 +11,8 @@
     "index": "node tools/build_knowledge.mjs",
     "index:crawl": "node tools/crawl_official.mjs",
     "index:embed": "node --use-system-ca tools/embed_knowledge.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
   }
 }

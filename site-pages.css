@@ -46,7 +46,7 @@
 .site-search button { flex: 0 0 40px; height: 42px; display: grid; place-items: center; background: transparent; }
 .search-results, .desktop-nav .nav-panel { background: var(--ground); border: 1px solid var(--surface-light); box-shadow: 0 12px 26px #14262020; }
 .search-results { position: absolute; z-index: 3; top: calc(100% + 6px); left: 0; width: min(320px, 75vw); max-height: min(440px, 65dvh); overflow: auto; padding: 12px; }
-.search-results p { color: var(--muted); font-size: 13px; }
+.search-results p { color: var(--muted); font-size: 14px; }
 .search-results ul { list-style: none; padding: 0; margin: 4px 0 0; }
 .search-results a { display: flex; align-items: center; min-height: 44px; padding: 4px 8px; }
 .nav-group { position: relative; }
@@ -69,11 +69,11 @@
   .site-header .search-results { left: auto; right: -44px; }
 }
 @media (max-width: 360px) {
-  .site-search input { font-size: 12px; padding-left: 6px; }
+  .site-search input { font-size: 16px; padding-left: 6px; }
   .site-search button { flex-basis: 28px; }
 }
 
-.directory-kicker { margin: 0 0 12px; color: var(--accent-ink); font-size: 13px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.directory-kicker { margin: 0 0 12px; color: var(--accent-ink); font-size: 14px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
 .directory-list { margin: 32px 0 0; padding: 0; list-style: none; counter-reset: directory; }
 .directory-list li { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr) minmax(0, 1.45fr); gap: 8px clamp(12px, 3vw, 42px); padding: 24px 0; border-top: 1px solid var(--surface-light); scroll-margin-top: 24px; counter-increment: directory; }
 .directory-list li::before { content: counter(directory, decimal-leading-zero); color: var(--accent-ink); font-weight: 750; }

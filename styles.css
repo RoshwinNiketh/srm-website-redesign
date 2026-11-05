@@ -10,7 +10,7 @@
   --display: clamp(50px, 7.2vw, 112px);
   --heading: clamp(38px, 4.5vw, 68px);
   --body: 16px;
-  --small: 13px;
+  --small: 14px;
   --radius: 50%;
   font-family: Manrope, Arial, sans-serif;
   color: var(--ink);
@@ -61,7 +61,10 @@ button {
 }
 
 button:focus-visible,
-a:focus-visible {
+a:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 6px;
 }
@@ -249,11 +252,11 @@ a {
 /* taste-skill-ignore: neutral scrim over photography */
 .hero-shade {
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.37), transparent 68%), /* taste-skill-ignore: neutral photo scrim for legibility */
+    linear-gradient(90deg, rgba(0, 0, 0, 0.58), transparent 68%), /* taste-skill-ignore: neutral photo scrim for legibility */
     linear-gradient( /* taste-skill-ignore: neutral photo scrim for legibility */
       0deg,
-      rgba(0, 0, 0, 0.83),
-      transparent 27%,
+      rgba(0, 0, 0, 0.88),
+      transparent 34%,
       transparent 85%,
       rgba(0, 0, 0, 0.3)
     );
@@ -356,7 +359,7 @@ a {
   display: flex;
   gap: 13px;
   align-items: center;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.7;
 }
 
@@ -366,7 +369,7 @@ a {
 
 .subtle {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .scroll-cue {
@@ -377,7 +380,7 @@ a {
   display: flex;
   gap: 13px;
   align-items: center;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .scroll-cue > span:last-child {
@@ -411,7 +414,7 @@ a {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 13px;
+  font-size: 14px;
   padding: 8px;
 }
 
@@ -430,7 +433,7 @@ a {
   align-items: center;
   gap: 12px;
   padding: 0 var(--space);
-  background: #101e1dd9;
+  background: #101e1df2;
   font-size: 14px;
 }
 
@@ -538,7 +541,7 @@ a {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .campus-map {
@@ -581,7 +584,7 @@ a {
   padding: 10px;
   transition: transform 0.3s;
   max-width: 290px;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .map-pin:hover {
@@ -637,7 +640,7 @@ a {
   position: absolute;
   left: 58%;
   bottom: 18%;
-  font-size: 13px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   gap: 13px;
@@ -657,7 +660,7 @@ a {
   bottom: 36px;
   width: 34px;
   text-align: center;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .map-compass svg {
@@ -701,7 +704,7 @@ a {
 
 .map-instruction span {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   margin-top: 7px;
   color: var(--muted);
 }
@@ -854,13 +857,13 @@ footer {
   align-items: flex-end;
   gap: 30px;
   margin-top: 75px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.8;
   color: var(--muted);
 }
 
 .footer-bottom p {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .footer-bottom > a {
@@ -916,7 +919,7 @@ dialog[open] {
   position: absolute;
   top: 30px;
   left: 34px;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .destination-heading {
@@ -927,7 +930,7 @@ dialog[open] {
 }
 
 .destination-heading > span {
-  font-size: 13px;
+  font-size: 14px;
   display: block;
   margin-bottom: 12px;
 }
@@ -965,7 +968,7 @@ dialog[open] {
 }
 
 .degree-heading > span {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
 }
 
@@ -989,12 +992,12 @@ dialog[open] {
 .degree-item > span:first-child > span {
   display: block;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
   margin-top: 7px;
 }
 
 .course-note {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
   margin-top: 20px;
   max-width: 680px;
@@ -1196,7 +1199,7 @@ dialog[open] {
   }
 
   .map-pin {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .map-pin > span:last-child {
@@ -1230,7 +1233,7 @@ dialog[open] {
 
   .header-action {
     margin-left: auto;
-    font-size: 13px;
+    font-size: 14px;
     gap: 12px;
   }
 
@@ -1273,7 +1276,7 @@ dialog[open] {
 
   .hero-caption {
     bottom: 119px;
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .scroll-cue {
@@ -1286,7 +1289,7 @@ dialog[open] {
 
   .hero-bottom {
     height: 78px;
-    font-size: 13px;
+    font-size: 14px;
     gap: 10px;
   }
 
@@ -1340,7 +1343,7 @@ dialog[open] {
   }
 
   .map-pin {
-    font-size: 13px;
+    font-size: 14px;
     gap: 12px;
     max-width: 190px;
   }
@@ -1375,13 +1378,13 @@ dialog[open] {
   .gate-position {
     left: 10%;
     bottom: 16%;
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .map-instruction {
     bottom: 32px;
     left: 50%;
-    font-size: 13px;
+    font-size: 14px;
     max-width: 220px;
   }
 
@@ -1423,7 +1426,7 @@ dialog[open] {
     min-width: calc(33.333% - 14px);
     margin-right: 20px;
     padding: 17px 0;
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .campus-school-bar button:nth-child(3) {
@@ -1470,7 +1473,7 @@ dialog[open] {
   }
 
   .footer-brand > span {
-    font-size: 13px;
+    font-size: 14px;
     margin-bottom: 5px;
   }
 
@@ -1478,11 +1481,11 @@ dialog[open] {
     flex-wrap: wrap;
     gap: 25px;
     margin-top: 45px;
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .footer-bottom p {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .footer-bottom > a {

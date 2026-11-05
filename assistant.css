@@ -1,4 +1,10 @@
 /* SRM assistant: launcher, chat window, campus guide and display settings. */
+.skip-link {
+  position: fixed; left: 12px; top: 12px; z-index: 200; padding: 12px 18px; border-radius: 6px;
+  background: #142620; color: #fff; font-weight: 800; font-size: 16px; transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; outline: 3px solid #e6b975; outline-offset: 2px; }
+main:focus { outline: none; }
 .srm-launcher, .srm-chat, .srm-stop-pill, .campus-guide {
   --srm-paper: #fffdf7;
   --srm-line: #142620;
@@ -26,6 +32,7 @@
 }
 .srm-launcher:hover { transform: scale(1.05); }
 .srm-launcher img { display: block; width: 46px; height: 46px; border-radius: 50%; }
+.inner-footer a, .footer-bottom > a { display: inline-flex; align-items: center; min-height: 24px; }
 .srm-launcher-label {
   color: var(--srm-ink); font-size: 16px; font-weight: 800; line-height: 1.2; white-space: nowrap;
 }
@@ -53,7 +60,7 @@
 .srm-chat-head img { width: 36px; height: 36px; flex: none; }
 .srm-chat-title { flex: 1; min-width: 0; }
 .srm-chat-title h2 { margin: 0; font-size: 16px; line-height: 1.2; font-weight: 800; letter-spacing: -0.01em; }
-.srm-chat-title span { display: block; font-size: 12px; color: var(--srm-muted); }
+.srm-chat-title span { display: block; font-size: 13px; color: var(--srm-muted); }
 .srm-icon-button { display: grid; place-items: center; flex: none; width: 44px; height: 44px; background: none; border: 0; border-radius: 50%; color: inherit; cursor: pointer; }
 .srm-icon-button:hover { background: var(--srm-soft); }
 .srm-icon-button[hidden] { display: none; }
@@ -90,7 +97,7 @@
 .srm-mic[aria-pressed="true"] { background: #b3261e; color: #fff; }
 .srm-send { display: grid; place-items: center; flex: none; width: 40px; height: 40px; margin: 2px; background: var(--srm-ink); color: #fff; border: 0; border-radius: 50%; cursor: pointer; }
 .srm-send:disabled { opacity: 0.5; cursor: progress; }
-.srm-note { margin: 6px 14px 10px; font-size: 11.5px; line-height: 1.3; color: var(--srm-muted); text-align: center; }
+.srm-note { margin: 6px 14px 10px; font-size: 13px; line-height: 1.3; color: var(--srm-muted); text-align: center; }
 
 .srm-settings { flex: 1; overflow-y: auto; padding: 16px 14px; }
 .srm-settings[hidden] { display: none; }

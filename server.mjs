@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import { createReadStream, existsSync, statSync } from "node:fs";
+import { createReadStream, existsSync, readFileSync, statSync } from "node:fs";
 import { resolve, extname, sep } from "node:path";
 import { renderPage } from "./render-pages.mjs";
 import { handle } from "./assistant-server.mjs";
@@ -7,6 +7,14 @@ import { handle } from "./assistant-server.mjs";
 const root = resolve(import.meta.dirname);
 if (existsSync(resolve(root, ".env"))) process.loadEnvFile(resolve(root, ".env"));
 const port = Number(process.env.PORT || 3000);
+
+// Same security headers as production. Long caching is left out so edits show up at once.
+const headerRules = JSON.parse(readFileSync(resolve(root, "vercel.json"), "utf8")).headers.map((rule) => ({
+  pattern: new RegExp(`^${rule.source}$`),
+  headers: rule.headers,
+}));
+// Source files that production never serves.
+const PRIVATE = /^\/(tools|tests|docs|knowledge|api|node_modules)(\/|$)|^\/(package(-lock)?\.json|vercel\.json|README\.md|server\.mjs|build\.mjs|render-pages\.mjs|university-directory\.mjs|assistant-server\.mjs)$/;
 const types = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
@@ -54,6 +62,7 @@ async function serveApi(kind, request, response) {
         ip: request.socket.remoteAddress,
         origin: request.headers.origin,
         host: request.headers.host,
+        contentType: request.headers["content-type"],
       });
     } catch {
       result = { status: 400, json: { ok: false, error: "Invalid request." } };
@@ -69,8 +78,19 @@ createServer((request, response) => {
     const pathname = decodeURIComponent(
       new URL(request.url, "http://localhost").pathname,
     );
+    for (const rule of headerRules) {
+      if (!rule.pattern.test(pathname)) continue;
+      for (const { key, value } of rule.headers) {
+        if (key !== "Cache-Control" || value === "no-store") response.setHeader(key, value);
+      }
+    }
     if (apiRoutes[pathname]) {
       serveApi(apiRoutes[pathname], request, response);
+      return;
+    }
+    if (request.method !== "GET" && request.method !== "HEAD") {
+      response.writeHead(405);
+      response.end("Method not allowed");
       return;
     }
     const page = renderPage(pathname);
@@ -91,6 +111,7 @@ createServer((request, response) => {
     if (
       !file.startsWith(root + sep) ||
       /(^|[\\/])\./.test(pathname) ||
+      PRIVATE.test(pathname) ||
       !existsSync(file) ||
       !statSync(file).isFile()
     ) {

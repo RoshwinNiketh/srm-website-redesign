@@ -1,0 +1,234 @@
+[
+ {
+  "mode": "desktop",
+  "name": "home",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 30
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "home+chat",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 31
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "home+a11y panel",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 30
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "campus",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 24
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "admissions",
+  "violations": [],
+  "needsReview": []
+ },
+ {
+  "mode": "desktop",
+  "name": "academics",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "campus-life",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "research",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "about",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "contact",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "more",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "home",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 25
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "home+chat",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 27
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "home+a11y panel",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 25
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "campus",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 21
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "admissions",
+  "violations": [],
+  "needsReview": []
+ },
+ {
+  "mode": "mobile",
+  "name": "academics",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "campus-life",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "research",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "about",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "contact",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "more",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ }
+]

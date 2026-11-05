@@ -38,7 +38,7 @@ function renderDirectory(route) {
 }
 
 function renderInnerPage(page, route) {
-  const image = page.image ? `<img class="inner-image" src="/assets/images/${page.image}" alt="${page.imageAlt}" />` : "";
+  const image = page.image ? `<img class="inner-image" src="/assets/images/${page.image}" srcset="${[640, 960, 1280].map((width) => `/assets/images/${page.image.replace(".webp", `-${width}.webp`)} ${width}w`).join(", ")}, /assets/images/${page.image} 1672w" sizes="(max-width: 760px) 100vw, 50vw" alt="${page.imageAlt}" fetchpriority="high" width="1672" height="941" />` : "";
   return `<section class="inner-lead${image ? " inner-lead-with-image" : ""}">
     <div>
       <h1>${page.title}</h1>
@@ -87,6 +87,7 @@ export function renderPage(pathname) {
   }
   const template = isAdmissions ? read("admissions.html").replace("<!-- Admissions directory -->", () => renderDirectory(route)) : read("inner-page.html")
     .replace("<!-- Page title -->", () => innerPage.title)
+    .replace("<!-- Page description -->", () => innerPage.lead.replace(/"/g, "&quot;"))
     .replace("<!-- Page content -->", () => renderInnerPage(innerPage, route));
   return template.replace("<!-- Shared navigation -->", () => nav);
 }

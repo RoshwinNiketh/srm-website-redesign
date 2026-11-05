@@ -20,7 +20,7 @@ if (stage) {
   guide.setAttribute("aria-label", "Campus guide");
   guide.innerHTML = `
     <button type="button" class="guide-toggle" aria-expanded="true">
-      <img src="/assets/brand/srm-emblem.png" alt="" width="32" height="32" />
+      <img src="/assets/brand/srm-emblem.webp" alt="" width="32" height="32" />
       <span>Campus guide</span>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
     </button>

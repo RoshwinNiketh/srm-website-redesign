@@ -2,7 +2,36 @@ import { after, before, test } from "node:test";
 import assert from "node:assert/strict";
 import { createServer } from "node:http";
 import { parseCommand, ROUTES } from "../assistant-intents.mjs";
-import { answerQuestion, NOT_FOUND, retrieve, transformPage, ungroundedFacts } from "../assistant-server.mjs";
+import { answerQuestion, clientIp, handle, NOT_FOUND, retrieve, transformPage, ungroundedFacts } from "../assistant-server.mjs";
+import { readFileSync } from "node:fs";
+
+/* ---------- security ---------- */
+const JSON_TYPE = "application/json";
+test("rejects requests that aren't JSON", async () => {
+  assert.equal((await handle("chat", { message: "hi" }, { contentType: "text/plain" })).status, 415);
+});
+test("rejects other websites", async () => {
+  assert.equal((await handle("chat", { message: "hi" }, { contentType: JSON_TYPE, origin: "https://evil.example", host: "srm.example" })).status, 403);
+});
+test("rejects bodies that aren't objects", async () => {
+  assert.equal((await handle("chat", ["x"], { contentType: JSON_TYPE })).status, 400);
+});
+test("rate limits one visitor", async () => {
+  let last;
+  const saved = process.env.GEMINI_API_KEY;
+  delete process.env.GEMINI_API_KEY;
+  for (let i = 0; i < 21; i++) last = await handle("chat", { message: "hi" }, { contentType: JSON_TYPE, ip: "9.9.9.9" });
+  if (saved) process.env.GEMINI_API_KEY = saved;
+  assert.equal(last.status, 429);
+});
+test("ignores a forged forwarding header", () => {
+  assert.equal(clientIp({ "x-forwarded-for": "1.1.1.1", "x-real-ip": "2.2.2.2" }), "2.2.2.2");
+});
+test("production sends the security headers", () => {
+  const rule = JSON.parse(readFileSync(new URL("../vercel.json", import.meta.url), "utf8")).headers[0];
+  const keys = rule.headers.map((header) => header.key);
+  for (const key of ["Content-Security-Policy", "Strict-Transport-Security", "X-Content-Type-Options", "X-Frame-Options", "Referrer-Policy", "Permissions-Policy"]) assert.ok(keys.includes(key), key);
+});
 
 /* ---------- commands ---------- */
 const commands = [

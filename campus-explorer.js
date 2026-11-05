@@ -120,7 +120,8 @@ new IntersectionObserver(
       loadCampus();
     }
   },
-  { rootMargin: "120%" },
+  // Close enough to feel instant, without making every visitor download the 3D engine.
+  { rootMargin: "40%" },
 ).observe(stage);
 
 function floorContent(index) {

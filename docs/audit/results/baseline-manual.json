@@ -1,0 +1,441 @@
+{
+ "small": {
+  "/#home": [
+   [
+    "13px/400",
+    9,
+    [
+     "Kattankulathur, Chennai",
+     "A new perspective on SRM",
+     "Scroll to discover"
+    ]
+   ],
+   [
+    "13px/700",
+    6,
+    [
+     "Engineering & Technology",
+     "Medical & Health Sciences",
+     "Science & Humanities"
+    ]
+   ]
+  ],
+  "/admissions": [
+   [
+    "13px/750",
+    1,
+    [
+     "SRMIST / Admissions"
+    ]
+   ]
+  ],
+  "/academics": [
+   [
+    "13px/750",
+    1,
+    [
+     "SRMIST / Academics"
+    ]
+   ]
+  ],
+  "/campus-life": [
+   [
+    "13px/750",
+    1,
+    [
+     "SRMIST / Campus Life"
+    ]
+   ]
+  ],
+  "/research": [
+   [
+    "13px/750",
+    1,
+    [
+     "SRMIST / Research & Innovation"
+    ]
+   ]
+  ],
+  "/about": [
+   [
+    "13px/750",
+    1,
+    [
+     "SRMIST / About Us"
+    ]
+   ]
+  ],
+  "/contact": [],
+  "/more": [
+   [
+    "13px/750",
+    1,
+    [
+     "SRMIST / More"
+    ]
+   ]
+  ]
+ },
+ "headings": {
+  "/#home": [
+   "H1:A world ofpossibilities.",
+   "H2:Pick a building.",
+   "H2:Different paths.Shared possi",
+   "H3:Make what's next.",
+   "H2:Your storystarts here."
+  ],
+  "/admissions": [
+   "H1:Admissions",
+   "H2:Explore Admissions",
+   "H3:Indian Admissions",
+   "H3:International Admissions",
+   "H3:Programmes & Eligibility",
+   "H3:Fees & Scholarships",
+   "H3:Application Process & FAQs",
+   "H2:What can I study?",
+   "H2:How to apply",
+   "H2:Before you apply"
+  ],
+  "/academics": [
+   "H1:Academics",
+   "H2:Explore Academics",
+   "H3:Undergraduate & Postgraduate",
+   "H3:Schools & Faculties",
+   "H3:Departments",
+   "H3:Academic Calendar & Library",
+   "H3:Online & Distance Education",
+   "H2:Explore the faculties",
+   "H2:Compare your options"
+  ],
+  "/campus-life": [
+   "H1:Campus Life",
+   "H2:Explore Campus Life",
+   "H3:Student Life & Activities",
+   "H3:Hostels & Dining",
+   "H3:Clubs & Societies",
+   "H3:Sports & Fitness",
+   "H3:Campus Facilities & Student ",
+   "H2:Plan your first visit"
+  ],
+  "/research": [
+   "H1:Research",
+   "H2:Explore Research & Innovatio",
+   "H3:Research Overview",
+   "H3:Research Centres & Centres o",
+   "H3:Publications & Journals",
+   "H3:Patents, Incubation & Startu",
+   "H3:Industry & International Col",
+   "H2:Start a research enquiry"
+  ],
+  "/about": [
+   "H1:About SRM",
+   "H2:Explore About Us",
+   "H3:About SRMIST",
+   "H3:Leadership & Administration",
+   "H3:Rankings & Accreditations",
+   "H3:Our Campuses",
+   "H3:Contact Us",
+   "H2:Explore Kattankulathur"
+  ],
+  "/contact": [
+   "H1:Contact",
+   "H2:Who to contact",
+   "H2:Before you get in touch"
+  ],
+  "/more": [
+   "H1:More from SRMIST",
+   "H2:Explore more resources",
+   "H3:Placements & Recruiters",
+   "H3:International Relations",
+   "H3:Alumni Network",
+   "H3:News & Events",
+   "H3:Careers",
+   "H2:Find the right office"
+  ]
+ },
+ "targets": {
+  "/#home": [
+   "Back to the beginning ↑ 342x23"
+  ],
+  "/admissions": [
+   "SRM campus experience ↗ 171x19"
+  ],
+  "/academics": [
+   "SRM campus experience ↗ 171x19"
+  ],
+  "/campus-life": [
+   "SRM campus experience ↗ 171x19"
+  ],
+  "/research": [
+   "SRM campus experience ↗ 171x19"
+  ],
+  "/about": [
+   "SRM campus experience ↗ 171x19"
+  ],
+  "/contact": [
+   "SRM campus experience ↗ 171x19"
+  ],
+  "/more": [
+   "SRM campus experience ↗ 171x19"
+  ]
+ },
+ "keyboard": {
+  "/#home": {
+   "noRing": [],
+   "first": [
+    "A.primary-button:Explore the campus\n   ",
+    "A.scroll-cue:Scroll to discover↓",
+    "BUTTON.sound-button:Turn campus ambience o"
+   ]
+  },
+  "/admissions": {
+   "noRing": [],
+   "first": [
+    "A.brand:SRM home",
+    "INPUT:",
+    "BUTTON:Find pages"
+   ]
+  },
+  "/academics": {
+   "noRing": [],
+   "first": [
+    "A.brand:SRM home",
+    "INPUT:",
+    "BUTTON:Find pages"
+   ]
+  },
+  "/campus-life": {
+   "noRing": [],
+   "first": [
+    "A.brand:SRM home",
+    "INPUT:",
+    "BUTTON:Find pages"
+   ]
+  },
+  "/research": {
+   "noRing": [],
+   "first": [
+    "A.brand:SRM home",
+    "INPUT:",
+    "BUTTON:Find pages"
+   ]
+  },
+  "/about": {
+   "noRing": [],
+   "first": [
+    "A.brand:SRM home",
+    "INPUT:",
+    "BUTTON:Find pages"
+   ]
+  },
+  "/contact": {
+   "noRing": [],
+   "first": [
+    "A.brand:SRM home",
+    "INPUT:",
+    "BUTTON:Find pages"
+   ]
+  },
+  "/more": {
+   "noRing": [],
+   "first": [
+    "A.brand:SRM home",
+    "INPUT:",
+    "BUTTON:Find pages"
+   ]
+  }
+ },
+ "reflow": {
+  "/#home": 0,
+  "/admissions": 0,
+  "/academics": 0,
+  "/campus-life": 0,
+  "/research": 0,
+  "/about": 0,
+  "/contact": 0,
+  "/more": 0
+ },
+ "photoContrast": [
+  {
+   "width": 1440,
+   "selector": ".hero-content h1",
+   "size": 103.68,
+   "weight": 400,
+   "typical": 11.51,
+   "worst": 5.16,
+   "large": true
+  },
+  {
+   "width": 1440,
+   "selector": ".hero-motto",
+   "size": 31,
+   "weight": 750,
+   "typical": 15.46,
+   "worst": 5.5,
+   "large": true
+  },
+  {
+   "width": 1440,
+   "selector": ".hero-content p:last-of-type",
+   "size": 16,
+   "weight": 400,
+   "typical": 10.02,
+   "worst": 2.82,
+   "large": false
+  },
+  {
+   "width": 1440,
+   "selector": ".hero-caption",
+   "size": 13,
+   "weight": 400,
+   "typical": 17.18,
+   "worst": 12.22,
+   "large": false
+  },
+  {
+   "width": 1440,
+   "selector": ".scroll-cue",
+   "size": 13,
+   "weight": 400,
+   "typical": 14.25,
+   "worst": 4.13,
+   "large": false
+  },
+  {
+   "width": 1440,
+   "selector": ".sound-button",
+   "size": 13,
+   "weight": 400,
+   "typical": 18.6,
+   "worst": 13.97,
+   "large": false
+  },
+  {
+   "width": 1440,
+   "selector": ".hero-bottom",
+   "size": 14,
+   "weight": 400,
+   "typical": 16.32,
+   "worst": 2.16,
+   "large": false
+  },
+  {
+   "width": 390,
+   "selector": ".hero-content h1",
+   "size": 48,
+   "weight": 400,
+   "typical": 10.53,
+   "worst": 6.84,
+   "large": true
+  },
+  {
+   "width": 390,
+   "selector": ".hero-motto",
+   "size": 20,
+   "weight": 750,
+   "typical": 11.52,
+   "worst": 3.14,
+   "large": true
+  },
+  {
+   "width": 390,
+   "selector": ".hero-content p:last-of-type",
+   "size": 16,
+   "weight": 400,
+   "typical": 11.1,
+   "worst": 4.7,
+   "large": false
+  },
+  {
+   "width": 390,
+   "selector": ".hero-caption",
+   "size": 13,
+   "weight": 400,
+   "typical": 15.52,
+   "worst": 5.74,
+   "large": false
+  },
+  {
+   "width": 390,
+   "selector": ".sound-button",
+   "size": 13,
+   "weight": 400,
+   "typical": 15.03,
+   "worst": 6.27,
+   "large": false
+  },
+  {
+   "width": 390,
+   "selector": ".hero-bottom",
+   "size": 13,
+   "weight": 400,
+   "typical": 16.43,
+   "worst": 1.07,
+   "large": false
+  },
+  {
+   "width": 1440,
+   "selector": ".campus-intro h2",
+   "size": 96,
+   "weight": 800,
+   "typical": 1,
+   "worst": 1,
+   "large": true
+  },
+  {
+   "width": 1440,
+   "selector": ".campus-hint",
+   "size": 16,
+   "weight": 400,
+   "typical": 1.65,
+   "worst": 1.65,
+   "large": false
+  },
+  {
+   "width": 1440,
+   "selector": ".campus-intro .eyebrow",
+   "size": 13,
+   "weight": 700,
+   "typical": 1.7,
+   "worst": 1.7,
+   "large": false
+  },
+  {
+   "width": 390,
+   "selector": ".campus-intro h2",
+   "size": 44.8,
+   "weight": 800,
+   "typical": 1,
+   "worst": 1,
+   "large": true
+  },
+  {
+   "width": 390,
+   "selector": ".campus-hint",
+   "size": 16,
+   "weight": 400,
+   "typical": 1.65,
+   "worst": 1.65,
+   "large": false
+  },
+  {
+   "width": 390,
+   "selector": ".campus-intro .eyebrow",
+   "size": 13,
+   "weight": 700,
+   "typical": 1.7,
+   "worst": 1.7,
+   "large": false
+  }
+ ],
+ "meta": {
+  "/#home": "{\"title\":\"SRM — A world of possibilities\",\"desc\":\"Discover a new perspective on SRM. Explore a cinematic campus concept and find your place in engineering, medicine, arts and science.\",\"lang\":\"en\",\"skip\":false,\"imgNoAlt\":0,\"imgNoSize\":[\"assets/images/engineering.webp\",\"assets/images/archgate.webp\",\"/assets/brand/srm-emblem.png\"]}",
+  "/admissions": "{\"title\":\"Admissions · SRM Institute of Science and Technology\",\"desc\":\"Explore study at SRM Institute of Science and Technology and find your way to the official application portal.\",\"lang\":\"en\",\"skip\":false,\"imgNoAlt\":0,\"imgNoSize\":[\"/assets/images/archgate.webp\",\"/assets/images/engineering.webp\",\"/assets/images/medical.webp\",\"/assets/images/campus-life.webp\",\"/assets/brand/srm-emblem.png\"]}",
+  "/academics": "{\"title\":\"Academics · SRM\",\"desc\":null,\"lang\":\"en\",\"skip\":false,\"imgNoAlt\":0,\"imgNoSize\":[\"/assets/images/engineering.webp\",\"/assets/brand/srm-emblem.png\"]}",
+  "/campus-life": "{\"title\":\"Campus Life · SRM\",\"desc\":null,\"lang\":\"en\",\"skip\":false,\"imgNoAlt\":0,\"imgNoSize\":[\"/assets/images/campus-life.webp\",\"/assets/brand/srm-emblem.png\"]}",
+  "/research": "{\"title\":\"Research · SRM\",\"desc\":null,\"lang\":\"en\",\"skip\":false,\"imgNoAlt\":0,\"imgNoSize\":[\"/assets/brand/srm-emblem.png\"]}",
+  "/about": "{\"title\":\"About SRM · SRM\",\"desc\":null,\"lang\":\"en\",\"skip\":false,\"imgNoAlt\":0,\"imgNoSize\":[\"/assets/images/archgate.webp\",\"/assets/brand/srm-emblem.png\"]}",
+  "/contact": "{\"title\":\"Contact · SRM\",\"desc\":null,\"lang\":\"en\",\"skip\":false,\"imgNoAlt\":0,\"imgNoSize\":[\"/assets/brand/srm-emblem.png\"]}",
+  "/more": "{\"title\":\"More from SRMIST · SRM\",\"desc\":null,\"lang\":\"en\",\"skip\":false,\"imgNoAlt\":0,\"imgNoSize\":[\"/assets/brand/srm-emblem.png\"]}"
+ }
+}

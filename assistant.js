@@ -284,7 +284,7 @@ launcher.setAttribute("aria-expanded", "false");
 launcher.setAttribute("aria-controls", "srm-chat");
 launcher.title = "Ask SRM";
 const launcherLogo = el("img");
-launcherLogo.src = "/assets/brand/srm-emblem.png";
+launcherLogo.src = "/assets/brand/srm-emblem.webp";
 launcherLogo.alt = "";
 launcherLogo.width = 44;
 launcherLogo.height = 44;
@@ -304,9 +304,11 @@ chat.setAttribute("aria-modal", "false");
 chat.setAttribute("aria-labelledby", "srm-chat-title");
 chat.hidden = true;
 
-const header = el("header", "srm-chat-head");
+const header = el("div", "srm-chat-head");
 const headLogo = el("img");
-headLogo.src = "/assets/brand/srm-emblem.png";
+headLogo.src = "/assets/brand/srm-emblem.webp";
+headLogo.width = 36;
+headLogo.height = 36;
 headLogo.alt = "";
 const headText = el("div", "srm-chat-title");
 const title = el("h2", "", "SRM Assistant");
@@ -532,11 +534,11 @@ function buildSettings() {
   const sizeLabel = el("span", "", "Text size");
   const smaller = el("button", "", "A−");
   smaller.type = "button";
-  smaller.setAttribute("aria-label", "Make text smaller");
+  smaller.setAttribute("aria-label", "A− Make text smaller");
   smaller.addEventListener("click", () => setDisplay("text-smaller"));
   const larger = el("button", "", "A+");
   larger.type = "button";
-  larger.setAttribute("aria-label", "Make text larger");
+  larger.setAttribute("aria-label", "A+ Make text larger");
   larger.addEventListener("click", () => setDisplay("text-larger"));
   size.append(sizeLabel, smaller, larger);
 

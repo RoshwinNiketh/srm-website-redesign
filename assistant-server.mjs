@@ -311,16 +311,28 @@ export async function transformPage({ page, mode }) {
 
 /* ---------- request handling ---------- */
 const hits = new Map();
+let allHits = [];
 function limited(ip) {
   const now = Date.now();
   const recent = (hits.get(ip) || []).filter((time) => now - time < 60000);
   recent.push(now);
   hits.set(ip, recent);
   if (hits.size > 5000) hits.clear();
-  return recent.length > 20;
+  // A ceiling across all visitors, so changing IP addresses can't drain the Gemini quota.
+  allHits = allHits.filter((time) => now - time < 60000);
+  allHits.push(now);
+  return recent.length > 20 || allHits.length > 300;
 }
 
-export async function handle(kind, body, { ip = "local", origin, host } = {}) {
+export function clientIp(headers) {
+  // Set by Vercel itself. A visitor can forge the first entry of x-forwarded-for.
+  return String(headers["x-vercel-forwarded-for"] || headers["x-real-ip"] || "unknown").split(",")[0].trim();
+}
+
+export async function handle(kind, body, { ip = "local", origin, host, contentType } = {}) {
+  // Plain forms on other sites can't send JSON, which blocks cross-site posts.
+  if (!String(contentType || "").toLowerCase().startsWith("application/json")) return { status: 415, json: { ok: false, error: "Send JSON." } };
+  if (!body || typeof body !== "object" || Array.isArray(body)) return { status: 400, json: { ok: false, error: "Invalid request." } };
   try {
     if (origin && host && new URL(origin).host !== host) return { status: 403, json: { ok: false, error: "Not allowed." } };
   } catch {

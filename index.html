@@ -10,33 +10,11 @@
     />
     <title>SRM — A world of possibilities</title>
     <script src="/assistant-prefs.js"></script>
-    <style>
-      #intro-loading { display: none; }
-      html.intro-pending body > :not(#intro-loading) { visibility: hidden; }
-      html.intro-pending { overflow: hidden; background: #faf7ee; }
-      html.intro-pending #intro-loading {
-        position: fixed;
-        inset: 0;
-        display: grid;
-        place-items: center;
-        background: #faf7ee;
-        color: #142620;
-        font: 16px system-ui, sans-serif;
-      }
-    </style>
-    <script>
-      try {
-        if (!location.hash && !matchMedia("(prefers-reduced-motion: reduce)").matches &&
-            document.documentElement.dataset.a11yMotion !== "off" &&
-            Element.prototype.animate && sessionStorage.getItem("srm-landing-intro-v1") !== "played") {
-          document.documentElement.classList.add("intro-pending");
-          setTimeout(() => document.documentElement.classList.remove("intro-pending"), 20000);
-        }
-      } catch {}
-    </script>
-    <link rel="preload" href="/assets/brand/srm-logo.png" as="image" fetchpriority="high" />
+    <script src="/intro-guard.js"></script>
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/brand/srm-logo.webp" as="image" fetchpriority="high" />
     <link rel="icon" href="/assets/brand/srm-emblem.png" type="image/png" />
-    <link rel="preload" href="assets/images/campus-aerial.webp" as="image" />
+    <link rel="preload" as="image" href="/assets/images/campus-aerial.webp" imagesrcset="/assets/images/campus-aerial-640.webp 640w, /assets/images/campus-aerial-960.webp 960w, /assets/images/campus-aerial-1280.webp 1280w, /assets/images/campus-aerial.webp 1672w" imagesizes="100vw" />
     <link rel="stylesheet" href="/theme.css" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="/site-pages.css" />
@@ -52,14 +30,15 @@
   </head>
   <body>
     <div id="intro-loading" role="status">Loading the SRM experience…</div>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <!-- Shared navigation start -->
     <header class="site-header">
       <a class="brand" href="/" aria-label="SRM home">
-        <img src="/assets/brand/srm-logo.png" alt="" width="544" height="184" />
+        <img src="/assets/brand/srm-logo.webp" alt="" width="408" height="138" />
       </a>
       <form class="site-search" role="search">
         <label class="search-label" for="site-search-input">Search SRMIST</label>
-        <input id="site-search-input" type="search" placeholder="Search SRMIST" autocomplete="off" aria-controls="site-search-results" />
+        <input id="site-search-input" type="search" placeholder="Search" autocomplete="off" aria-controls="site-search-results" />
         <button type="submit" aria-label="Find pages">
           <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4 4"/></svg>
         </button>
@@ -89,11 +68,12 @@
       <!-- Mobile page links -->
     </nav>
     <!-- Shared navigation end -->
-    <main>
+    <main id="main-content" tabindex="-1">
       <section id="home" class="hero">
         <div class="hero-media">
           <img
-            src="assets/images/campus-aerial.webp"
+            src="/assets/images/campus-aerial.webp"
+            srcset="/assets/images/campus-aerial-640.webp 640w, /assets/images/campus-aerial-960.webp 960w, /assets/images/campus-aerial-1280.webp 1280w, /assets/images/campus-aerial.webp 1672w" sizes="100vw"
             alt="Cinematic concept of SRM campus, with the archgate, tropical landscape and sunlit academic towers"
             fetchpriority="high"
             width="1672"
@@ -126,7 +106,7 @@
         >
         <button
           class="sound-button"
-          aria-label="Turn campus ambience on"
+          aria-label="Sound off. Turn campus ambience on"
           aria-pressed="false"
         >
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -170,7 +150,7 @@
             <h2 id="panel-title">Engineering &amp; Technology</h2>
             <p id="panel-tagline" class="panel-tagline"></p>
             <div class="floor-tabs" role="tablist" aria-label="Building floors" id="floor-tabs"></div>
-            <div id="floor-body" class="floor-body" role="tabpanel" tabindex="0"></div>
+            <div id="floor-body" class="floor-body" role="tabpanel" tabindex="0" aria-label="Floor details"></div>
             <p class="panel-note">Sample content for this concept. Programmes, fees, and building locations need confirming before launch.</p>
           </aside>
         </div>
@@ -247,8 +227,8 @@
       </section>
     </main>
     <footer>
-      <a class="footer-brand" href="/" aria-label="SRM home">
-        <img src="/assets/brand/srm-logo.png" alt="" width="544" height="184" loading="lazy" />
+      <a class="footer-brand" href="/" aria-label="SRM home. Learn. Leap. Lead.">
+        <img src="/assets/brand/srm-logo.webp" alt="" width="408" height="138" loading="lazy" />
         <span>Learn. Leap. Lead.</span>
       </a>
       <div class="footer-bottom">
@@ -268,8 +248,9 @@
       <div class="destination-visual">
         <img
           id="destination-image"
-          src="assets/images/engineering.webp"
+          src="assets/images/engineering-960.webp"
           alt=""
+          loading="lazy"
         />
         <div class="destination-scrim"></div>
         <button class="close-dialog" aria-label="Return to campus">
@@ -300,7 +281,7 @@
       </div>
     </dialog>
     <div class="journey-transition" aria-hidden="true">
-      <img src="assets/images/archgate.webp" alt="" />
+      <img id="journey-image" data-src="/assets/images/archgate-1280.webp" alt="" />
       <div></div>
       <span
         >Through the archgate.<br /><strong id="journey-destination"

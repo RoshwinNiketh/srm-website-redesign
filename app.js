@@ -113,6 +113,9 @@ async function visitSchool(key, trigger) {
   document.querySelector("#journey-destination").textContent =
     schools[key].name;
   if (!reducedMotion.matches) {
+    // Fetched only when needed, so it never slows the first page load.
+    const journeyImage = document.querySelector("#journey-image");
+    if (!journeyImage.src) journeyImage.src = journeyImage.dataset.src;
     transition.classList.add("active");
     await new Promise((resolve) => setTimeout(resolve, 850));
   }
@@ -209,7 +212,7 @@ soundButton.addEventListener("click", async () => {
     soundButton.setAttribute("aria-pressed", String(!isPlaying));
     soundButton.setAttribute(
       "aria-label",
-      `Turn campus ambience ${isPlaying ? "on" : "off"}`,
+      `Sound ${isPlaying ? "off" : "on"}. Turn campus ambience ${isPlaying ? "on" : "off"}`,
     );
     soundButton.querySelector("span").textContent = isPlaying
       ? "Sound off"

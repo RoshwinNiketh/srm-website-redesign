@@ -1,0 +1,530 @@
+[
+ {
+  "mode": "desktop",
+  "name": "home",
+  "violations": [
+   {
+    "id": "label-content-name-mismatch",
+    "impact": "serious",
+    "help": "Elements must have their visible text as part of their accessible name",
+    "count": 2,
+    "targets": [
+     {
+      "t": ".sound-button",
+      "s": "Text inside the element is not included in the accessible name"
+     },
+     {
+      "t": ".footer-brand",
+      "s": "Text inside the element is not included in the accessible name"
+     }
+    ]
+   }
+  ],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 30
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "home+chat",
+  "violations": [
+   {
+    "id": "label-content-name-mismatch",
+    "impact": "serious",
+    "help": "Elements must have their visible text as part of their accessible name",
+    "count": 2,
+    "targets": [
+     {
+      "t": ".sound-button",
+      "s": "Text inside the element is not included in the accessible name"
+     },
+     {
+      "t": ".footer-brand",
+      "s": "Text inside the element is not included in the accessible name"
+     }
+    ]
+   },
+   {
+    "id": "landmark-no-duplicate-banner",
+    "impact": "moderate",
+    "help": "Document should not have more than one banner landmark",
+    "count": 1,
+    "targets": [
+     {
+      "t": ".site-header",
+      "s": "Document has more than one banner landmark"
+     }
+    ]
+   },
+   {
+    "id": "landmark-unique",
+    "impact": "moderate",
+    "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "count": 1,
+    "targets": [
+     {
+      "t": ".site-header",
+      "s": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable"
+     }
+    ]
+   }
+  ],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 30
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "home+a11y panel",
+  "violations": [
+   {
+    "id": "label-content-name-mismatch",
+    "impact": "serious",
+    "help": "Elements must have their visible text as part of their accessible name",
+    "count": 4,
+    "targets": [
+     {
+      "t": ".sound-button",
+      "s": "Text inside the element is not included in the accessible name"
+     },
+     {
+      "t": ".footer-brand",
+      "s": "Text inside the element is not included in the accessible name"
+     },
+     {
+      "t": "button[aria-label=\"Make text smaller\"]",
+      "s": "Text inside the element is not included in the accessible name"
+     },
+     {
+      "t": "button[aria-label=\"Make text larger\"]",
+      "s": "Text inside the element is not included in the accessible name"
+     }
+    ]
+   },
+   {
+    "id": "landmark-no-duplicate-banner",
+    "impact": "moderate",
+    "help": "Document should not have more than one banner landmark",
+    "count": 1,
+    "targets": [
+     {
+      "t": ".site-header",
+      "s": "Document has more than one banner landmark"
+     }
+    ]
+   },
+   {
+    "id": "landmark-unique",
+    "impact": "moderate",
+    "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "count": 1,
+    "targets": [
+     {
+      "t": ".site-header",
+      "s": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable"
+     }
+    ]
+   }
+  ],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 30
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "campus",
+  "violations": [
+   {
+    "id": "label-content-name-mismatch",
+    "impact": "serious",
+    "help": "Elements must have their visible text as part of their accessible name",
+    "count": 2,
+    "targets": [
+     {
+      "t": ".sound-button",
+      "s": "Text inside the element is not included in the accessible name"
+     },
+     {
+      "t": ".footer-brand",
+      "s": "Text inside the element is not included in the accessible name"
+     }
+    ]
+   },
+   {
+    "id": "landmark-no-duplicate-banner",
+    "impact": "moderate",
+    "help": "Document should not have more than one banner landmark",
+    "count": 1,
+    "targets": [
+     {
+      "t": ".site-header",
+      "s": "Document has more than one banner landmark"
+     }
+    ]
+   },
+   {
+    "id": "landmark-unique",
+    "impact": "moderate",
+    "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "count": 1,
+    "targets": [
+     {
+      "t": ".site-header",
+      "s": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable"
+     }
+    ]
+   }
+  ],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 24
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "admissions",
+  "violations": [],
+  "needsReview": []
+ },
+ {
+  "mode": "desktop",
+  "name": "academics",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "campus-life",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "research",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "about",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "contact",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "desktop",
+  "name": "more",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "home",
+  "violations": [
+   {
+    "id": "label-content-name-mismatch",
+    "impact": "serious",
+    "help": "Elements must have their visible text as part of their accessible name",
+    "count": 2,
+    "targets": [
+     {
+      "t": ".sound-button",
+      "s": "Text inside the element is not included in the accessible name"
+     },
+     {
+      "t": ".footer-brand",
+      "s": "Text inside the element is not included in the accessible name"
+     }
+    ]
+   }
+  ],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 25
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "home+chat",
+  "violations": [
+   {
+    "id": "label-content-name-mismatch",
+    "impact": "serious",
+    "help": "Elements must have their visible text as part of their accessible name",
+    "count": 2,
+    "targets": [
+     {
+      "t": ".sound-button",
+      "s": "Text inside the element is not included in the accessible name"
+     },
+     {
+      "t": ".footer-brand",
+      "s": "Text inside the element is not included in the accessible name"
+     }
+    ]
+   },
+   {
+    "id": "landmark-no-duplicate-banner",
+    "impact": "moderate",
+    "help": "Document should not have more than one banner landmark",
+    "count": 1,
+    "targets": [
+     {
+      "t": ".site-header",
+      "s": "Document has more than one banner landmark"
+     }
+    ]
+   },
+   {
+    "id": "landmark-unique",
+    "impact": "moderate",
+    "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "count": 1,
+    "targets": [
+     {
+      "t": ".site-header",
+      "s": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable"
+     }
+    ]
+   }
+  ],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 26
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "home+a11y panel",
+  "violations": [
+   {
+    "id": "label-content-name-mismatch",
+    "impact": "serious",
+    "help": "Elements must have their visible text as part of their accessible name",
+    "count": 4,
+    "targets": [
+     {
+      "t": ".sound-button",
+      "s": "Text inside the element is not included in the accessible name"
+     },
+     {
+      "t": ".footer-brand",
+      "s": "Text inside the element is not included in the accessible name"
+     },
+     {
+      "t": "button[aria-label=\"Make text smaller\"]",
+      "s": "Text inside the element is not included in the accessible name"
+     },
+     {
+      "t": "button[aria-label=\"Make text larger\"]",
+      "s": "Text inside the element is not included in the accessible name"
+     }
+    ]
+   },
+   {
+    "id": "landmark-no-duplicate-banner",
+    "impact": "moderate",
+    "help": "Document should not have more than one banner landmark",
+    "count": 1,
+    "targets": [
+     {
+      "t": ".site-header",
+      "s": "Document has more than one banner landmark"
+     }
+    ]
+   },
+   {
+    "id": "landmark-unique",
+    "impact": "moderate",
+    "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "count": 1,
+    "targets": [
+     {
+      "t": ".site-header",
+      "s": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable"
+     }
+    ]
+   }
+  ],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 25
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "campus",
+  "violations": [
+   {
+    "id": "label-content-name-mismatch",
+    "impact": "serious",
+    "help": "Elements must have their visible text as part of their accessible name",
+    "count": 2,
+    "targets": [
+     {
+      "t": ".sound-button",
+      "s": "Text inside the element is not included in the accessible name"
+     },
+     {
+      "t": ".footer-brand",
+      "s": "Text inside the element is not included in the accessible name"
+     }
+    ]
+   },
+   {
+    "id": "landmark-no-duplicate-banner",
+    "impact": "moderate",
+    "help": "Document should not have more than one banner landmark",
+    "count": 1,
+    "targets": [
+     {
+      "t": ".site-header",
+      "s": "Document has more than one banner landmark"
+     }
+    ]
+   },
+   {
+    "id": "landmark-unique",
+    "impact": "moderate",
+    "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "count": 1,
+    "targets": [
+     {
+      "t": ".site-header",
+      "s": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable"
+     }
+    ]
+   }
+  ],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 21
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "admissions",
+  "violations": [],
+  "needsReview": []
+ },
+ {
+  "mode": "mobile",
+  "name": "academics",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "campus-life",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "research",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "about",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "contact",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "mode": "mobile",
+  "name": "more",
+  "violations": [],
+  "needsReview": [
+   {
+    "id": "color-contrast",
+    "count": 1
+   }
+  ]
+ }
+]

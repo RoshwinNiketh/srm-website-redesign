@@ -7,6 +7,7 @@
     <meta name="description" content="Explore study at SRM Institute of Science and Technology and find your way to the official application portal." />
     <title>Admissions · SRM Institute of Science and Technology</title>
     <link rel="icon" href="/assets/brand/srm-emblem.png" type="image/png" />
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/theme.css" />
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/site-pages.css" />
@@ -17,11 +18,12 @@
     <script type="module" src="/assistant.js"></script>
   </head>
   <body class="admissions">
+    <a class="skip-link" href="#admissions-content">Skip to main content</a>
     <!-- Shared navigation -->
-    <main id="admissions-content">
+    <main id="admissions-content" tabindex="-1">
       <section class="admissions-lead" aria-labelledby="admissions-title">
         <figure class="admissions-masthead">
-          <img src="/assets/images/archgate.webp" alt="Architectural concept of the SRM archgate and its landscaped approach" fetchpriority="high" />
+          <img src="/assets/images/archgate.webp" srcset="/assets/images/archgate-640.webp 640w, /assets/images/archgate-960.webp 960w, /assets/images/archgate-1280.webp 1280w, /assets/images/archgate.webp 1672w" sizes="100vw" alt="Architectural concept of the SRM archgate and its landscaped approach" fetchpriority="high" width="1672" height="941" />
         </figure>
         <div class="admissions-layout admissions-title">
           <p class="admissions-place">SRM Institute of Science and Technology<br />Kattankulathur, Tamil Nadu</p>
@@ -35,9 +37,9 @@
       <!-- Admissions directory -->
       <section class="admissions-layout admissions-study" aria-labelledby="admissions-study-title">
         <figure>
-          <img src="/assets/images/engineering.webp" alt="Concept illustration of SRM's engineering buildings" loading="lazy" />
-          <img src="/assets/images/medical.webp" alt="Aerial concept illustration of the SRM medical campus" loading="lazy" />
-          <img src="/assets/images/campus-life.webp" alt="Concept illustration of a shaded campus walkway" loading="lazy" />
+          <img src="/assets/images/engineering.webp" srcset="/assets/images/engineering-640.webp 640w, /assets/images/engineering-960.webp 960w, /assets/images/engineering-1280.webp 1280w, /assets/images/engineering.webp 1672w" sizes="(max-width: 760px) 100vw, 45vw" alt="Concept illustration of SRM's engineering buildings" loading="lazy" width="1672" height="941" />
+          <img src="/assets/images/medical.webp" srcset="/assets/images/medical-640.webp 640w, /assets/images/medical-960.webp 960w, /assets/images/medical-1280.webp 1280w, /assets/images/medical.webp 1672w" sizes="(max-width: 760px) 100vw, 45vw" alt="Aerial concept illustration of the SRM medical campus" loading="lazy" width="1672" height="941" />
+          <img src="/assets/images/campus-life.webp" srcset="/assets/images/campus-life-640.webp 640w, /assets/images/campus-life-960.webp 960w, /assets/images/campus-life-1280.webp 1280w, /assets/images/campus-life.webp 1672w" sizes="(max-width: 760px) 100vw, 45vw" alt="Concept illustration of a shaded campus walkway" loading="lazy" width="1672" height="941" />
         </figure>
         <div>
           <h2 id="admissions-study-title">What can I study?</h2>

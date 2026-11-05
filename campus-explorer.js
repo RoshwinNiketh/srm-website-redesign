@@ -114,14 +114,16 @@ function loadCampus() {
   return campusLoading;
 }
 new IntersectionObserver(
-  ([entry], observer) => {
-    if (entry.isIntersecting) {
+  (entries, observer) => {
+    // Check them all: arriving at #campus can report "hidden" then "visible" together.
+    if (entries.some((entry) => entry.isIntersecting)) {
       observer.disconnect();
       loadCampus();
     }
   },
-  // Close enough to feel instant, without making every visitor download the 3D engine.
-  { rootMargin: "40%" },
+  // The section starts right at the fold, so this waits for the first scroll.
+  // Visitors who never scroll down never download the 3D engine.
+  { rootMargin: "0px 0px -1px 0px" },
 ).observe(stage);
 
 function floorContent(index) {

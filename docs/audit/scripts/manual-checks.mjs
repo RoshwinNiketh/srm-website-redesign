@@ -14,6 +14,8 @@ ws.onmessage = (m) => { const d = JSON.parse(m.data); if (d.id) { wait.get(d.id)
 const cmd = (method, params = {}) => new Promise((r) => { const i = ++id; wait.set(i, r); ws.send(JSON.stringify({ id: i, method, params })); });
 const ev = async (expression) => { const r = await cmd("Runtime.evaluate", { expression, awaitPromise: true, returnByValue: true }); return r.result?.result?.value; };
 await cmd("Page.enable"); await cmd("Runtime.enable");
+// The check adds a temporary style, which the site's security policy would otherwise block.
+await cmd("Page.setBypassCSP", { enabled: true });
 const results = { small: {}, headings: {}, targets: {}, keyboard: {}, reflow: {}, photoContrast: [], meta: {} };
 
 const pages = ["/#home", "/admissions", "/academics", "/campus-life", "/research", "/about", "/contact", "/more"];
@@ -58,10 +60,10 @@ for (const [path, width, height, selectors] of checks) {
   await open(path, path.includes("campus") ? 8000 : 2000);
   for (const selector of selectors) {
     await ev("document.querySelector('.srm-launcher')?.style.setProperty('visibility','hidden');document.querySelector('.campus-guide')?.style.setProperty('visibility','hidden')");
-    const info = JSON.parse(await ev(`JSON.stringify((()=>{const e=document.querySelector(${JSON.stringify(selector)});if(!e)return null;const r=e.getBoundingClientRect();if(!r.width)return null;const c=getComputedStyle(e);return{sy:scrollY,x:r.x,y:r.y,w:r.width,h:r.height,color:c.color,size:parseFloat(c.fontSize),weight:parseInt(c.fontWeight),shadow:c.textShadow!=='none'}})())`) || "null");
+    const info = JSON.parse(await ev(`JSON.stringify((()=>{const e=document.querySelector(${JSON.stringify(selector)});if(!e)return null;const g=document.createRange();g.selectNodeContents(e);const r=g.getBoundingClientRect();if(!r.width)return null;const c=getComputedStyle(e);return{sy:scrollY,x:r.x,y:r.y,w:r.width,h:r.height,color:c.color,size:parseFloat(c.fontSize),weight:parseInt(c.fontWeight),shadow:c.textShadow!=='none'}})())`) || "null");
     if (!info || info.y + info.h > height || info.y < 0) continue;
-    await ev(`(()=>{const s=document.createElement('style');s.id='__hide';s.textContent=${JSON.stringify(selector)}+',' + ${JSON.stringify(selector)}+' *{color:transparent!important;text-shadow:none!important;border-color:transparent!important;fill:transparent!important;stroke:transparent!important}';document.head.append(s)})()`);
-    await sleep(60);
+    await ev(`(()=>{const s=document.createElement('style');s.id='__hide';s.textContent=${JSON.stringify(selector)}+',' + ${JSON.stringify(selector)}+' *{transition:none!important;animation:none!important;color:transparent!important;text-shadow:none!important;border-color:transparent!important;fill:transparent!important;stroke:transparent!important}';document.head.append(s)})()`);
+    await sleep(150);
     const shot = await cmd("Page.captureScreenshot", { format: "png", clip: { x: info.x, y: info.y + info.sy, width: info.w, height: info.h, scale: 1 } });
     await ev("document.getElementById('__hide').remove()");
     const file = join(scratch, `${width}-${selector.replace(/[^a-z0-9]/gi, "_")}.png`); writeFileSync(file, Buffer.from(shot.result.data, "base64"));

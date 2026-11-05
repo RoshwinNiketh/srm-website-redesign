@@ -159,7 +159,7 @@ document.querySelectorAll("[data-preview]").forEach((button) => {
       row.classList.toggle("selected", row === button);
       row.setAttribute("aria-pressed", String(row === button));
     });
-    document.querySelector("#school-image").src = school.image;
+    document.querySelector("#school-image").src = school.image.replace(".webp", "-960.webp");
     document.querySelector("#school-image").alt =
       `Architectural concept for ${school.name}`;
     document.querySelector("#school-preview-title").textContent =

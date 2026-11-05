@@ -1,0 +1,232 @@
+<title>SRM Website Audit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column, with results shown as before-to-after score tracks. */
+:root {
+  --bg: #f6f8fb; --panel: #ffffff; --fg: #101b2d; --muted: #4b5a70; --line: #d5dde8;
+  --brand: #0b4ea2; --gold: #a86f00; --before: #9aa8bb; --good: #137a4b; --warn: #a65300; --bad: #b3261e;
+  --sans: Manrope, "Segoe UI", Arial, sans-serif; --mono: "IBM Plex Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0d1420; --panel: #151f2f; --fg: #edf2f8; --muted: #a9b6c8; --line: #2c3a4f;
+  --brand: #7fb2f5; --gold: #e6b975; --before: #66758a; --good: #5fd39c; --warn: #f0a85c; --bad: #ff8e85; color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #0d1420; --panel: #151f2f; --fg: #edf2f8; --muted: #a9b6c8; --line: #2c3a4f;
+  --brand: #7fb2f5; --gold: #e6b975; --before: #66758a; --good: #5fd39c; --warn: #f0a85c; --bad: #ff8e85; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--sans); padding-block: 40px 72px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 900px; margin: 0 auto; display: grid; gap: 44px; }
+main > * { min-width: 0; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.08; letter-spacing: -0.03em; font-weight: 800; margin: 0 0 10px; text-wrap: balance; }
+h2 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.015em; font-weight: 800; margin: 0 0 12px; text-wrap: balance; }
+h3 { font-size: 1.05rem; font-weight: 800; margin: 22px 0 6px; }
+p { margin: 0 0 12px; max-width: 68ch; }
+a { color: var(--brand); }
+a:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+.kicker { font: 600 13px var(--mono); letter-spacing: 0.04em; color: var(--gold); margin-bottom: 8px; }
+.lead { font-size: 1.1rem; color: var(--muted); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 20px; }
+.stat { background: var(--panel); border-top: 3px solid var(--brand); padding: 14px 16px; }
+.stat b { display: block; font: 600 1.45rem/1.2 var(--mono); }
+.stat span { font-size: 14px; color: var(--muted); }
+.scroll { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-weight: 800; white-space: nowrap; }
+td.n, th.n { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.track-row { display: grid; grid-template-columns: 148px minmax(0, 1fr) 76px; gap: 10px; align-items: center; padding: 7px 14px; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.track-row:last-child { border-bottom: 0; }
+.tracks { background: var(--panel); border: 1px solid var(--line); }
+.track { position: relative; height: 12px; background: var(--line); }
+.track i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--brand); }
+.track u { position: absolute; top: -3px; bottom: -3px; width: 3px; background: var(--fg); text-decoration: none; }
+.track-row span:last-child { font: 600 14px var(--mono); text-align: right; white-space: nowrap; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--muted); margin: 8px 0 0; }
+.key i { display: inline-block; width: 14px; height: 10px; background: var(--brand); margin-right: 6px; }
+.key u { display: inline-block; width: 3px; height: 14px; background: var(--fg); margin-right: 6px; vertical-align: -2px; }
+ul { margin: 0 0 12px; padding-left: 20px; max-width: 68ch; }
+li { margin-bottom: 6px; }
+.tag { font: 600 12.5px var(--mono); white-space: nowrap; }
+.fixed { color: var(--good); } .open { color: var(--warn); } .risk { color: var(--bad); }
+code { font: 13.5px var(--mono); overflow-wrap: anywhere; }
+.note { border-left: 3px solid var(--gold); padding: 10px 14px; background: var(--panel); }
+.note p:last-child { margin-bottom: 0; }
+@media (max-width: 520px) { .track-row { grid-template-columns: 1fr 72px; } .track { grid-column: 1 / -1; grid-row: 2; } }
+</style>
+<main>
+<header>
+  <div class="kicker">Next-Gen SRM Website Design Challenge 2026 · 5 Nov 2026</div>
+  <h1>SRM Website Audit</h1>
+  <p class="lead">Accessibility, readability, speed and security gaps in the redesigned SRM site, what was changed, and how it measured before and after. The official srmist.edu.in site is included for comparison.</p>
+  <div class="stats">
+    <div class="stat"><b>42 → 98</b><span>Home mobile speed score, first visit</span></div>
+    <div class="stat"><b>1,734 → 430 KB</b><span>Home page download</span></div>
+    <div class="stat"><b>0</b><span>Automated accessibility violations left</span></div>
+    <div class="stat"><b>0 → 7</b><span>Security headers on every page</span></div>
+  </div>
+</header>
+
+<section>
+  <h2>Summary</h2>
+  <p>Every page now scores 93 or higher on mobile speed and 100 on accessibility, best practices and SEO in Lighthouse. Pages download 26–76% less, depending on the page. On the 19 text samples checked over photos and the 3D scene, none now falls below the contrast minimum; two did before. All 51 visitor-flow checks pass on the production build, including live Gemini answers.</p>
+  <div class="note"><p><strong>Read the home score with care.</strong> The landing intro still keeps the page hidden for up to 6.9 seconds on a first visit, unless the visitor skips it. Lighthouse appears to count the intro artwork as the main content, so 98 overstates how soon a first-time visitor reaches the page. Its removal or shortening is a design decision, listed under next steps.</p></div>
+</section>
+
+<section>
+  <h2>Speed, before and after</h2>
+  <p>Lighthouse mobile score, with simulated slow-mobile network and CPU. Each row shows the score after the changes, with a mark at the earlier score.</p>
+  <div class="tracks" role="img" aria-label="Mobile speed scores before and after, listed in the table below">
+    <div class="track-row"><span>Home, first visit</span><span class="track"><i style="width:98%"></i><u style="left:42%"></u></span><span>42→98</span></div>
+    <div class="track-row"><span>Home, no intro</span><span class="track"><i style="width:99%"></i><u style="left:56%"></u></span><span>56→99</span></div>
+    <div class="track-row"><span>Admissions</span><span class="track"><i style="width:93%"></i><u style="left:76%"></u></span><span>76→93</span></div>
+    <div class="track-row"><span>Academics</span><span class="track"><i style="width:99%"></i><u style="left:91%"></u></span><span>91→99</span></div>
+    <div class="track-row"><span>Campus Life</span><span class="track"><i style="width:99%"></i><u style="left:83%"></u></span><span>83→99</span></div>
+    <div class="track-row"><span>About</span><span class="track"><i style="width:99%"></i><u style="left:83%"></u></span><span>83→99</span></div>
+    <div class="track-row"><span>Research, Contact, More</span><span class="track"><i style="width:100%"></i><u style="left:100%;margin-left:-3px"></u></span><span>100→100</span></div>
+  </div>
+  <div class="key"><span><i></i>After</span><span><u></u>Before</span><span>Track runs from 0 to 100</span></div>
+  <h3>Slow-loading pages found</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Page</th><th class="n">Main content appears (LCP)</th><th class="n">Blocked main thread</th><th class="n">Download</th><th>Main cause</th></tr></thead>
+    <tbody>
+      <tr><td>Home, first visit</td><td class="n">7.4 → 2.0 s*</td><td class="n">6,652 → 76 ms</td><td class="n">1,734 → 430 KB</td><td>3D engine loaded for every visitor, plus 510 KB and 477 KB images, one of them hidden</td></tr>
+      <tr><td>Home, no intro</td><td class="n">7.4 → 2.0 s</td><td class="n">847 → 0 ms</td><td class="n">1,734 → 430 KB</td><td>Same</td></tr>
+      <tr><td>Admissions</td><td class="n">7.3 → 3.2 s</td><td class="n">0 → 0 ms</td><td class="n">1,696 → 503 KB</td><td>Four full-size photos, about 1.5 MB</td></tr>
+      <tr><td>Campus Life</td><td class="n">4.7 → 2.3 s</td><td class="n">0 → 0 ms</td><td class="n">675 → 206 KB</td><td>One 518 KB photo</td></tr>
+      <tr><td>About</td><td class="n">4.7 → 2.3 s</td><td class="n">0 → 0 ms</td><td class="n">666 → 206 KB</td><td>One 510 KB photo</td></tr>
+      <tr><td>Academics</td><td class="n">3.5 → 2.1 s</td><td class="n">0 → 0 ms</td><td class="n">432 → 186 KB</td><td>One 275 KB photo</td></tr>
+    </tbody>
+  </table></div>
+  <p class="key">* Before the intro finishes. See the note in the summary.</p>
+</section>
+
+<section>
+  <h2>Comparison with the official site</h2>
+  <p>Same tool and settings, measured on the live srmist.edu.in on 5 Nov 2026 over this PC's internet connection. The redesign ran on a local server, so its network timing is more favourable and the comparison is a guide. Page size, request count and audit failures don't depend on that.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Mobile</th><th class="n">Speed</th><th class="n">LCP</th><th class="n">Download</th><th class="n">Requests</th><th class="n">Accessibility</th><th class="n">Best practices</th></tr></thead>
+    <tbody>
+      <tr><td>Official home</td><td class="n">42</td><td class="n">33.9 s</td><td class="n">10,504 KB</td><td class="n">382</td><td class="n">81</td><td class="n">77</td></tr>
+      <tr><td>Official admissions</td><td class="n">56</td><td class="n">18.4 s</td><td class="n">5,743 KB</td><td class="n">233</td><td class="n">79</td><td class="n">77</td></tr>
+      <tr><td>Official contact</td><td class="n">55</td><td class="n">16.2 s</td><td class="n">5,757 KB</td><td class="n">218</td><td class="n">83</td><td class="n">77</td></tr>
+      <tr><td><strong>Redesign home</strong></td><td class="n">98</td><td class="n">2.0 s</td><td class="n">430 KB</td><td class="n">24</td><td class="n">100</td><td class="n">100</td></tr>
+      <tr><td><strong>Redesign admissions</strong></td><td class="n">93</td><td class="n">3.2 s</td><td class="n">503 KB</td><td class="n">18</td><td class="n">100</td><td class="n">100</td></tr>
+      <tr><td><strong>Redesign contact</strong></td><td class="n">100</td><td class="n">0.9 s</td><td class="n">110 KB</td><td class="n">13</td><td class="n">100</td><td class="n">100</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Gaps on the official site, with recommended solutions</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Gap Lighthouse or the headers showed</th><th>Recommended solution</th></tr></thead>
+    <tbody>
+      <tr><td>Low colour contrast</td><td>Set colour tokens that meet 4.5:1 for text</td></tr>
+      <tr><td>Links and buttons with no accessible name</td><td>Add visible text or an <code>aria-label</code> to each</td></tr>
+      <tr><td>No working skip link, heading levels skipped, positive <code>tabindex</code>, invalid ARIA</td><td>Add a skip link, fix the heading order, and remove the misused attributes</td></tr>
+      <tr><td>Heavy pages: unused and unminified CSS and JavaScript, oversized images, render-blocking files, weak caching</td><td>Remove unused plugins, minify, serve sized WebP or AVIF images, defer scripts, and set long cache lifetimes</td></tr>
+      <tr><td>None of the six main security headers on the home page, and the server reveals <code>nginx/1.24.0 (Ubuntu)</code></td><td>Add HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy and Permissions-Policy, and hide the server version</td></tr>
+      <tr><td>Third-party cookies and links search engines can't crawl</td><td>Review third-party scripts and use real <code>href</code> links</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Accessibility, fonts, contrast and readability</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Gap found in the redesign</th><th>Who it affects</th><th>Solution</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>No skip link</td><td>Keyboard and screen reader users</td><td>Added as the first focusable item on inner pages and Admissions. It moves focus to the main content</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Focus style missing on inputs and menu toggles</td><td>Keyboard users</td><td>Shared visible focus outline now covers them</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Spoken name didn't match visible words on the sound button, footer logo and text-size buttons</td><td>Voice control users</td><td>Names now include the visible words</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Duplicate banner landmark from the chat header</td><td>Screen reader users</td><td>Chat header is no longer a landmark</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>33 CSS rules at 11–13px text</td><td>Low vision, older readers</td><td>Page text raised to 14px or larger. The chat's small labels are 13px</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Search box at 12px on phones, placeholder cut off</td><td>Phone users. Under 16px also makes iPhones zoom in</td><td>16px and a shorter placeholder</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Hero text over bright buildings: 3.95:1 and 4.27:1 at the brightest points, under the 4.5:1 minimum</td><td>Low vision, bright light</td><td>Stronger shading behind the text: now 6.14:1 and 6.01:1</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Labels under the 3D view nearly invisible after the merge</td><td>Everyone</td><td>Dark background restored</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Missing descriptions on 6 pages</td><td>Search and screen reader users</td><td>Added from each page's lead text</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Footer links under 24px tall</td><td>Touch and motor impairment</td><td>Minimum height of 24px</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Tight negative letter-spacing on large headings</td><td>Dyslexic and low-vision readers</td><td>Left as is because it's a brand choice and passes automated checks. Worth easing</td><td><span class="tag open">Open</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="key">These checks already passed: page language, image alt text, heading order, no sideways scrolling at 320px wide.</p>
+</section>
+
+<section>
+  <h2>Images and scripts</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Item</th><th>Before</th><th>After</th></tr></thead>
+    <tbody>
+      <tr><td>Hero photo, full size</td><td class="n">477 KB</td><td class="n">210 KB, plus 39–141 KB sizes</td></tr>
+      <tr><td>Archgate photo, full size</td><td class="n">510 KB</td><td class="n">231 KB, plus 45–156 KB sizes</td></tr>
+      <tr><td>Logo</td><td class="n">66 KB PNG</td><td class="n">26 KB WebP</td></tr>
+      <tr><td>Chat emblem</td><td class="n">21 KB PNG</td><td class="n">7 KB WebP</td></tr>
+      <tr><td>3D engine and scene</td><td class="n">1,326 KB + scene file, every visit</td><td class="n">510 KB bundled, only after scrolling</td></tr>
+      <tr><td>Other scripts and styles</td><td>Unminified</td><td>Minified at build</td></tr>
+      <tr><td>Unused images shipped</td><td>Depth maps and an old gate image</td><td>Build ships only images the site uses</td></tr>
+      <tr><td>Hidden images downloaded on load</td><td>Transition and dialog photos</td><td>Load only when needed</td></tr>
+      <tr><td>Page jumps while images load</td><td>Some images had no set size</td><td>Width and height set. Layout shift is 0.000 on all pages</td></tr>
+      <tr><td>Fonts</td><td>Found late</td><td>Preloaded</td></tr>
+      <tr><td>Caching</td><td>Revalidated every visit</td><td>7 days for assets, 1 hour for scripts and styles</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Security</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Risk</th><th>Severity</th><th>Action</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Cross-site scripting: no second layer of defence</td><td class="tag">High</td><td>Strict Content Security Policy, with inline script and style moved to files. No page or flow triggered a block</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Clickjacking, MIME sniffing, referrer leaks, HTTPS downgrade</td><td class="tag">Medium</td><td>Added X-Frame-Options, frame-ancestors, nosniff, Referrer-Policy and HSTS</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Rate limit could be dodged with a forged IP header, draining the Gemini quota</td><td class="tag">Medium</td><td>Uses Vercel's trusted IP header, plus a limit across all visitors per server instance</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Other websites could post to the chat API</td><td class="tag">Medium</td><td>Requires JSON and a matching origin</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Local server exposed source files and accepted any method</td><td class="tag">Low</td><td>Source paths blocked, and only GET and HEAD allowed for pages</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Microphone and other device access open by default</td><td class="tag">Low</td><td>Permissions-Policy allows microphone on this site only, and blocks camera, location, payment and USB</td><td><span class="tag fixed">Fixed</span></td></tr>
+      <tr><td>Gemini key was pasted into a chat session and an untracked file</td><td class="tag">High</td><td>Never committed: the git history scan found none. The key still needs replacing</td><td><span class="tag risk">Your action</span></td></tr>
+      <tr><td>Rate limits reset per server instance on Vercel</td><td class="tag">Medium</td><td>Add a Vercel Firewall rule and a Google Cloud budget alert</td><td><span class="tag open">Open</span></td></tr>
+      <tr><td>Prompt injection through visitor messages or indexed pages</td><td class="tag">Medium</td><td>Limited by checks: citations required, facts verified against sources, fixed list of links, text-only display. Risk is reduced, not gone</td><td><span class="tag open">Monitor</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="key">Also checked: <code>npm audit</code> found 0 vulnerabilities, and esbuild, the only package, is used at build time only. No unsafe HTML from user input was found. CSP and header behaviour on the live Vercel domain still needs confirming.</p>
+</section>
+
+<section>
+  <h2>How this was tested</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Check</th><th>Coverage</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Lighthouse 13</td><td>9 page states, mobile and desktop, before and after</td><td>Mobile speed 93–100. Accessibility, best practices and SEO 100</td></tr>
+      <tr><td>axe-core 4</td><td>11 page states including the open chat, at 2 sizes</td><td>0 violations. Text over images needed the check below</td></tr>
+      <tr><td>Contrast sampled from pixels</td><td>19 samples over photos and the 3D scene</td><td>2 failures before, 0 after</td></tr>
+      <tr><td>Keyboard, target size, 320px reflow, font scan</td><td>8 pages</td><td>Pass</td></tr>
+      <tr><td>Visitor flows on the production build</td><td>51 checks: intro, search, live Gemini chat, refusals, summaries, navigation, display commands, 3D flight, skip link, all pages</td><td>51 of 51 on two runs in a row</td></tr>
+      <tr><td>Automated tests</td><td><code>npm test</code></td><td>43 of 43</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><p><strong>A bug this testing caught:</strong> after the change that delays the 3D engine, the 3D scene could fail to start when arriving from another page. A flow check found it, and it was fixed before release.</p></div>
+  <h3>What these results don't cover</h3>
+  <ul>
+    <li>Scores come from a software-rendered test browser on one PC and a local server, using emulated device sizes. Real phones, slower 3D hardware and Vercel will differ.</li>
+    <li>Lighthouse ran just before two final small changes: the 3D start fix and the footer link height. Neither adds weight, but the scores weren't re-measured after them.</li>
+    <li>No screen reader or disabled user has tried the site. Automated tools catch only part of accessibility problems.</li>
+    <li>Real microphone input and speech output weren't tested.</li>
+    <li>Contrast over the 3D scene changes as the view moves. It was sampled at the starting view.</li>
+    <li>Sign language isn't provided.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Recommended next steps</h2>
+  <ul>
+    <li><strong>Before presenting:</strong> replace the Gemini key, set <code>GEMINI_API_KEY</code> on Vercel, and try the deployed site on a real phone.</li>
+    <li><strong>Decide on the intro:</strong> shorten it, or show it only once with the page visible behind it. This is the largest remaining wait, and it's a design call for your team.</li>
+    <li><strong>Test with people:</strong> run NVDA and a phone screen reader through chat, search and the 3D section.</li>
+    <li><strong>Replace sample content:</strong> the 3D panel still shows sample fees and degrees, marked as samples. Confirm or remove them before any public launch.</li>
+    <li><strong>Clean up:</strong> the old journey animation and school dialog can no longer be opened after the merged navigation changes, and the repo holds about 9 MB of unused PNG originals. Remove them if your team agrees. They aren't shipped to visitors, and the PNGs are the sources for image regeneration.</li>
+    <li><strong>Finish meaning-based search:</strong> run <code>npm run index:embed</code> across two days of the free tier. Keyword search works until then.</li>
+  </ul>
+  <p class="key">Results and scripts: <code>docs/audit/</code> on branch <code>rn/audit-optimization</code>.</p>
+</section>
+</main>

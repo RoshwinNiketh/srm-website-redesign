@@ -252,7 +252,7 @@ a {
 /* taste-skill-ignore: neutral scrim over photography */
 .hero-shade {
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.58), transparent 68%), /* taste-skill-ignore: neutral photo scrim for legibility */
+    linear-gradient(90deg, rgba(0, 0, 0, 0.7), transparent 68%), /* taste-skill-ignore: neutral photo scrim for legibility */
     linear-gradient( /* taste-skill-ignore: neutral photo scrim for legibility */
       0deg,
       rgba(0, 0, 0, 0.88),

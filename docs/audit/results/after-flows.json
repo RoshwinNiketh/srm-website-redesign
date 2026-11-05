@@ -1,0 +1,260 @@
+{
+ "results": [
+  {
+   "name": "desktop intro plays",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop intro ends and page shows",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop hero offers sized images",
+   "ok": true,
+   "detail": "http://localhost:4302/assets/images/campus-aerial.webp"
+  },
+  {
+   "name": "desktop 3D engine waits until needed",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop site search shows results",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop live chat answers with source",
+   "ok": true,
+   "detail": "SRM Institute of Science and Technology provides various hostel facilities for Indian, NRI, and international students. These hostels are self-contained with spacious rooms, lounges, and dining halls. Additionally, students can access amenities like gymnasiums and playgrounds within the campus. From: SRM Hostels ↗ Getting Around & Campus Safety | Life at SRM ↗ Listen"
+  },
+  {
+   "name": "desktop live chat refuses off-topic",
+   "ok": true,
+   "detail": "I couldn't find that in SRM's website content, so I won't guess. The Contact page lists who can help. From: Contact Listen"
+  },
+  {
+   "name": "desktop page summary works",
+   "ok": true,
+   "detail": "Here is a short summary of this page. Explore Campus Virtually The website provides a 3D campus explorer tool to help visitors navigate building locations at the Kattankulathur facility. Diverse Academic Fields Students can explore various schools and degree paths to find a field that aligns with their personal interests. Hands On Discovery The institute encourages students to engage in engineering and technology to prepare for future breakthroughs. From: This page Listen"
+  },
+  {
+   "name": "desktop text size command",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop contrast command",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop navigation command",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop chat stays open after navigation",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop lands on the 3D section",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop 3D scene built from the bundle",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop flight reaches the building",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop guide describes it",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop /admissions images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop /academics images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop /campus-life images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop /research images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop /about images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop /contact images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop /more images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop skip link is first and visible",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop skip link moves focus to main",
+   "ok": true,
+   "detail": "MAIN"
+  },
+  {
+   "name": "phone intro plays",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone intro ends and page shows",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone hero offers sized images",
+   "ok": true,
+   "detail": "http://localhost:4302/assets/images/campus-aerial.webp"
+  },
+  {
+   "name": "phone 3D engine waits until needed",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone site search shows results",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone live chat answers with source",
+   "ok": true,
+   "detail": "SRM provides comfortable and safe housing for students, with separate facilities for men, women, and international students. The Kattankulathur campus offers various hostels, and there is also an international hostel located nearby. Students are encouraged to explore the available housing options on campus. From: SRM Hostels ↗ Campus Life Getting Around & Campus Safety | Life at SRM ↗ Listen"
+  },
+  {
+   "name": "phone live chat refuses off-topic",
+   "ok": true,
+   "detail": "I couldn't find that in SRM's website content, so I won't guess. The Contact page lists who can help. From: Contact Listen"
+  },
+  {
+   "name": "phone page summary works",
+   "ok": true,
+   "detail": "Here is a short summary of this page. Explore Campus Virtually The website provides a 3D campus explorer tool to help visitors navigate building locations at the Kattankulathur facility. Diverse Academic Fields Students can explore various schools and degree paths to find a field that aligns with their personal interests. Hands On Discovery The institute encourages students to engage in engineering and technology to prepare for future breakthroughs. From: This page Listen"
+  },
+  {
+   "name": "phone text size command",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone contrast command",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone navigation command",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone chat stays open after navigation",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone lands on the 3D section",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone 3D scene built from the bundle",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone flight reaches the building",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone guide describes it",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone /admissions images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone /academics images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone /campus-life images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone /research images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone /about images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone /contact images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone /more images ok, no sideways scroll",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone skip link is first and visible",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone skip link moves focus to main",
+   "ok": true,
+   "detail": "MAIN"
+  },
+  {
+   "name": "no errors, CSP blocks or failed requests",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "logs": []
+}

@@ -32,7 +32,7 @@ main:focus { outline: none; }
 }
 .srm-launcher:hover { transform: scale(1.05); }
 .srm-launcher img { display: block; width: 46px; height: 46px; border-radius: 50%; }
-.inner-footer a, .footer-bottom > a { display: inline-flex; align-items: center; min-height: 24px; }
+.inner-footer a, .admissions-footer a, .footer-bottom > a { display: inline-flex; align-items: center; min-height: 24px; }
 .srm-launcher-label {
   color: var(--srm-ink); font-size: 16px; font-weight: 800; line-height: 1.2; white-space: nowrap;
 }

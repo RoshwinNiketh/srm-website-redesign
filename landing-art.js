@@ -326,9 +326,9 @@ export function introArtwork(mobile) {
         ${crowd(mobile)}
         ${character()}
         ${desk()}
-        ${airborneCaps(mobile)}
       </g>
     </g>
+    <g class="camera">${airborneCaps(mobile)}</g>
     <g transform="translate(606 222)">
       <g data-hero-cap class="moving-part">${use("cap")}</g>
     </g>

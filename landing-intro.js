@@ -13,6 +13,43 @@ function playbackTime(cue) {
 
 const duration = playbackTime(6900);
 
+async function cacheAirborneCaps(svg) {
+  const cap = svg.querySelector("#intro-cap");
+  const hatch = svg.querySelector("#intro-hatch");
+  const bounds = { x: -81, y: -39, width: 160, height: 101 };
+  const canvas = document.createElement("canvas");
+  canvas.width = bounds.width * 2;
+  canvas.height = bounds.height * 2;
+  const context = canvas.getContext("2d");
+  if (!context) return;
+
+  const drawing = `<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}" viewBox="${Object.values(bounds).join(" ")}">
+    <style>.ink{stroke:#263244;stroke-linecap:round;stroke-linejoin:round}</style>
+    <defs>${hatch.outerHTML}</defs>${cap.outerHTML}
+  </svg>`;
+  const source = new Image();
+  const url = URL.createObjectURL(new Blob([drawing], { type: "image/svg+xml" }));
+  try {
+    source.src = url;
+    await source.decode();
+    context.drawImage(source, 0, 0);
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+
+  const bitmap = new Image();
+  bitmap.src = canvas.toDataURL();
+  await bitmap.decode();
+  const sprite = document.createElementNS(svg.namespaceURI, "image");
+  sprite.id = "intro-cap-sprite";
+  for (const [name, value] of Object.entries(bounds)) sprite.setAttribute(name, value);
+  sprite.setAttribute("href", bitmap.src);
+  svg.querySelector("defs").append(sprite);
+  for (const hat of svg.querySelectorAll("[data-air-cap] use")) {
+    hat.setAttribute("href", "#intro-cap-sprite");
+  }
+}
+
 async function playIntro() {
   const html = document.documentElement;
   if (!html.classList.contains("intro-pending") || motion.matches || location.hash) return;
@@ -45,6 +82,9 @@ async function playIntro() {
   const skip = get(".intro-skip");
   const paper = get(".intro-paper");
   const svg = get(".intro-art");
+  // The editable cap remains the fallback if image preparation fails.
+  await cacheAirborneCaps(svg).catch(() => {});
+  if (!html.classList.contains("intro-pending") || motion.matches || location.hash) return;
   const flyingLogo = document.createElement("div");
   flyingLogo.className = "brand intro-brand";
   flyingLogo.setAttribute("aria-hidden", "true");
@@ -151,7 +191,7 @@ async function playIntro() {
     document.body.prepend(root);
     document.body.classList.add("landing-intro-active");
     for (const element of covered) element.inert = true;
-    track(get(".camera"), [
+    const cameraFrames = [
       { transform: "translateY(9px) scale(1.24)", offset: 0 },
       { transform: "translateY(0) scale(1.18)", offset: .16, easing: "ease-in-out" },
       { transform: "translateY(7px) scale(1.13)", offset: .38 },
@@ -159,9 +199,12 @@ async function playIntro() {
       { transform: "translateY(12px) scale(.96)", offset: .77 },
       { transform: "translateY(12px) scale(.955)", offset: .85, easing: "ease-in" },
       { transform: "translateY(24px) scale(1.09)", offset: 1 },
-    ], 0, 6100);
-    // The scene has faded by this point. Drop it from painting during the logo flight.
-    track(get(".camera"), [{ visibility: "visible" }, { visibility: "hidden" }], 6100, 1, "step-end");
+    ];
+    for (const layer of svg.querySelectorAll(".camera")) {
+      track(layer, cameraFrames, 0, 6100);
+      // The scene has faded by this point. Drop it from painting during the logo flight.
+      track(layer, [{ visibility: "visible" }, { visibility: "hidden" }], 6100, 1, "step-end");
+    }
 
     track(get("#intro-student"), [
       { ...transform("translate(0, 19px) rotate(-1.4deg)", 0), offset: 0, easing: easeOut },

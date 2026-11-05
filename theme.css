@@ -18,7 +18,7 @@
 }
 
 /* Keep text and controls readable over the existing campus photography. */
-:where(.hero, .gateway, .campus-stage, .tilt-card, .life) {
+:where(.hero, .campus-stage, .tilt-card, .life) {
   --ground: #101e1d;
   --surface: #162724;
   --surface-light: #20332e;

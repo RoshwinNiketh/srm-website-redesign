@@ -277,6 +277,14 @@ a {
   line-height: 1.65;
 }
 
+.hero-content .hero-motto {
+  font-size: clamp(20px, 2.2vw, 31px);
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.hero-content .hero-motto + p { margin-top: 12px; }
+
 .primary-button {
   display: inline-flex;
   align-items: center;
@@ -527,52 +535,6 @@ a {
 
 .text-link:hover span {
   transform: translate(3px, -3px);
-}
-
-.gateway-image {
-  position: relative;
-  height: 560px;
-  display: block;
-  overflow: hidden;
-}
-
-.gateway-image img {
-  transition: transform 1.2s;
-}
-
-.gateway-image:hover img {
-  transform: scale(1.04);
-}
-
-.gateway-image::after {
-  content: "";
-  position: absolute;
-  inset: 55% 0 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)); /* taste-skill-ignore: neutral photo scrim for legibility */
-}
-
-.gateway-enter {
-  position: absolute;
-  z-index: 1;
-  bottom: 35px;
-  right: 35px;
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  font-size: 14px;
-}
-
-.gateway-enter .circle-arrow {
-  background: var(--accent);
-  color: var(--dark);
-}
-
-.image-note {
-  position: absolute;
-  z-index: 1;
-  left: 35px;
-  bottom: 44px;
-  font-size: 13px;
 }
 
 .campus-section {
@@ -1450,28 +1412,6 @@ dialog[open] {
   .section-heading > p {
     max-width: 460px;
     margin-top: 26px;
-  }
-
-  .gateway-image {
-    height: 450px;
-  }
-
-  .gateway-image img {
-    object-position: center;
-  }
-
-  .gateway-enter {
-    bottom: 28px;
-    right: 24px;
-    font-size: 13px;
-    gap: 14px;
-  }
-
-  .image-note {
-    top: 25px;
-    bottom: auto;
-    left: 24px;
-    font-size: 13px;
   }
 
   .campus-top {

@@ -458,7 +458,7 @@ a {
   align-items: center;
   gap: 12px;
   padding: 0 var(--space);
-  background: #101e1dd9;
+  background: #102440d9;
   font-size: 14px;
 }
 
@@ -907,7 +907,7 @@ dialog {
 }
 
 dialog::backdrop {
-  background: #061310d9;
+  background: #08192dd9;
 }
 
 dialog[open] {
@@ -1052,7 +1052,7 @@ dialog[open] {
 .journey-transition > div {
   position: absolute;
   inset: 0;
-  background: #06131077;
+  background: #08192d77;
 }
 
 .journey-transition > span {

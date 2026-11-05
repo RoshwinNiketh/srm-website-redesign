@@ -8,6 +8,7 @@ import { pageRoutes, renderPage } from "../render-pages.mjs";
 
 const root = join(import.meta.dirname, "..");
 const cache = join(import.meta.dirname, ".crawl-cache");
+const indexPath = join(root, "knowledge/chunks.json");
 const CHUNK = 1000;
 const OVERLAP = 120;
 const MAX_CHUNKS_PER_PAGE = 30;
@@ -93,13 +94,13 @@ for (const route of pageRoutes.filter((item) => item !== "/")) {
   addPage({ prefix: `site${route.replace(/\//g, "-")}`, title, url: route, route, parts: sections(lines, title) });
 }
 
-const home = readFileSync(join(root, "index.html"), "utf8");
+const home = renderPage("/");
 const homeParts = [];
-for (const id of ["schools", "life"]) {
+for (const id of ["highlights", "schools"]) {
   const match = home.match(new RegExp(`<section id="${id}"[\\s\\S]*?</section>`));
   if (match) homeParts.push(...sections(htmlToLines(match[0].replace(/<button[\s\S]*?<\/button>/g, " ")), "Home"));
 }
-homeParts.unshift({ section: "Home", lines: ["SRM Institute of Science and Technology, Kattankulathur, Tamil Nadu, India. Learn. Leap. Lead. The home page includes a 3D campus explorer where visitors can pick a building, a list of schools, and a section on life beyond the classroom. The 3D campus building locations and sample details are a design concept and need confirming."] });
+homeParts.unshift({ section: "Home", lines: ["SRM Institute of Science and Technology, Kattankulathur, Tamil Nadu, India. Learn. Leap. Lead. The home page includes a 3D campus explorer, institutional highlights, and a list of schools. The 3D campus building locations and sample details are a design concept and need confirming."] });
 addPage({ prefix: "site-home", title: "Home", url: "/", route: "/", parts: homeParts });
 const localCount = chunks.length;
 
@@ -128,11 +129,14 @@ if (existsSync(manifestPath)) {
     addPage({ prefix: `srm${i}`, title: page.title, url: page.url, parts: sections(lines, page.title) });
   });
   console.log(`Official pages indexed: ${loaded.length}`);
+} else if (existsSync(indexPath)) {
+  const previous = JSON.parse(readFileSync(indexPath, "utf8"));
+  chunks.push(...previous.filter((chunk) => !chunk.route));
 }
 
 // Never let the sample figures through, even if one is copied into a page later.
 const SAMPLE = /₹\s?(4,50,000|3,00,000|1,50,000|2,50,000|2,00,000)/;
 const clean = chunks.filter((chunk, i) => i >= localCount || !SAMPLE.test(chunk.text));
 mkdirSync(join(root, "knowledge"), { recursive: true });
-writeFileSync(join(root, "knowledge/chunks.json"), JSON.stringify(clean));
+writeFileSync(indexPath, JSON.stringify(clean));
 console.log(`Chunks: ${clean.length} (${localCount} from this site)`);

@@ -45,14 +45,14 @@
   font-weight: 650;
 }
 
-.admissions-button:hover { background: #31483c; }
+.admissions-button:hover { background: #304b6b; }
 .admissions-study { padding-block: clamp(60px, 8vw, 120px); background: var(--surface); }
 .admissions-study figure {
   align-self: start;
   width: 80%;
   margin: 0;
   aspect-ratio: 1.18;
-  background: #bec8bb;
+  background: #bdcbdb;
   display: grid;
   grid-template: repeat(2, minmax(0, 1fr)) / minmax(0, 1.15fr) minmax(0, 1fr);
   overflow: hidden;

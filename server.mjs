@@ -13,6 +13,7 @@ const types = {
   ".svg": "image/svg+xml",
   ".woff2": "font/woff2",
   ".glb": "model/gltf-binary",
+  ".json": "application/json; charset=utf-8",
 };
 
 createServer((request, response) => {

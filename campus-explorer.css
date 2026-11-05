@@ -29,6 +29,28 @@
 .floor-tag.on { color: var(--gold); font-size: 17px; }
 .campus-intro { position: absolute; left: var(--gut); bottom: 36px; pointer-events: none; transition: opacity 0.25s var(--ease); }
 .campus-stage.visiting .campus-intro { opacity: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .campus {
+      view-timeline-name: --campus-entry;
+      overflow: clip;
+      background: var(--ground);
+    }
+    .campus-stage {
+      animation: campus-rise var(--ease) both;
+      animation-timeline: --campus-entry;
+      animation-range: entry 0% entry 85%;
+    }
+    .campus-stage:focus-within { animation: none; }
+  }
+}
+
+@keyframes campus-rise {
+  from { transform: translateY(clamp(48px, 12svh, 120px)); opacity: 0.45; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
 .campus-intro h2 { font-size: clamp(2.8rem, 7vw, 6rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1; margin: 6px 0 10px; }
 .campus-hint { color: var(--mist); }
 .campus-controls { position: absolute; right: var(--gut); bottom: 36px; display: flex; gap: 6px; }

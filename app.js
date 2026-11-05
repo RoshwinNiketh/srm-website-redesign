@@ -242,7 +242,7 @@ if ("IntersectionObserver" in window && !reducedMotion.matches) {
   );
   document
     .querySelectorAll(
-      ".section-heading h2,.section-heading p,.section-heading .text-link,.campus-top h2,.campus-top p,.school-row,.school-preview-image,.school-preview-copy h3,.school-preview-copy p,.life-copy h2,.life-copy p,.life-copy .primary-button,.closing h2,.closing p,.closing .primary-button",
+      ".section-heading h2,.section-heading p,.section-heading .text-link,.campus-top h2,.campus-top p,.school-row,.school-preview-image,.school-preview-copy h3,.school-preview-copy p,.closing h2,.closing p,.closing .primary-button",
     )
     .forEach((element, index) => {
       element.classList.add("reveal", "waiting");

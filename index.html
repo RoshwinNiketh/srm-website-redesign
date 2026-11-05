@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101e1d" />
+    <meta
+      name="description"
+      content="Discover a new perspective on SRM. Explore a cinematic campus concept and find your place in engineering, medicine, arts and science."
+    />
+    <title>SRM — A world of possibilities</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="assets/images/campus-aerial.webp" as="image" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="SRM home">
+        <svg
+          class="brand-seal"
+          viewBox="0 0 52 58"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M26 3 46 11v22L26 54 6 33V11Z"
+            stroke="currentColor"
+            stroke-width="1.7"
+          />
+          <path d="m26 8 15 6v17L26 47 11 31V14Z" stroke="currentColor" />
+          <path
+            d="M16 31h20M19 29V19h14v10M16 19l10-6 10 6M23 21v8m6-8v8M21 36l5 5 5-5"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+        </svg>
+        <span class="brand-name"
+          >SRM<span>Institute of Science<br />and Technology</span></span
+        >
+      </a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a class="nav-active" href="#campus">The campus</a
+        ><a href="#schools">Find your school</a><a href="#life">Life at SRM</a>
+      </nav>
+      <a class="header-action" href="#schools"
+        >Find your future <span aria-hidden="true">↗</span></a
+      >
+      <button
+        class="menu-button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span></span><span></span>
+      </button>
+    </header>
+    <nav
+      id="mobile-menu"
+      class="mobile-menu"
+      aria-label="Mobile navigation"
+      hidden
+    >
+      <a href="#campus">The campus</a><a href="#schools">Find your school</a
+      ><a href="#life">Life at SRM</a>
+    </nav>
+    <main>
+      <section id="home" class="hero">
+        <div class="hero-media">
+          <img
+            src="assets/images/campus-aerial.webp"
+            alt="Cinematic concept of SRM campus, with the archgate, tropical landscape and sunlit academic towers"
+            fetchpriority="high"
+            width="1672"
+            height="941"
+          />
+        </div>
+        <div class="hero-shade"></div>
+        <div class="hero-content">
+          <h1>A world of<br />possibilities.</h1>
+          <p>Your future has a place.<br />Come discover it at SRM.</p>
+          <a href="#campus" class="primary-button"
+            >Explore the campus
+            <span class="circle-arrow" aria-hidden="true">↗</span></a
+          >
+        </div>
+        <button
+          class="hero-marker"
+          data-school="engineering"
+          aria-label="Explore the School of Engineering"
+        >
+          <span class="marker-dot"></span
+          ><span>School of Engineering <span aria-hidden="true">↗</span></span>
+        </button>
+        <div class="hero-caption">
+          <span class="location-symbol" aria-hidden="true">⌖</span
+          ><span
+            >Kattankulathur, Chennai<br /><span class="subtle"
+              >A new perspective on SRM</span
+            ></span
+          >
+        </div>
+        <a class="scroll-cue" href="#gateway"
+          ><span class="mouse" aria-hidden="true"></span>Scroll to discover<span
+            aria-hidden="true"
+            >↓</span
+          ></a
+        >
+        <button
+          class="sound-button"
+          aria-label="Turn campus ambience on"
+          aria-pressed="false"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M4 10v4h4l5 4V6l-5 4H4Zm13-1 5 6m0-6-5 6"
+              stroke="currentColor"
+              stroke-width="1.5"
+            /></svg
+          ><span>Sound off</span>
+        </button>
+        <div class="hero-bottom">
+          <span class="live-dot"></span>One campus. Endless directions.<a
+            href="#campus"
+            >Choose yours <span aria-hidden="true">↘</span></a
+          >
+        </div>
+      </section>
+
+      <section id="gateway" class="gateway section-space">
+        <div class="section-heading">
+          <h2>Every journey<br />has a beginning.</h2>
+          <div>
+            <p>
+              Yours starts at the archgate. Step inside a campus built for
+              curious minds and see where your ambition takes you.
+            </p>
+            <a class="text-link" href="#campus"
+              >Step into SRM <span aria-hidden="true">↘</span></a
+            >
+          </div>
+        </div>
+        <a
+          class="gateway-image"
+          href="#campus"
+          aria-label="Enter the campus from the archgate"
+          ><img
+            src="assets/images/archgate.webp"
+            alt="Concept view through a stone archgate toward a palm-lined university boulevard"
+            width="1672"
+            height="941"
+            loading="lazy"
+          /><span class="gateway-enter"
+            >Begin your journey
+            <span class="circle-arrow" aria-hidden="true">↗</span></span
+          ><span class="image-note">The archgate · Your starting point</span></a
+        >
+      </section>
+
+      <section
+        id="campus"
+        class="campus-section"
+        aria-label="Interactive campus explorer"
+      >
+        <div class="campus-top">
+          <div>
+            <h2>Find your place.</h2>
+            <p>Follow your curiosity. Choose a school to explore.</p>
+          </div>
+          <span class="view-label"
+            ><span class="live-dot"></span>Campus explorer</span
+          >
+        </div>
+        <div class="campus-map" data-ui>
+          <div class="map-landscape">
+            <img
+              class="map-image"
+              src="assets/images/campus-aerial.webp"
+              alt="Illustrative campus map with selectable school locations"
+              width="1672"
+              height="941"
+              loading="lazy"
+            />
+            <div class="map-shade"></div>
+            <button class="map-pin pin-medical" data-school="medical">
+              <span class="pin-node">+</span
+              ><span
+                >Medical &amp; Health Sciences
+                <span aria-hidden="true">↗</span></span
+              >
+            </button>
+            <button class="map-pin pin-arts" data-school="arts">
+              <span class="pin-node">+</span
+              ><span
+                >Science &amp; Humanities
+                <span aria-hidden="true">↗</span></span
+              >
+            </button>
+            <button class="map-pin pin-engineering" data-school="engineering">
+              <span class="pin-node">+</span
+              ><span
+                >Engineering &amp; Technology
+                <span aria-hidden="true">↗</span></span
+              >
+            </button>
+            <button class="map-pin pin-management" data-school="management">
+              <span class="pin-node">+</span
+              ><span>Management <span aria-hidden="true">↗</span></span>
+            </button>
+            <div class="gate-position">
+              <span class="gate-node"></span>You are here · Archgate
+            </div>
+          </div>
+          <div class="map-compass" aria-hidden="true">
+            <span>N</span
+            ><svg viewBox="0 0 40 40">
+              <path d="m20 4 8 28-8-6-8 6Z" fill="currentColor" />
+              <path d="m20 4 8 28-8-6Z" fill="#ffffff55" />
+            </svg>
+          </div>
+          <div class="map-controls">
+            <button id="map-reset" aria-label="Reset campus view">↺</button
+            ><button id="map-zoom-in" aria-label="Zoom into campus">+</button
+            ><button id="map-zoom-out" aria-label="Zoom out of campus">
+              −
+            </button>
+          </div>
+          <div class="map-instruction">
+            A place for every possibility.<span
+              >Select a destination to begin your visit.</span
+            >
+          </div>
+        </div>
+        <div class="campus-school-bar" aria-label="Campus destinations">
+          <button data-school="engineering">Engineering <span>↗</span></button
+          ><button data-school="medical">Medical <span>↗</span></button
+          ><button data-school="arts">Arts &amp; Science <span>↗</span></button
+          ><button data-school="management">Management <span>↗</span></button
+          ><button data-school="law">Law <span>↗</span></button>
+        </div>
+      </section>
+
+      <section id="schools" class="schools-section section-space">
+        <div class="section-heading">
+          <h2>Different paths.<br />Shared possibility.</h2>
+          <p>
+            Build something. Discover something. Change something. Find the
+            field that feels like you.
+          </p>
+        </div>
+        <div class="schools-layout">
+          <div class="school-list" aria-label="Choose your school">
+            <button class="school-row selected" data-preview="engineering">
+              <span>Engineering &amp; Technology</span
+              ><span aria-hidden="true">↗</span></button
+            ><button class="school-row" data-preview="medical">
+              <span>Medical &amp; Health Sciences</span
+              ><span aria-hidden="true">↗</span></button
+            ><button class="school-row" data-preview="arts">
+              <span>Science &amp; Humanities</span
+              ><span aria-hidden="true">↗</span></button
+            ><button class="school-row" data-preview="management">
+              <span>Management</span><span aria-hidden="true">↗</span></button
+            ><button class="school-row" data-preview="law">
+              <span>Law</span><span aria-hidden="true">↗</span>
+            </button>
+          </div>
+          <article class="school-preview">
+            <div class="school-preview-image">
+              <img
+                id="school-image"
+                src="assets/images/engineering.webp"
+                alt="Architectural concept of an SRM academic tower"
+                width="1672"
+                height="941"
+                loading="lazy"
+              />
+            </div>
+            <div class="school-preview-copy">
+              <h3 id="school-preview-title">Make what's next.</h3>
+              <p id="school-preview-description">
+                From the first line of code to the next breakthrough. Explore a
+                world of engineering, technology and hands-on discovery.
+              </p>
+              <button
+                class="text-link"
+                id="preview-explore"
+                data-school="engineering"
+              >
+                Explore the school <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="life" class="life-section">
+        <img
+          src="assets/images/campus-life.webp"
+          alt="Concept of a lush palm-lined university courtyard at sunrise"
+          width="1672"
+          height="941"
+          loading="lazy"
+        />
+        <div class="life-shade"></div>
+        <div class="life-copy">
+          <h2>Beyond the<br />classroom.</h2>
+          <p>
+            The conversations after class. The ideas that turn into projects.
+            The people who become your people. Make room for all of it.
+          </p>
+          <a href="#campus" class="primary-button"
+            >Take a look around
+            <span class="circle-arrow" aria-hidden="true">↗</span></a
+          >
+        </div>
+        <span class="life-caption"
+          >Your campus. Your community. Your story.</span
+        >
+      </section>
+      <section class="closing section-space">
+        <h2>Your story<br />starts here.</h2>
+        <p>Every great story starts somewhere.</p>
+        <a class="primary-button" href="#campus"
+          >Find your place at SRM
+          <span class="circle-arrow" aria-hidden="true">↗</span></a
+        >
+      </section>
+    </main>
+    <footer>
+      <a class="footer-brand" href="#home"
+        >SRM<span>Learn. Leap. Lead.</span></a
+      >
+      <div class="footer-bottom">
+        <span
+          >Institute of Science and Technology<br />Kattankulathur, Tamil Nadu,
+          India</span
+        >
+        <p>
+          Campus experience · Design concept<br />AI-generated architectural
+          visualizations
+        </p>
+        <a href="#home">Back to the beginning ↑</a>
+      </div>
+    </footer>
+
+    <dialog id="school-dialog" aria-labelledby="destination-title">
+      <div class="destination-visual">
+        <img
+          id="destination-image"
+          src="assets/images/engineering.webp"
+          alt=""
+        />
+        <div class="destination-scrim"></div>
+        <button class="close-dialog" aria-label="Return to campus">
+          &times;</button
+        ><span class="destination-location">SRM · Kattankulathur</span>
+        <div class="destination-heading">
+          <span>Your next destination</span>
+          <h2 id="destination-title">Engineering &amp; Technology</h2>
+        </div>
+      </div>
+      <div class="destination-content">
+        <div class="destination-intro">
+          <h3 id="destination-tagline">Make what's next.</h3>
+          <p id="destination-description"></p>
+        </div>
+        <div class="degree-heading">
+          <h3>Find your direction</h3>
+          <span>Illustrative degree pathways</span>
+        </div>
+        <div id="degree-list" class="degree-list"></div>
+        <p class="course-note">
+          Program examples for this design preview. Availability, eligibility
+          and admissions details will be confirmed before launch.
+        </p>
+        <button class="text-link return-campus">
+          Return to the campus <span aria-hidden="true">↙</span>
+        </button>
+      </div>
+    </dialog>
+    <div class="journey-transition" aria-hidden="true">
+      <img src="assets/images/archgate.webp" alt="" />
+      <div></div>
+      <span
+        >Through the archgate.<br /><strong id="journey-destination"
+          >Into your future.</strong
+        ></span
+      >
+    </div>
+    <div id="toast" role="status"></div>
+  </body>
+</html>

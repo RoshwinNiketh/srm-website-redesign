@@ -171,32 +171,6 @@ document.querySelectorAll("[data-preview]").forEach((button) => {
   );
 });
 
-const menuButton = document.querySelector(".menu-button");
-const mobileMenu = document.querySelector("#mobile-menu");
-menuButton.addEventListener("click", () => {
-  mobileMenu.hidden = !mobileMenu.hidden;
-  menuButton.setAttribute("aria-expanded", String(!mobileMenu.hidden));
-  menuButton.setAttribute(
-    "aria-label",
-    mobileMenu.hidden ? "Open navigation" : "Close navigation",
-  );
-});
-mobileMenu.querySelectorAll("a").forEach((link) =>
-  link.addEventListener("click", () => {
-    mobileMenu.hidden = true;
-    menuButton.setAttribute("aria-expanded", "false");
-    menuButton.setAttribute("aria-label", "Open navigation");
-  }),
-);
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !mobileMenu.hidden) {
-    mobileMenu.hidden = true;
-    menuButton.setAttribute("aria-expanded", "false");
-    menuButton.setAttribute("aria-label", "Open navigation");
-    menuButton.focus();
-  }
-});
-
 let zoom = 1;
 const mapImage = document.querySelector(".map-landscape");
 function setZoom(value) {

@@ -18,17 +18,21 @@
 
 .srm-launcher {
   position: fixed; right: 20px; bottom: 20px; z-index: 90;
-  width: 56px; height: 56px; padding: 5px; border-radius: 50%;
-  background: #fff; border: 0; cursor: pointer;
+  display: flex; align-items: center; gap: 10px; padding: 5px 5px 5px 20px;
+  background: #fff; border: 0; border-radius: 999px; cursor: pointer;
   box-shadow: 0 6px 22px #0b1e1a4d, 0 0 0 1px #14262022;
+  transform-origin: right center;
   transition: transform 0.16s ease;
 }
-.srm-launcher:hover { transform: scale(1.06); }
-.srm-launcher img { display: block; width: 100%; height: 100%; }
+.srm-launcher:hover { transform: scale(1.05); }
+.srm-launcher img { display: block; width: 46px; height: 46px; border-radius: 50%; }
+.srm-launcher-label {
+  color: var(--srm-ink); font-size: 16px; font-weight: 800; line-height: 1.2; white-space: nowrap;
+}
 .srm-launcher[hidden] { display: none; }
 
 .srm-stop-pill {
-  position: fixed; right: 86px; bottom: 28px; z-index: 90;
+  position: fixed; right: 20px; bottom: 86px; z-index: 90;
   display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px 0 10px;
   background: var(--srm-ink); color: #fff; border: 0; border-radius: 20px; font-size: 14px; font-weight: 700; cursor: pointer;
 }
@@ -75,7 +79,7 @@
 .srm-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 .srm-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 14px 10px; }
-.hero-bottom { padding-right: 88px; }
+.hero-bottom { padding-right: 160px; }
 .srm-chip { flex: none; min-height: 36px; padding: 0 12px; background: var(--srm-paper); border: 1px solid #14262040; border-radius: 18px; color: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
 .srm-chip:hover { background: var(--srm-soft); }
 
@@ -134,8 +138,9 @@
 
 @media (max-width: 760px) {
   .srm-chat { right: 0; bottom: 0; width: 100%; height: 100dvh; border-radius: 0; }
-  .srm-launcher { right: 14px; bottom: 14px; width: 52px; height: 52px; }
-  .srm-stop-pill { right: 74px; bottom: 20px; }
+  .srm-launcher { right: 14px; bottom: 14px; }
+  .srm-launcher img { width: 42px; height: 42px; }
+  .srm-stop-pill { right: 14px; bottom: 76px; }
   .campus-controls { bottom: auto; }
   .campus-guide, .campus-stage.visiting .campus-guide { left: 16px; right: auto; top: 24px; }
   .campus-guide:not(.collapsed) { top: 76px; width: calc(100% - 32px); }

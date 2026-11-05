@@ -279,7 +279,7 @@ export function runCommand(command) {
 /* ---------- chat window ---------- */
 const launcher = el("button", "srm-launcher");
 launcher.type = "button";
-launcher.setAttribute("aria-label", "Open SRM assistant");
+launcher.setAttribute("aria-label", "Ask the SRM assistant");
 launcher.setAttribute("aria-expanded", "false");
 launcher.setAttribute("aria-controls", "srm-chat");
 launcher.title = "Ask SRM";
@@ -288,7 +288,7 @@ launcherLogo.src = "/assets/brand/srm-emblem.png";
 launcherLogo.alt = "";
 launcherLogo.width = 44;
 launcherLogo.height = 44;
-launcher.append(launcherLogo);
+launcher.append(el("span", "srm-launcher-label", "Ask ?"), launcherLogo);
 
 const stopPill = el("button", "srm-stop-pill");
 stopPill.type = "button";

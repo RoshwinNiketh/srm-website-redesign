@@ -22,9 +22,7 @@ function sharedNavigation(home, activePath) {
         ${topics.map(([id, label]) => `<a href="${path}#${id}">${label}</a>`).join("")}
       </div>
     </details>`).join("");
-  const signIn = '<a class="nav-sign-in" href="https://sp.srmist.edu.in/srmiststudentportal/students/loginManager/youLogin.jsp" aria-label="Sign in to the SRMIST Student Portal">Sign in</a>';
-  return nav.replace("<!-- Desktop page links -->", () => links + signIn)
-    .replace("<!-- Compact sign in -->", () => signIn)
+  return nav.replace("<!-- Desktop page links -->", () => links)
     .replace("<!-- Mobile page links -->", () => links);
 }
 

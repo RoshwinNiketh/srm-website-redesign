@@ -2,7 +2,53 @@ import { introArtwork } from "./landing-art.js";
 
 const sessionKey = "srm-landing-intro-v1";
 const motion = matchMedia("(prefers-reduced-motion: reduce)");
-const duration = 6900;
+const graduationStart = 3300;
+const graduationEnd = 6100;
+
+function playbackTime(cue) {
+  const graduationElapsed = Math.max(0, Math.min(cue, graduationEnd) - graduationStart);
+  const capSpinElapsed = Math.max(0, Math.min(cue, 5990) - 5457);
+  return cue + graduationElapsed * .5 + capSpinElapsed * .75;
+}
+
+const duration = playbackTime(6900);
+
+async function cacheAirborneCaps(svg) {
+  const cap = svg.querySelector("#intro-cap");
+  const hatch = svg.querySelector("#intro-hatch");
+  const bounds = { x: -81, y: -39, width: 160, height: 101 };
+  const canvas = document.createElement("canvas");
+  canvas.width = bounds.width * 2;
+  canvas.height = bounds.height * 2;
+  const context = canvas.getContext("2d");
+  if (!context) return;
+
+  const drawing = `<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}" viewBox="${Object.values(bounds).join(" ")}">
+    <style>.ink{stroke:#263244;stroke-linecap:round;stroke-linejoin:round}</style>
+    <defs>${hatch.outerHTML}</defs>${cap.outerHTML}
+  </svg>`;
+  const source = new Image();
+  const url = URL.createObjectURL(new Blob([drawing], { type: "image/svg+xml" }));
+  try {
+    source.src = url;
+    await source.decode();
+    context.drawImage(source, 0, 0);
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+
+  const bitmap = new Image();
+  bitmap.src = canvas.toDataURL();
+  await bitmap.decode();
+  const sprite = document.createElementNS(svg.namespaceURI, "image");
+  sprite.id = "intro-cap-sprite";
+  for (const [name, value] of Object.entries(bounds)) sprite.setAttribute(name, value);
+  sprite.setAttribute("href", bitmap.src);
+  svg.querySelector("defs").append(sprite);
+  for (const hat of svg.querySelectorAll("[data-air-cap] use")) {
+    hat.setAttribute("href", "#intro-cap-sprite");
+  }
+}
 
 async function playIntro() {
   const html = document.documentElement;
@@ -13,7 +59,13 @@ async function playIntro() {
   if (!logoImage || !title) return;
 
   const flyingImage = logoImage.cloneNode(true);
-  await Promise.all([logoImage.decode(), flyingImage.decode()]);
+  const heroImage = document.querySelector(".hero-media img");
+  await Promise.all([
+    logoImage.decode(),
+    flyingImage.decode(),
+    document.fonts.ready,
+    heroImage?.decode().catch(() => {}),
+  ]);
   if (!html.classList.contains("intro-pending") || motion.matches || location.hash) return;
 
   const root = document.createElement("div");
@@ -30,6 +82,9 @@ async function playIntro() {
   const skip = get(".intro-skip");
   const paper = get(".intro-paper");
   const svg = get(".intro-art");
+  // The editable cap remains the fallback if image preparation fails.
+  await cacheAirborneCaps(svg).catch(() => {});
+  if (!html.classList.contains("intro-pending") || motion.matches || location.hash) return;
   const flyingLogo = document.createElement("div");
   flyingLogo.className = "brand intro-brand";
   flyingLogo.setAttribute("aria-hidden", "true");
@@ -78,14 +133,23 @@ async function playIntro() {
       y: center.y,
       scale: Math.min(1.65, innerWidth * .73 / target.width),
     };
-    positionLogo(Math.max(0, timeline.currentTime - epoch));
+    positionLogo(epoch === undefined ? 0 : Math.max(0, timeline.currentTime - epoch));
   }
 
   // Every track shares the same document-timeline origin. Transforms and
   // opacity run as keyframes; only the live logo handoff needs script per frame.
   function track(element, frames, delay, length, easing = "linear") {
-    const animation = element.animate(frames, { delay, duration: length, fill: "both", easing });
-    animation.startTime = epoch;
+    const effect = new KeyframeEffect(element, frames, { fill: "both", easing });
+    const startTime = playbackTime(delay);
+    const playbackLength = playbackTime(delay + length) - startTime;
+    const offsets = effect.getKeyframes();
+    effect.setKeyframes(frames.map((frame, index) => ({
+      ...frame,
+      offset: (playbackTime(delay + offsets[index].computedOffset * length) - startTime) / playbackLength,
+    })));
+    effect.updateTiming({ delay: startTime, duration: playbackLength });
+    const animation = new Animation(effect, timeline);
+    animation.currentTime = 0;
     animations.push(animation);
     return animation;
   }
@@ -103,7 +167,8 @@ async function playIntro() {
   }
 
   function positionLogo(t) {
-    const p = Math.min(1, Math.max(0, (t - 6300) / (duration - 6300)));
+    const flightStart = playbackTime(6300);
+    const p = Math.min(1, Math.max(0, (t - flightStart) / (duration - flightStart)));
     const ease = p * p * (3 - 2 * p);
     const finalX = target.left + target.width / 2;
     const finalY = target.top + target.height / 2;
@@ -126,11 +191,7 @@ async function playIntro() {
     document.body.prepend(root);
     document.body.classList.add("landing-intro-active");
     for (const element of covered) element.inert = true;
-    sessionStorage.setItem(sessionKey, "played");
-    epoch = timeline.currentTime;
-    measure();
-
-    track(get(".camera"), [
+    const cameraFrames = [
       { transform: "translateY(9px) scale(1.24)", offset: 0 },
       { transform: "translateY(0) scale(1.18)", offset: .16, easing: "ease-in-out" },
       { transform: "translateY(7px) scale(1.13)", offset: .38 },
@@ -138,7 +199,12 @@ async function playIntro() {
       { transform: "translateY(12px) scale(.96)", offset: .77 },
       { transform: "translateY(12px) scale(.955)", offset: .85, easing: "ease-in" },
       { transform: "translateY(24px) scale(1.09)", offset: 1 },
-    ], 0, 6100);
+    ];
+    for (const layer of svg.querySelectorAll(".camera")) {
+      track(layer, cameraFrames, 0, 6100);
+      // The scene has faded by this point. Drop it from painting during the logo flight.
+      track(layer, [{ visibility: "visible" }, { visibility: "hidden" }], 6100, 1, "step-end");
+    }
 
     track(get("#intro-student"), [
       { ...transform("translate(0, 19px) rotate(-1.4deg)", 0), offset: 0, easing: easeOut },
@@ -244,10 +310,20 @@ async function playIntro() {
     window.addEventListener("pagehide", () => finish(false), options);
     window.addEventListener("resize", measure, options);
     motion.addEventListener("change", (event) => { if (event.matches) finish(); }, options);
+    // Resolve the initial artwork layout before any track starts counting time.
+    measure();
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    if (stop || !html.classList.contains("intro-pending") || motion.matches || location.hash) {
+      finish(false);
+      return;
+    }
+    sessionStorage.setItem(sessionKey, "played");
+    epoch = timeline.currentTime;
+    for (const animation of animations) animation.startTime = epoch;
     resizeObserver.observe(logo);
     handoff = setTimeout(() => {
       frame = requestAnimationFrame(fly);
-    }, Math.max(0, 6250 - (timeline.currentTime - epoch)));
+    }, Math.max(0, playbackTime(6250) - (timeline.currentTime - epoch)));
     // Fail open even if the tab is hidden or the animation clock is interrupted.
     watchdog = setTimeout(finish, duration + 400);
   } catch (error) {

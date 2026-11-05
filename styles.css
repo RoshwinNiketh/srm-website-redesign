@@ -283,7 +283,6 @@ a {
   line-height: 1.25;
 }
 
-.hero-content .hero-motto + p { margin-top: 12px; }
 
 .primary-button {
   display: inline-flex;
@@ -349,16 +348,6 @@ a {
   animation: pulse 3s infinite;
 }
 
-.hero-caption {
-  position: absolute;
-  bottom: 124px;
-  left: var(--space);
-  display: flex;
-  gap: 13px;
-  align-items: center;
-  font-size: 13px;
-  line-height: 1.7;
-}
 
 .location-symbol {
   font-size: 28px;
@@ -1299,10 +1288,6 @@ dialog[open] {
     margin-top: 24px;
   }
 
-  .hero-caption {
-    bottom: 119px;
-    font-size: 13px;
-  }
 
   .scroll-cue {
     display: none;

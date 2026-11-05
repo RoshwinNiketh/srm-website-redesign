@@ -71,6 +71,8 @@ export const pages = {
       ["Main campus address", "SRM Institute of Science and Technology, SRM Nagar, Kattankulathur 603 203, Chengalpattu district, Tamil Nadu, India.", "https://www.srmist.edu.in/contact-us/", "Campus contact directory"],
       ["General enquiries", "The university lists its main switchboard numbers as +91 44 27417000 and +91 44 27417777.", "tel:+914427417000", "Call the main switchboard"],
       ["Admissions enquiries", "The official application portal lists admissions.india@srmist.edu.in for questions about applying through the India route.", "mailto:admissions.india@srmist.edu.in", "Email Admissions India"],
+      ["Exams and student services", "Choose the service for your campus and batch. Use the Controller of Examinations for exam and credential requests.", "/exams", "Exams & Results"],
+      ["Accessibility and campus support", "Find the right office to report an access barrier, raise a grievance or ask for campus support.", "/campus-life#safety", "Safety & Support"],
       ["International admissions", "Use the international admissions page for the application routes for foreign nationals and NRI, PIO and OCI applicants.", "https://www.srmist.edu.in/admission-international/", "Visit International Admissions"],
     ],
     nextHeading: "Before you get in touch",

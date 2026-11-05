@@ -3,7 +3,6 @@
 // not included: they live in JavaScript and in sections this script skips.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { pages } from "../site-pages.mjs";
 import { pageRoutes, renderPage } from "../render-pages.mjs";
 
 const root = join(import.meta.dirname, "..");
@@ -84,12 +83,11 @@ function addPage({ prefix, title, url, route, parts }) {
 
 /* ---------- this site ---------- */
 // Reads each page as visitors get it, so the assistant matches what is on screen.
-const TITLES = { "/admissions": "Admissions", "/more": "More from SRMIST" };
 const LINK_LABELS = /^(Official SRMIST resource|Related SRMIST resource|Contact directory|Explore this page)\b/;
 
-for (const route of pageRoutes.filter((item) => item !== "/")) {
+for (const route of pageRoutes.filter((item) => item !== "/" && item !== "/directory")) {
   const main = renderPage(route).match(/<main[^>]*>([\s\S]*)<\/main>/)[1];
-  const title = TITLES[route] || tidy(pages[route].title);
+  const title = tidy(main.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)[1].replace(/<[^>]+>/g, " "));
   const lines = htmlToLines(main).map((line) => line.replace(/\s*[↗↓↘]\s*/g, " ").trim()).filter((line) => line && !LINK_LABELS.test(line));
   addPage({ prefix: `site${route.replace(/\//g, "-")}`, title, url: route, route, parts: sections(lines, title) });
 }

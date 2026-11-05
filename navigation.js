@@ -24,14 +24,17 @@ const input = search.querySelector("input");
 const results = search.querySelector(".search-results");
 const resultList = results.querySelector("ul");
 const status = results.querySelector("[role=status]");
-const destinations = [...document.querySelectorAll(".desktop-nav a")].map((link) => ({
-  label: link.textContent.trim().replace(/^Explore /, ""),
-  href: link.getAttribute("href"),
-  category: link.closest("details")?.querySelector("summary").textContent.trim() ?? "",
-}));
+const destinations = [...document.querySelector("#site-search-index").content.querySelectorAll("a")]
+  .map((link) => ({
+    label: link.textContent,
+    href: link.getAttribute("href"),
+    terms: normalize(link.textContent + " " + link.dataset.terms),
+  }));
 
 function normalize(value) {
-  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  return value.toLowerCase().normalize("NFKD").replace(/\p{M}/gu, "")
+    .replace(/\bb[.\s-]*tech\b/g, "btech")
+    .replace(/[^\p{L}\p{N}]+/gu, " ").trim();
 }
 
 function showResults() {
@@ -40,15 +43,29 @@ function showResults() {
   results.hidden = !query;
   if (!query) return;
   const terms = query.split(" ");
-  const matches = destinations.filter(({ label, category }) =>
-    terms.every((term) => normalize(label + " " + category).includes(term)),
-  );
-  status.textContent = matches.length ? `${matches.length} matching destinations` : "No matching destinations.";
-  for (const { label, href } of matches) {
+  function rank({ label }) {
+    const title = normalize(label);
+    if (title === query) return 3;
+    if (title.startsWith(query)) return 2;
+    return Number(title.includes(query));
+  }
+  const matches = destinations.filter((entry) => terms.every((term) => entry.terms.includes(term)))
+    .sort((a, b) => rank(b) - rank(a));
+  const visibleMatches = matches.slice(0, 12);
+  status.textContent = matches.length ? `${matches.length} matching destinations${matches.length > visibleMatches.length ? ", showing the first 12" : ""}` : "No matching destinations.";
+  for (const { label, href } of visibleMatches) {
     const item = document.createElement("li");
     const link = document.createElement("a");
     link.textContent = label;
     link.href = href;
+    item.append(link);
+    resultList.append(item);
+  }
+  if (!matches.length || matches.length > visibleMatches.length) {
+    const item = document.createElement("li");
+    const link = document.createElement("a");
+    link.textContent = "Browse the A–Z Directory";
+    link.href = "/directory";
     item.append(link);
     resultList.append(item);
   }
@@ -59,6 +76,7 @@ function showResults() {
 input.addEventListener("input", showResults);
 input.addEventListener("focus", showResults);
 search.addEventListener("submit", (event) => {
+  if (!normalize(input.value)) return;
   event.preventDefault();
   showResults();
   resultList.querySelector("a")?.focus();
@@ -69,19 +87,9 @@ search.addEventListener("focusout", (event) => {
 resultList.addEventListener("click", () => { results.hidden = true; });
 
 for (const group of groups) {
-  if (group.closest(".desktop-nav")) {
-    group.addEventListener("pointerenter", (event) => {
-      if (event.pointerType === "mouse") group.open = true;
-    });
-    group.addEventListener("pointerleave", (event) => {
-      if (event.pointerType === "mouse" && !group.contains(document.activeElement)) {
-        group.open = false;
-      }
-    });
-    group.addEventListener("focusout", (event) => {
-      if (!group.contains(event.relatedTarget) && !group.matches(":hover")) group.open = false;
-    });
-  }
+  group.addEventListener("focusout", (event) => {
+    if (event.relatedTarget && !group.contains(event.relatedTarget)) group.open = false;
+  });
   group.addEventListener("toggle", () => {
     if (group.open) {
       for (const other of groups) if (other !== group) other.open = false;

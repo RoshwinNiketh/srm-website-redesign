@@ -15,7 +15,7 @@ const browserFiles = [
   "app.js", "navigation.js", "campus-explorer.js", "campus3d.js",
   "landing-intro.js", "landing-art.js", "styles.css", "theme.css",
   "admissions.css", "site-pages.css", "campus-explorer.css", "landing-intro.css",
-  "assets/brand/srm-logo.png", "assets/fonts/manrope-latin.woff2",
+  "assets/brand/srm-logo.png", "assets/brand/srm-emblem.png", "assets/fonts/manrope-latin.woff2",
   "assets/fonts/OFL.txt", "assets/data/campus.json", "assets/lib/three.module.js",
   ...readdirSync(join(root, "assets/images"))
     .filter((name) => name.endsWith(".webp"))

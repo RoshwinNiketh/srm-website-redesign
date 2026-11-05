@@ -15,3 +15,7 @@ fresh tab or remove `srm-landing-intro-v1` from the tab's session storage.
 - `theme.css` defines the shared ivory palette and readable colors for text over photography.
 - The shared navigation lives in `index.html`. It uses the supplied
   `assets/brand/srm-logo.png`, which the intro also uses for its handoff.
+
+## Contributors
+
+- OpenAI Codex assisted with the landing animation, shared theme, and campus explorer integration.

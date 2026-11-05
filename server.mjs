@@ -27,7 +27,7 @@ createServer((request, response) => {
         .split("<!-- Shared navigation start -->")[1]
         .split("<!-- Shared navigation end -->")[0]
         .replaceAll('href="/admissions"', 'href="/admissions" class="nav-active" aria-current="page"')
-        .replace('class="header-action" href="/#campus"', 'class="header-action" href="#apply"')
+        .replace('class="header-action" href="#schools"', 'class="header-action" href="#apply"')
         .replace("Find your future", "How to apply");
       const page = readFileSync(resolve(root, "admissions.html"), "utf8")
         .replace("<!-- Shared navigation -->", () => nav);

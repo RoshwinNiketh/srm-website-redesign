@@ -4,19 +4,17 @@ const sessionKey = "srm-landing-intro-v1";
 const motion = matchMedia("(prefers-reduced-motion: reduce)");
 const duration = 6900;
 
-function hasPlayed() {
-  try {
-    return sessionStorage.getItem(sessionKey) === "played";
-  } catch {
-    return true; // If the preference can't be saved, avoid replaying each visit.
-  }
-}
-
-function playIntro() {
-  if (motion.matches || hasPlayed() || location.hash || !Element.prototype.animate) return;
+async function playIntro() {
+  const html = document.documentElement;
+  if (!html.classList.contains("intro-pending") || motion.matches || location.hash) return;
   const logo = document.querySelector(".site-header .brand");
+  const logoImage = logo?.querySelector("img");
   const title = document.querySelector("#landing-title");
-  if (!logo || !title) return;
+  if (!logoImage || !title) return;
+
+  const flyingImage = logoImage.cloneNode(true);
+  await Promise.all([logoImage.decode(), flyingImage.decode()]);
+  if (!html.classList.contains("intro-pending") || motion.matches || location.hash) return;
 
   const root = document.createElement("div");
   root.className = "landing-intro";
@@ -35,7 +33,7 @@ function playIntro() {
   const flyingLogo = document.createElement("div");
   flyingLogo.className = "brand intro-brand";
   flyingLogo.setAttribute("aria-hidden", "true");
-  flyingLogo.append(...Array.from(logo.children, (child) => child.cloneNode(true)));
+  flyingLogo.append(flyingImage);
   root.append(flyingLogo);
 
   const animations = [];
@@ -258,4 +256,6 @@ function playIntro() {
   }
 }
 
-playIntro();
+playIntro()
+  .catch((error) => console.warn("Landing intro was skipped:", error))
+  .finally(() => document.documentElement.classList.remove("intro-pending"));

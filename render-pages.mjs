@@ -20,14 +20,24 @@ function sharedNavigation(home, activePath) {
 function renderInnerPage(page) {
   const image = page.image ? `<img class="inner-image" src="/assets/images/${page.image}" alt="${page.imageAlt}" />` : "";
   return `<section class="inner-lead${image ? " inner-lead-with-image" : ""}">
-    <div><h1>${page.title}</h1><p>${page.lead}</p></div>${image}
+    <div>
+      <h1>${page.title}</h1>
+      <p>${page.lead}</p>
+      <a class="inner-jump" href="#page-details">${page.topicHeading} <span aria-hidden="true">↓</span></a>
+    </div>${image}
   </section>
-  <section class="inner-topics" aria-labelledby="inner-topics-title">
+  <section id="page-details" class="inner-topics" aria-labelledby="inner-topics-title">
     <h2 id="inner-topics-title">${page.topicHeading}</h2>
     <dl>${page.topics.map(([title, description, href, label]) => `<div>
       <dt>${title}</dt><dd>${description}${href ? `<a class="inner-topic-link" href="${href}">${label} <span aria-hidden="true">↗</span></a>` : ""}</dd>
     </div>`).join("")}</dl>
-    <div class="inner-actions">${page.links.map(([label, href]) => `<a href="${href}">${label} <span aria-hidden="true">↗</span></a>`).join("")}</div>
+  </section>
+  <section class="inner-next" aria-labelledby="inner-next-title">
+    <h2 id="inner-next-title">${page.nextHeading}</h2>
+    <div>
+      <p>${page.nextText}</p>
+      <div class="inner-actions">${page.links.map(([label, href]) => `<a href="${href}">${label} <span aria-hidden="true">↗</span></a>`).join("")}</div>
+    </div>
   </section>`;
 }
 

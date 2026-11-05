@@ -9,6 +9,30 @@
       content="Discover a new perspective on SRM. Explore a cinematic campus concept and find your place in engineering, medicine, arts and science."
     />
     <title>SRM — A world of possibilities</title>
+    <style>
+      #intro-loading { display: none; }
+      html.intro-pending body > :not(#intro-loading) { visibility: hidden; }
+      html.intro-pending { overflow: hidden; background: #faf7ee; }
+      html.intro-pending #intro-loading {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: #faf7ee;
+        color: #142620;
+        font: 16px system-ui, sans-serif;
+      }
+    </style>
+    <script>
+      try {
+        if (!location.hash && !matchMedia("(prefers-reduced-motion: reduce)").matches &&
+            Element.prototype.animate && sessionStorage.getItem("srm-landing-intro-v1") !== "played") {
+          document.documentElement.classList.add("intro-pending");
+          setTimeout(() => document.documentElement.classList.remove("intro-pending"), 20000);
+        }
+      } catch {}
+    </script>
+    <link rel="preload" href="/assets/brand/srm-logo.png" as="image" fetchpriority="high" />
     <link rel="icon" href="/assets/brand/srm-logo.png" type="image/png" />
     <link rel="preload" href="assets/images/campus-aerial.webp" as="image" />
     <link rel="stylesheet" href="/theme.css" />
@@ -22,12 +46,14 @@
     <script type="module" src="/campus-explorer.js"></script>
   </head>
   <body>
+    <div id="intro-loading" role="status">Loading the SRM experience…</div>
     <!-- Shared navigation start -->
     <header class="site-header">
       <a class="brand" href="/" aria-label="SRM home">
         <img src="/assets/brand/srm-logo.png" alt="" width="544" height="184" />
       </a>
       <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
         <a href="/admissions">Admissions</a>
         <a href="/academics">Academics</a>
         <a href="/campus-life">Campus Life</a>

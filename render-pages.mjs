@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { photos, pagePhoto, photoStories } from "./campus-photos.mjs";
 import { pages } from "./site-pages.mjs";
 import { universityDirectory } from "./university-directory.mjs";
 import { homeHighlights, pageHighlights } from "./institutional-highlights.mjs";
@@ -28,6 +29,36 @@ const uniqueEntries = [...new Map(searchEntries.map((entry) => [entry[1], entry]
   .sort(([a], [b]) => a.localeCompare(b));
 const link = (label, href) => `<a href="${escape(href)}">${escape(label)}</a>`;
 const linkList = (items) => `<ul>${items.map(([label, href]) => `<li>${link(label, href)}</li>`).join("")}</ul>`;
+
+function photo(key, { eager = false } = {}) {
+  const [file, alt, width, height, caption, source] = photos[key];
+  return `<figure class="campus-photo">
+    <img src="/assets/images/${file}.webp" alt="${escape(alt)}" width="${width}" height="${height}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" />
+    <figcaption><span>${escape(caption)}</span><a href="${escape(source)}" aria-label="SRMIST photo source for ${escape(caption)}">Photo source</a></figcaption>
+  </figure>`;
+}
+
+function editorialLead(route, title, lead, destination, label) {
+  return `<section class="editorial-lead${Object.hasOwn(servicePages, route) || route === "/directory" ? " editorial-lead-service" : ""}">
+    <div class="editorial-lead-copy">
+      <p class="editorial-kicker">SRM Institute of Science and Technology</p>
+      <h1>${escape(title)}</h1>
+      <p class="editorial-intro">${escape(lead)}</p>
+      <a class="editorial-jump" href="${destination}">${label} <span aria-hidden="true">↓</span></a>
+    </div>
+    ${photo(pagePhoto[route], { eager: true })}
+  </section>`;
+}
+
+function photoStory(route) {
+  const story = photoStories[route];
+  if (!story) return "";
+  const [title, ...images] = story;
+  return `<section class="photo-story" aria-labelledby="photo-story-title">
+    <h2 id="photo-story-title">${title}</h2>
+    <div class="photo-story-grid">${images.map((key) => photo(key)).join("")}</div>
+  </section>`;
+}
 
 const footer = `<footer class="site-footer"><div><a class="footer-home" href="/">SRM Institute of Science and Technology</a><p>Campus website prototype</p></div><nav aria-label="Footer">${linkList(footerLinks)}</nav></footer>`;
 
@@ -68,8 +99,8 @@ function sharedNavigation(home, activePath) {
 function renderDirectory(route) {
   const [title, topics] = directories[route];
   return `<section id="page-details" class="inner-topics directory" aria-labelledby="directory-title">
-    <p class="directory-kicker">SRMIST / ${escape(title)}</p>
-    <h2 id="directory-title">Explore ${escape(title)}</h2>
+    <header class="directory-heading"><p class="directory-kicker">SRMIST / ${escape(title)}</p>
+    <h2 id="directory-title">Explore ${escape(title)}</h2></header>
     <ol class="directory-list">${topics.map(([id, label, description, ...sources]) => `<li id="${escape(id)}">
       <h3>${escape(label)}</h3><p>${escape(description)}</p>
       <div class="directory-sources">${sources.map((source, index) => {
@@ -83,8 +114,9 @@ function renderDirectory(route) {
 
 function renderService(route) {
   const [title, lead] = servicePages[route] || ["A–Z Directory", "Browse university information by topic. Use site search to narrow the list."];
-  return `<section class="inner-lead"><h1>${escape(title)}</h1><p>${escape(lead)}</p></section>
-    ${route === "/directory" ? `<nav class="inner-topics az-directory" aria-label="A–Z destinations">${linkList(uniqueEntries)}</nav>` : renderDirectory(route)}`;
+  return `${editorialLead(route, title, lead, "#page-details", route === "/directory" ? "Browse destinations" : "Explore services")}
+    ${photoStory(route)}
+    ${route === "/directory" ? `<nav id="page-details" class="inner-topics az-directory" aria-label="A–Z destinations">${linkList(uniqueEntries)}</nav>` : renderDirectory(route)}`;
 }
 
 function renderHighlights({ label, title, intro, metrics = [], links }, home = false) {
@@ -94,7 +126,7 @@ function renderHighlights({ label, title, intro, metrics = [], links }, home = f
       <div><h2 id="highlights-title">${title}</h2><p>${intro}</p></div>
     </div>
     ${metrics.length ? `<div class="highlights-evidence">
-      ${home ? '<img src="/assets/images/engineering.webp" alt="Architectural concept of the SRM engineering campus" width="1672" height="941" loading="lazy" decoding="async" />' : ""}
+      ${home ? photo("tech") : ""}
       <dl class="highlights-metrics">${metrics.map(([value, description, period, [source, href]]) => `<div class="highlights-metric">
         <dt>${description}</dt><dd><strong>${value}</strong><span>${period}</span><a href="${href}">${source} <span aria-hidden="true">↗</span></a></dd>
       </div>`).join("")}</dl>
@@ -104,14 +136,8 @@ function renderHighlights({ label, title, intro, metrics = [], links }, home = f
 }
 
 function renderInnerPage(page, route) {
-  const image = page.image ? `<img class="inner-image" src="/assets/images/${page.image}" alt="${page.imageAlt}" width="1672" height="941" loading="lazy" decoding="async" />` : "";
-  return `<section class="inner-lead${image ? " inner-lead-with-image" : ""}">
-    <div>
-      <h1>${page.title}</h1>
-      <p>${page.lead}</p>
-      <a class="inner-jump" href="#page-details">Explore this page <span aria-hidden="true">↓</span></a>
-    </div>${image}
-  </section>
+  return `${editorialLead(route, page.title, page.lead, "#page-details", "Explore this page")}
+  ${photoStory(route)}
   ${renderHighlights(pageHighlights[route])}
 ${route === "/contact" ? `  <section id="page-details" class="inner-topics" aria-labelledby="inner-topics-title">
     <h2 id="inner-topics-title">${page.topicHeading}</h2>
@@ -157,7 +183,7 @@ export function renderPage(pathname) {
           ["Find a programme", "/programmes"], ["Student services", "/students"],
           ["Exams & Results", "/exams"], ["Plan a visit", "/visit"],
         ])}</nav>`)
-      .replace("<!-- Homepage highlights -->", () => renderHighlights(homeHighlights, true)));
+      .replace("<!-- Homepage highlights -->", () => renderHighlights(homeHighlights, true) + photoStory("/")));
   }
   const template = isAdmissions ? read("admissions.html")
     .replace("<!-- Admissions directory -->", () => renderHighlights(pageHighlights[route]) + renderDirectory(route)) : read("inner-page.html")

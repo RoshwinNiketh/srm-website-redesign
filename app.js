@@ -4,7 +4,7 @@ const schools = {
     tagline: "Make what's next.",
     description:
       "From the first line of code to the next breakthrough. Explore a world of engineering, technology and hands-on discovery.",
-    image: "assets/images/engineering.webp",
+    image: "assets/images/tech-park.webp",
     degrees: [
       ["Computer Science & Engineering", "B.Tech · Undergraduate"],
       ["Mechanical Engineering", "B.Tech · Undergraduate"],
@@ -17,7 +17,7 @@ const schools = {
     tagline: "A future in caring.",
     description:
       "Bring curiosity and compassion together. Discover pathways in medicine and the health sciences, from understanding the human body to caring for a community.",
-    image: "assets/images/medical.webp",
+    image: "assets/images/medicine-official.webp",
     degrees: [
       ["Medicine & Surgery", "MBBS · Undergraduate"],
       ["Dental Surgery", "BDS · Undergraduate"],
@@ -30,7 +30,7 @@ const schools = {
     tagline: "See things differently.",
     description:
       "Ask a bigger question. Find a new perspective. Explore the sciences, creative disciplines and humanities in a community of curious thinkers.",
-    image: "assets/images/campus-life.webp",
+    image: "assets/images/library-official.webp",
     degrees: [
       ["Visual Communication", "B.Sc · Undergraduate"],
       ["Psychology", "B.Sc · Undergraduate"],
@@ -43,7 +43,7 @@ const schools = {
     tagline: "Lead with possibility.",
     description:
       "Turn an idea into an opportunity. Explore business, entrepreneurship and the skills to bring people together around a shared ambition.",
-    image: "assets/images/engineering.webp",
+    image: "assets/images/management-official.webp",
     degrees: [
       ["Business Administration", "BBA · Undergraduate"],
       ["Business Administration", "MBA · Postgraduate"],
@@ -56,7 +56,7 @@ const schools = {
     tagline: "Stand for something.",
     description:
       "Understand the systems that shape society. Explore legal thinking, advocacy and the pursuit of justice through an interdisciplinary education.",
-    image: "assets/images/archgate.webp",
+    image: "assets/images/law-official.webp",
     degrees: [
       ["Arts & Law", "B.A. LL.B. (Hons.) · Integrated"],
       ["Business & Law", "B.Com. LL.B. (Hons.) · Integrated"],
@@ -89,7 +89,7 @@ function populateDestination(key) {
     school.description;
   const image = document.querySelector("#destination-image");
   image.src = school.image;
-  image.alt = `Architectural concept for ${school.name}`;
+  image.alt = `SRMIST photograph for ${school.name}`;
   document.querySelector("#degree-list").replaceChildren(
     ...school.degrees.map(([name, type]) => {
       const item = document.createElement("div");
@@ -158,7 +158,7 @@ document.querySelectorAll("[data-preview]").forEach((button) => {
     });
     document.querySelector("#school-image").src = school.image;
     document.querySelector("#school-image").alt =
-      `Architectural concept for ${school.name}`;
+      `SRMIST photograph for ${school.name}`;
     document.querySelector("#school-preview-title").textContent =
       school.tagline;
     document.querySelector("#school-preview-description").textContent =

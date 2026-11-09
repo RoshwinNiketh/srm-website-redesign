@@ -5,7 +5,7 @@ const schools = {
     block: "SRM Tech Park",
     tagline: "Make what's next.",
     description: "From the first line of code to the next breakthrough. Explore a world of engineering, technology and hands-on discovery.",
-    image: "assets/images/engineering.webp",
+    image: "assets/images/tech-park.webp",
   },
   medical: {
     name: "Medical & Health Sciences",
@@ -13,7 +13,7 @@ const schools = {
     block: "Illustrative location",
     tagline: "A future in caring.",
     description: "Bring curiosity and compassion together. Discover pathways in medicine and the health sciences, from understanding the human body to caring for a community.",
-    image: "assets/images/medical.webp",
+    image: "assets/images/medicine-official.webp",
   },
   arts: {
     name: "Science & Humanities",
@@ -21,7 +21,7 @@ const schools = {
     block: "Illustrative location",
     tagline: "See things differently.",
     description: "Ask a bigger question. Find a new perspective. Explore the sciences, creative disciplines and humanities in a community of curious thinkers.",
-    image: "assets/images/campus-life.webp",
+    image: "assets/images/library-official.webp",
   },
   management: {
     name: "Management",
@@ -29,7 +29,7 @@ const schools = {
     block: "SRM MBA Block",
     tagline: "Lead with possibility.",
     description: "Turn an idea into an opportunity. Explore business, entrepreneurship and the skills to bring people together around a shared ambition.",
-    image: "assets/images/engineering.webp",
+    image: "assets/images/management-official.webp",
   },
   law: {
     name: "Law",
@@ -37,7 +37,7 @@ const schools = {
     block: "Illustrative location",
     tagline: "Stand for something.",
     description: "Understand the systems that shape society. Explore legal thinking, advocacy and the pursuit of justice through an interdisciplinary education.",
-    image: "assets/images/archgate.webp",
+    image: "assets/images/law-official.webp",
   },
 };
 const FLOORS = ["Programmes", "Fees", "Labs", "Faculty", "Placements", "Apply"];

@@ -92,3 +92,28 @@
 }
 
 
+
+/* Keep the application entry point alongside the student photograph. */
+.admissions-lead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+  align-items: center;
+  gap: clamp(20px, 4vw, 72px);
+  padding: clamp(32px, 6vw, 90px) var(--space);
+}
+.admissions-lead .admissions-masthead { grid-column: 2; grid-row: 1; height: auto; background: transparent; }
+.admissions-masthead img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.admissions-lead .admissions-title {
+  display: block;
+  grid-column: 1;
+  grid-row: 1;
+  padding: 0;
+}
+.admissions-title h1 { color: var(--dark); font-size: clamp(42px, 6.6vw, 104px); overflow-wrap: anywhere; }
+.admissions-title .admissions-place { margin: 0 0 14px; color: var(--accent-ink); font-weight: 750; }
+.admissions-masthead figcaption { padding-block: 10px; font-size: 13px; color: var(--muted); }
+.admissions-masthead figcaption a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; }
+@media (max-width: 760px) {
+  .admissions-lead { grid-template-columns: minmax(0, 1fr); }
+  .admissions-lead .admissions-masthead { grid-column: 1; grid-row: 2; }
+}

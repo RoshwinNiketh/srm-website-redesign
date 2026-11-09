@@ -213,3 +213,137 @@
 }
 .inner-lead h1 { overflow-wrap: anywhere; }
 @media (max-width: 760px) { .site-footer { grid-template-columns: minmax(0, 1fr); } }
+
+/* Photography leads the page. Service pages use a shorter masthead so their
+   destinations stay close to the top of the page. */
+.editorial-lead {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 96px);
+  padding: clamp(40px, 6vw, 100px) var(--space);
+}
+.editorial-lead-service {
+  grid-template-columns: minmax(0, 1fr) minmax(0, .85fr);
+  padding-block: clamp(32px, 4.5vw, 72px);
+  background: var(--surface);
+}
+.editorial-lead-copy { max-width: 650px; }
+.editorial-kicker {
+  margin-bottom: 18px;
+  color: var(--accent-ink);
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.editorial-lead h1 {
+  color: var(--dark);
+  font-size: clamp(40px, 6.4vw, 100px);
+  line-height: .98;
+  overflow-wrap: anywhere;
+}
+.editorial-lead-service h1 { font-size: clamp(40px, 5.5vw, 78px); }
+.editorial-intro {
+  max-width: 44ch;
+  margin-top: 22px;
+  font-size: clamp(17px, 1.5vw, 23px);
+  line-height: 1.55;
+}
+.editorial-jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 44px;
+  margin-top: 18px;
+  color: var(--dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.campus-photo { margin: 0; min-width: 0; }
+.campus-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--surface-light);
+}
+.editorial-lead-service .campus-photo img { aspect-ratio: 16 / 10; }
+.campus-photo figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 12px;
+  padding-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.campus-photo figcaption a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.photo-story {
+  padding: clamp(44px, 7vw, 105px) var(--space);
+  background: var(--surface);
+}
+.photo-story h2 {
+  color: var(--dark);
+  font-size: clamp(34px, 5vw, 74px);
+  margin-bottom: clamp(22px, 4vw, 52px);
+}
+.photo-story-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 32px);
+}
+.photo-story-grid img { aspect-ratio: auto; height: clamp(210px, 25vw, 380px); }
+.photo-story-grid > :nth-child(2) { margin-top: 24px; }
+.photo-story-grid > :nth-child(3) { margin-top: 48px; }
+
+.directory { background: var(--ground); }
+.directory-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.directory-list li {
+  display: grid;
+  grid-template-columns: 2.1rem minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  align-content: start;
+  gap: 10px 12px;
+  padding: clamp(18px, 2.5vw, 36px);
+  background: var(--surface);
+  border: 0;
+  border-top: 2px solid var(--surface-light);
+}
+.directory-list li:first-child {
+  grid-column: 1 / -1;
+  grid-template-columns: 2.1rem minmax(0, .9fr) minmax(0, 1.1fr);
+  background: var(--dark);
+  color: var(--on-dark);
+  border-color: var(--dark);
+}
+.directory-list li:first-child :is(p, a, h3), .directory-list li:first-child::before { color: inherit; }
+.directory-list li:first-child .directory-sources { grid-column: 3; }
+.directory-list li:not(:first-child) :is(p, .directory-sources) { grid-column: 2; }
+.directory-list li:target { border-top-color: var(--accent-ink); }
+.directory-list li:first-child :focus-visible { outline-color: var(--on-dark); }
+.highlights-home .highlights-evidence { align-items: start; }
+.highlights-home .campus-photo img { aspect-ratio: 5 / 4; object-position: center 48%; }
+
+@media (max-width: 760px) {
+  .editorial-lead, .editorial-lead-service, .directory-list { grid-template-columns: minmax(0, 1fr); }
+  .editorial-lead .campus-photo img { aspect-ratio: 3 / 2; }
+  .photo-story-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .photo-story-grid > :first-child { grid-column: 1 / -1; }
+  .photo-story-grid > :nth-child(n) { margin-top: 0; }
+  .photo-story-grid img { height: auto; aspect-ratio: 4 / 3; }
+  .directory-list li:first-child { grid-template-columns: 2.1rem minmax(0, 1fr); }
+  .directory-list li:first-child :is(p, .directory-sources) { grid-column: 2; }
+}

@@ -2,8 +2,6 @@ export const pages = {
   "/academics": {
     title: "Academics",
     lead: "Explore undergraduate, postgraduate and doctoral study across SRMIST’s six faculties.",
-    image: "engineering.webp",
-    imageAlt: "Concept illustration of an SRM academic building",
     topicHeading: "Faculties and programmes",
     topics: [
       ["Engineering &amp; Technology", "Explore B.Tech and M.Tech pathways. SRMIST also lists architecture and design programmes, including B.Arch and B.Des.", "https://www.srmist.edu.in/college/college-of-engineering-technology/", "Faculty of Engineering &amp; Technology", "engineering"],
@@ -20,8 +18,6 @@ export const pages = {
   "/campus-life": {
     title: "Campus Life",
     lead: "Get a feel for life at SRM beyond the classroom.",
-    image: "campus-life.webp",
-    imageAlt: "Concept illustration of a shaded campus walkway",
     topicHeading: "Student life at Kattankulathur",
     topics: [
       ["Clubs and activities", "Student Affairs coordinates club activities and campus events. Students can get involved in areas such as music, dance, theatre, literary work and creative arts.", "https://www.srmist.edu.in/life-at-srm/student-life/clubs/", "Browse student clubs"],
@@ -50,8 +46,6 @@ export const pages = {
   "/about": {
     title: "About SRM",
     lead: "Get to know SRM Institute of Science and Technology and its Kattankulathur campus in Tamil Nadu.",
-    image: "archgate.webp",
-    imageAlt: "Concept illustration of the SRM archgate",
     topicHeading: "The institute and its campus",
     topics: [
       ["From engineering college to university", "SRMIST traces its origins in Kattankulathur to SRM Engineering College. It received deemed-to-be-university status in 2002 under Section 3 of the UGC Act.", "https://www.srmist.edu.in/about-us/", "Read the official history"],

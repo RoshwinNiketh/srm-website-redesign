@@ -81,3 +81,18 @@
   .landing-intro-active .site-header .brand { visibility: visible; }
 }
 
+
+#intro-loading { display: none; }
+html.intro-pending body > :not(#intro-loading, .landing-intro) { visibility: hidden; }
+html.intro-pending { overflow: hidden; background: #f1f7ff; }
+html.intro-pending #intro-loading {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #f1f7ff;
+  color: #172943;
+  font: 16px system-ui, sans-serif;
+}
+
+html.intro-pending .landing-intro-active #intro-loading { display: none; }

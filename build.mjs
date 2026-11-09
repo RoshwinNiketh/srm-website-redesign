@@ -1,6 +1,8 @@
-import { copyFileSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
+import { copyFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { pageRoutes, renderPage } from "./render-pages.mjs";
+
+import { browserFiles } from "./browser-files.mjs";
 
 const root = import.meta.dirname;
 const output = join(root, "dist");
@@ -11,18 +13,6 @@ for (const route of pageRoutes) {
   writeFileSync(join(output, filename), renderPage(route), "utf8");
 }
 
-const browserFiles = [
-  "app.js", "navigation.js", "campus-explorer.js", "campus3d.js",
-  "landing-intro.js", "landing-art.js", "styles.css", "theme.css",
-  "admissions.css", "site-pages.css", "campus-explorer.css", "landing-intro.css",
-  "assistant.js", "assistant.css", "assistant-prefs.js", "assistant-intents.mjs",
-  "campus-guide.js", "site-pages.mjs",
-  "assets/brand/srm-logo.png", "assets/brand/srm-emblem.png", "assets/fonts/manrope-latin.woff2",
-  "assets/fonts/OFL.txt", "assets/data/campus.json", "assets/lib/three.module.js",
-  ...readdirSync(join(root, "assets/images"))
-    .filter((name) => name.endsWith(".webp"))
-    .map((name) => `assets/images/${name}`),
-];
 
 for (const file of browserFiles) {
   const destination = join(output, file);

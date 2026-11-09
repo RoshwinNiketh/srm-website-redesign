@@ -1,8 +1,8 @@
 :root {
   color-scheme: light;
-  --ground: #faf7ee;
-  --surface: #f2ecdf;
-  --surface-light: #e9e0cf;
+  --ground: #f1f7ff;
+  --surface: #e6f0fc;
+  --surface-light: #d5e4f5;
   --ink: #172943;
   --muted: #475a73;
   --accent: #e6b975;
@@ -10,8 +10,8 @@
   --accent-ink: #80531c;
   --focus: #80531c;
   --dark: #034DA1;
-  --on-dark: #faf7ee;
-  --intro-paper: #faf6eb;
+  --on-dark: #f1f7ff;
+  --intro-paper: #edf5ff;
   --header-height: 94px;
   --space: clamp(24px, 4.2vw, 72px);
   --brand-width: clamp(140px, 15vw, 200px);

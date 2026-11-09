@@ -2,8 +2,6 @@ export const pages = {
   "/academics": {
     title: "Academics",
     lead: "Explore undergraduate, postgraduate and doctoral study across SRMIST’s six faculties.",
-    image: "engineering.webp",
-    imageAlt: "Concept illustration of an SRM academic building",
     topicHeading: "Faculties and programmes",
     topics: [
       ["Engineering &amp; Technology", "Explore B.Tech and M.Tech pathways. SRMIST also lists architecture and design programmes, including B.Arch and B.Des.", "https://www.srmist.edu.in/college/college-of-engineering-technology/", "Faculty of Engineering &amp; Technology", "engineering"],
@@ -20,8 +18,6 @@ export const pages = {
   "/campus-life": {
     title: "Campus Life",
     lead: "Get a feel for life at SRM beyond the classroom.",
-    image: "campus-life.webp",
-    imageAlt: "Concept illustration of a shaded campus walkway",
     topicHeading: "Student life at Kattankulathur",
     topics: [
       ["Clubs and activities", "Student Affairs coordinates club activities and campus events. Students can get involved in areas such as music, dance, theatre, literary work and creative arts.", "https://www.srmist.edu.in/life-at-srm/student-life/clubs/", "Browse student clubs"],
@@ -50,8 +46,6 @@ export const pages = {
   "/about": {
     title: "About SRM",
     lead: "Get to know SRM Institute of Science and Technology and its Kattankulathur campus in Tamil Nadu.",
-    image: "archgate.webp",
-    imageAlt: "Concept illustration of the SRM archgate",
     topicHeading: "The institute and its campus",
     topics: [
       ["From engineering college to university", "SRMIST traces its origins in Kattankulathur to SRM Engineering College. It received deemed-to-be-university status in 2002 under Section 3 of the UGC Act.", "https://www.srmist.edu.in/about-us/", "Read the official history"],
@@ -71,6 +65,8 @@ export const pages = {
       ["Main campus address", "SRM Institute of Science and Technology, SRM Nagar, Kattankulathur 603 203, Chengalpattu district, Tamil Nadu, India.", "https://www.srmist.edu.in/contact-us/", "Campus contact directory"],
       ["General enquiries", "The university lists its main switchboard numbers as +91 44 27417000 and +91 44 27417777.", "tel:+914427417000", "Call the main switchboard"],
       ["Admissions enquiries", "The official application portal lists admissions.india@srmist.edu.in for questions about applying through the India route.", "mailto:admissions.india@srmist.edu.in", "Email Admissions India"],
+      ["Exams and student services", "Choose the service for your campus and batch. Use the Controller of Examinations for exam and credential requests.", "/exams", "Exams & Results"],
+      ["Accessibility and campus support", "Find the right office to report an access barrier, raise a grievance or ask for campus support.", "/campus-life#safety", "Safety & Support"],
       ["International admissions", "Use the international admissions page for the application routes for foreign nationals and NRI, PIO and OCI applicants.", "https://www.srmist.edu.in/admission-international/", "Visit International Admissions"],
     ],
     nextHeading: "Before you get in touch",

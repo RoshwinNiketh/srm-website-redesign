@@ -5,14 +5,7 @@ const schools = {
     block: "SRM Tech Park",
     tagline: "Make what's next.",
     description: "From the first line of code to the next breakthrough. Explore a world of engineering, technology and hands-on discovery.",
-    image: "assets/images/engineering.webp",
-    fee: "₹4,50,000",
-    degrees: [
-      ["Computer Science & Engineering", "B.Tech · Undergraduate"],
-      ["Mechanical Engineering", "B.Tech · Undergraduate"],
-      ["Electronics & Communication", "B.Tech · Undergraduate"],
-      ["Advanced Engineering", "M.Tech · Postgraduate"],
-    ],
+    image: "assets/images/tech-park.webp",
   },
   medical: {
     name: "Medical & Health Sciences",
@@ -20,14 +13,7 @@ const schools = {
     block: "Illustrative location",
     tagline: "A future in caring.",
     description: "Bring curiosity and compassion together. Discover pathways in medicine and the health sciences, from understanding the human body to caring for a community.",
-    image: "assets/images/medical.webp",
-    fee: "₹3,00,000",
-    degrees: [
-      ["Medicine & Surgery", "MBBS · Undergraduate"],
-      ["Dental Surgery", "BDS · Undergraduate"],
-      ["Nursing", "B.Sc · Undergraduate"],
-      ["Physiotherapy", "BPT · Undergraduate"],
-    ],
+    image: "assets/images/medicine-official.webp",
   },
   arts: {
     name: "Science & Humanities",
@@ -35,14 +21,7 @@ const schools = {
     block: "Illustrative location",
     tagline: "See things differently.",
     description: "Ask a bigger question. Find a new perspective. Explore the sciences, creative disciplines and humanities in a community of curious thinkers.",
-    image: "assets/images/campus-life.webp",
-    fee: "₹1,50,000",
-    degrees: [
-      ["Visual Communication", "B.Sc · Undergraduate"],
-      ["Psychology", "B.Sc · Undergraduate"],
-      ["English", "B.A · Undergraduate"],
-      ["Biotechnology", "B.Sc · Undergraduate"],
-    ],
+    image: "assets/images/library-official.webp",
   },
   management: {
     name: "Management",
@@ -50,14 +29,7 @@ const schools = {
     block: "SRM MBA Block",
     tagline: "Lead with possibility.",
     description: "Turn an idea into an opportunity. Explore business, entrepreneurship and the skills to bring people together around a shared ambition.",
-    image: "assets/images/engineering.webp",
-    fee: "₹2,50,000",
-    degrees: [
-      ["Business Administration", "BBA · Undergraduate"],
-      ["Business Administration", "MBA · Postgraduate"],
-      ["Commerce", "B.Com · Undergraduate"],
-      ["Management Research", "Ph.D · Research"],
-    ],
+    image: "assets/images/management-official.webp",
   },
   law: {
     name: "Law",
@@ -65,14 +37,7 @@ const schools = {
     block: "Illustrative location",
     tagline: "Stand for something.",
     description: "Understand the systems that shape society. Explore legal thinking, advocacy and the pursuit of justice through an interdisciplinary education.",
-    image: "assets/images/archgate.webp",
-    fee: "₹2,00,000",
-    degrees: [
-      ["Arts & Law", "B.A. LL.B. (Hons.) · Integrated"],
-      ["Business & Law", "B.Com. LL.B. (Hons.) · Integrated"],
-      ["Law", "LL.B. · Undergraduate"],
-      ["Advanced Legal Studies", "LL.M. · Postgraduate"],
-    ],
+    image: "assets/images/law-official.webp",
   },
 };
 const FLOORS = ["Programmes", "Fees", "Labs", "Faculty", "Placements", "Apply"];
@@ -140,21 +105,21 @@ new IntersectionObserver(
 function floorContent(index) {
   const school = schools[activeKey];
   const body = $("#floor-body");
-  const rows = (items) => items.map(([a, b]) => `<div class="floor-row"><span>${a}<small>${b}</small></span><span aria-hidden="true">→</span></div>`).join("");
-  const sample = '<span class="sample">Sample data</span>';
+  const resource = (label, href) => `<a class="floor-row" href="${href}"><span>${label}</span><span aria-hidden="true">→</span></a>`;
   const views = [
-    `<p>${school.description}</p>${rows(school.degrees)}`,
-    `<p>Estimated first-year tuition</p><p class="big-figure">${school.fee}</p>${sample}${rows([["Hostel and dining", "Add to your estimate"], ["Scholarships", "Check what you may qualify for"]])}`,
-    `<p>Labs and facilities for ${school.name} will be listed here with photos.</p>${rows([["Central research facilities", "To be confirmed"], ["Teaching labs", "To be confirmed"]])}`,
-    `<p>Find the people behind the programmes.</p>${rows([["Faculty directory", "To be connected"], ["Research areas", "To be connected"]])}`,
-    `<p>Students placed</p><p class="big-figure">To verify</p>${sample}${rows([["Recruiters", "To be confirmed"], ["Median package", "To be confirmed"]])}`,
-    `<p class="big-figure">Your place on campus.</p><p>Apply only through official SRM channels. This concept takes no applications.</p>${rows([["SRMJEEE 2027", "Dates to be confirmed"], ["Talk to admissions", "+91 70 2645 2645"]])}`,
+    `<p>${school.description}</p>${resource("Find programmes and campuses", "/programmes")}`,
+    `<p>Fees vary by programme, campus and intake. Check the official schedule before applying.</p>${resource("Check fees and scholarships", "/admissions#fees")}`,
+    `<p>Find research centres and shared facilities, including access instructions.</p>${resource("Browse research facilities", "/research#projects")}`,
+    `<p>Find published staff profiles and academic contacts.</p>${resource("Browse departments and faculty", "/academics#people")}`,
+    `<p>Use the Career Centre for campus-specific placement and career information.</p>${resource("Find the Career Centre", "/students#careers")}`,
+    `<p>Choose your programme, intake and campus before opening the official application.</p>${resource("Check admissions and deadlines", "/admissions#intakes")}`,
   ];
   body.innerHTML = views[index];
   $("#floor-tabs")
     .querySelectorAll("button")
     .forEach((tab, i) => {
       tab.setAttribute("aria-selected", String(i === index));
+      if (i === index) body.setAttribute("aria-labelledby", tab.id);
       tab.tabIndex = i === index ? 0 : -1;
     });
   campus?.setFloor(index);
@@ -171,6 +136,8 @@ function openPanel() {
       const tab = document.createElement("button");
       tab.role = "tab";
       tab.textContent = name;
+      tab.id = `campus-tab-${i}`;
+      tab.setAttribute("aria-controls", "floor-body");
       tab.addEventListener("click", () => floorContent(i));
       tab.addEventListener("keydown", (e) => {
         if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;

@@ -1,11 +1,73 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { photos, pagePhoto, photoStories } from "./campus-photos.mjs";
 import { pages } from "./site-pages.mjs";
 import { universityDirectory } from "./university-directory.mjs";
 import { homeHighlights, pageHighlights } from "./institutional-highlights.mjs";
 
+import { footerLinks, pageAdditions, servicePages, utilityLinks } from "./site-services.mjs";
+
 const root = import.meta.dirname;
-export const pageRoutes = ["/", "/admissions", ...Object.keys(pages), "/more"];
+const escape = (value) => String(value).replace(/[&<>"']/g, (char) => ({
+  "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+})[char]);
+const directories = Object.fromEntries(universityDirectory.map(([path, title, topics]) => [
+  path, [title, [...(pageAdditions[path] || []), ...topics]],
+]));
+for (const [path, [title, , topics]] of Object.entries(servicePages)) {
+  directories[path] = [title, topics];
+}
+const primary = ["/academics", "/admissions", "/research", "/campus-life", "/international", "/about"];
+const searchEntries = [
+  ...Object.entries(directories).flatMap(([path, [title, topics]]) => [
+    [title, path, ""],
+    ...topics.map(([id, label, description]) => [label, `${path}#${id}`, `${title} ${description}`]),
+  ]),
+  ...footerLinks.map(([title, path]) => [title, path, ""]),
+];
+const uniqueEntries = [...new Map(searchEntries.map((entry) => [entry[1], entry])).values()]
+  .sort(([a], [b]) => a.localeCompare(b));
+const link = (label, href) => `<a href="${escape(href)}">${escape(label)}</a>`;
+const linkList = (items) => `<ul>${items.map(([label, href]) => `<li>${link(label, href)}</li>`).join("")}</ul>`;
+
+function photo(key, { eager = false } = {}) {
+  const [file, alt, width, height, caption, source] = photos[key];
+  return `<figure class="campus-photo">
+    <img src="/assets/images/${file}.webp" alt="${escape(alt)}" width="${width}" height="${height}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" />
+    <figcaption><span>${escape(caption)}</span><a href="${escape(source)}" aria-label="SRMIST photo source for ${escape(caption)}">Photo source</a></figcaption>
+  </figure>`;
+}
+
+function editorialLead(route, title, lead, destination, label) {
+  return `<section class="editorial-lead${Object.hasOwn(servicePages, route) || route === "/directory" ? " editorial-lead-service" : ""}">
+    <div class="editorial-lead-copy">
+      <p class="editorial-kicker">SRM Institute of Science and Technology</p>
+      <h1>${escape(title)}</h1>
+      <p class="editorial-intro">${escape(lead)}</p>
+      <a class="editorial-jump" href="${destination}">${label} <span aria-hidden="true">↓</span></a>
+    </div>
+    ${photo(pagePhoto[route], { eager: true })}
+  </section>`;
+}
+
+function photoStory(route) {
+  const story = photoStories[route];
+  if (!story) return "";
+  const [title, ...images] = story;
+  return `<section class="photo-story" aria-labelledby="photo-story-title">
+    <h2 id="photo-story-title">${title}</h2>
+    <div class="photo-story-grid">${images.map((key) => photo(key)).join("")}</div>
+  </section>`;
+}
+
+const footer = `<footer class="site-footer"><div><a class="footer-home" href="/">SRM Institute of Science and Technology</a><p>Campus website prototype</p></div><nav aria-label="Footer">${linkList(footerLinks)}</nav></footer>`;
+
+function layout(html) {
+  return html.replace(/<main(?: id="admissions-content")?([^>]*)>/, '<main id="main-content" tabindex="-1"$1>')
+    .replace(/<footer(?:\s[^>]*)?>[\s\S]*?<\/footer>/, () => footer)
+    .replace("</head>", '    <meta name="robots" content="noindex" />\n  </head>');
+}
+export const pageRoutes = ["/", "/admissions", ...Object.keys(pages), "/more", ...Object.keys(servicePages), "/directory"];
 
 function read(name) {
   return readFileSync(resolve(root, name), "utf8");
@@ -15,27 +77,46 @@ function sharedNavigation(home, activePath) {
   const nav = home.split("<!-- Shared navigation start -->")[1]
     .split("<!-- Shared navigation end -->")[0];
   const current = (path) => path === activePath ? ' aria-current="page"' : "";
-  const links = `<a href="/"${current("/")}>Home</a>` + universityDirectory.map(([path, title, topics]) =>
-    `<details class="nav-group"><summary${current(path)}>${title}</summary>
+  const links = primary.map((path) => {
+    const [title, topics] = directories[path];
+    return `<details class="nav-group"><summary${current(path)}>${escape(title)}</summary>
       <div class="nav-panel">
-        <a href="${path}"${current(path)}>Explore ${title === "More" ? "More Resources" : title}</a>
-        ${topics.map(([id, label]) => `<a href="${path}#${id}">${label}</a>`).join("")}
+        <a href="${path}"${current(path)}>Explore ${escape(title)}</a>
+        ${topics.slice(0, 7).map(([id, label]) => link(label, `${path}#${id}`)).join("")}
       </div>
-    </details>`).join("");
-  return nav.replace("<!-- Desktop page links -->", () => links)
-    .replace("<!-- Mobile page links -->", () => links);
+    </details>`;
+  }).join("");
+  const utility = `<ul>${utilityLinks.map(([label, path]) =>
+    `<li><a href="${path}"${current(path)}>${escape(label)}</a></li>`).join("")}</ul>`;
+  const quick = `<nav class="utility-nav" aria-label="University services">${utility}</nav>`;
+  const index = `<template id="site-search-index">${uniqueEntries.map(([title, href, terms]) =>
+    `<a href="${escape(href)}" data-terms="${escape(terms)}">${escape(title)}</a>`).join("")}</template>`;
+  return '<a class="skip-link" href="#main-content">Skip to main content</a>' +
+    nav.replace("<!-- Desktop page links -->", () => links)
+      .replace("<!-- Mobile page links -->", () => link("Home", "/") + links + utility) + quick + index;
 }
 
 function renderDirectory(route) {
-  const [, title, topics] = universityDirectory.find(([path]) => path === route);
+  const [title, topics] = directories[route];
   return `<section id="page-details" class="inner-topics directory" aria-labelledby="directory-title">
-    <p class="directory-kicker">SRMIST / ${title}</p>
-    <h2 id="directory-title">Explore ${title === "More" ? "more resources" : title}</h2>
-    <ol class="directory-list">${topics.map(([id, label, description, ...sources]) => `<li id="${id}">
-      <h3>${label}</h3><p>${description}</p>
-      <div class="directory-sources">${sources.map((href, index) => `<a href="${href}">${href.startsWith("/") ? "Contact directory" : index === 0 ? "Official SRMIST resource" : "Related SRMIST resource"} <span aria-hidden="true">↗</span></a>`).join("")}</div>
+    <header class="directory-heading"><p class="directory-kicker">SRMIST / ${escape(title)}</p>
+    <h2 id="directory-title">Explore ${escape(title)}</h2></header>
+    <ol class="directory-list">${topics.map(([id, label, description, ...sources]) => `<li id="${escape(id)}">
+      <h3>${escape(label)}</h3><p>${escape(description)}</p>
+      <div class="directory-sources">${sources.map((source, index) => {
+        if (Array.isArray(source)) return link(...source);
+        const topic = label.toLowerCase();
+        return link(source === "/contact" ? "Contact directory" : index === 0 ? `SRMIST guide to ${topic}` : `Additional information on ${topic}`, source);
+      }).join("")}</div>
     </li>`).join("")}</ol>
   </section>`;
+}
+
+function renderService(route) {
+  const [title, lead] = servicePages[route] || ["A–Z Directory", "Browse university information by topic. Use site search to narrow the list."];
+  return `${editorialLead(route, title, lead, "#page-details", route === "/directory" ? "Browse destinations" : "Explore services")}
+    ${photoStory(route)}
+    ${route === "/directory" ? `<nav id="page-details" class="inner-topics az-directory" aria-label="A–Z destinations">${linkList(uniqueEntries)}</nav>` : renderDirectory(route)}`;
 }
 
 function renderHighlights({ label, title, intro, metrics = [], links }, home = false) {
@@ -45,7 +126,7 @@ function renderHighlights({ label, title, intro, metrics = [], links }, home = f
       <div><h2 id="highlights-title">${title}</h2><p>${intro}</p></div>
     </div>
     ${metrics.length ? `<div class="highlights-evidence">
-      ${home ? '<img src="/assets/images/engineering.webp" alt="Architectural concept of the SRM engineering campus" width="1672" height="941" loading="lazy" decoding="async" />' : ""}
+      ${home ? photo("tech") : ""}
       <dl class="highlights-metrics">${metrics.map(([value, description, period, [source, href]]) => `<div class="highlights-metric">
         <dt>${description}</dt><dd><strong>${value}</strong><span>${period}</span><a href="${href}">${source} <span aria-hidden="true">↗</span></a></dd>
       </div>`).join("")}</dl>
@@ -55,14 +136,8 @@ function renderHighlights({ label, title, intro, metrics = [], links }, home = f
 }
 
 function renderInnerPage(page, route) {
-  const image = page.image ? `<img class="inner-image" src="/assets/images/${page.image}" alt="${page.imageAlt}" width="1672" height="941" loading="lazy" decoding="async" />` : "";
-  return `<section class="inner-lead${image ? " inner-lead-with-image" : ""}">
-    <div>
-      <h1>${page.title}</h1>
-      <p>${page.lead}</p>
-      <a class="inner-jump" href="#page-details">Explore this page <span aria-hidden="true">↓</span></a>
-    </div>${image}
-  </section>
+  return `${editorialLead(route, page.title, page.lead, "#page-details", "Explore this page")}
+  ${photoStory(route)}
   ${renderHighlights(pageHighlights[route])}
 ${route === "/contact" ? `  <section id="page-details" class="inner-topics" aria-labelledby="inner-topics-title">
     <h2 id="inner-topics-title">${page.topicHeading}</h2>
@@ -96,17 +171,23 @@ export function renderPage(pathname) {
     nextText: "Use the contact directory to get in touch with SRMIST.",
     links: [["Contact SRMIST", "/contact"]],
   } : Object.hasOwn(pages, route) ? pages[route] : null;
-  if (!isHome && !isAdmissions && !innerPage) return null;
+  const isService = Object.hasOwn(servicePages, route) || route === "/directory";
+  if (!isHome && !isAdmissions && !innerPage && !isService) return null;
 
   const home = read("index.html");
   const nav = sharedNavigation(home, isHome ? "/" : route);
   if (isHome) {
-    return home.replace(/<!-- Shared navigation start -->[\s\S]*?<!-- Shared navigation end -->/, () => nav)
-      .replace("<!-- Homepage highlights -->", () => renderHighlights(homeHighlights, true));
+    return layout(home.replace(/<!-- Shared navigation start -->[\s\S]*?<!-- Shared navigation end -->/, () => nav)
+      .replace("<!-- Homepage services -->", () =>
+        `<nav class="home-services" aria-label="Popular university services">${linkList([
+          ["Find a programme", "/programmes"], ["Student services", "/students"],
+          ["Exams & Results", "/exams"], ["Plan a visit", "/visit"],
+        ])}</nav>`)
+      .replace("<!-- Homepage highlights -->", () => renderHighlights(homeHighlights, true) + photoStory("/")));
   }
   const template = isAdmissions ? read("admissions.html")
     .replace("<!-- Admissions directory -->", () => renderHighlights(pageHighlights[route]) + renderDirectory(route)) : read("inner-page.html")
-    .replace("<!-- Page title -->", () => innerPage.title)
-    .replace("<!-- Page content -->", () => renderInnerPage(innerPage, route));
-  return template.replace("<!-- Shared navigation -->", () => nav);
+    .replace("<!-- Page title -->", () => isService ? servicePages[route]?.[0] || "A–Z Directory" : innerPage.title)
+    .replace("<!-- Page content -->", () => isService ? renderService(route) : renderInnerPage(innerPage, route));
+  return layout(template.replace("<!-- Shared navigation -->", () => nav));
 }

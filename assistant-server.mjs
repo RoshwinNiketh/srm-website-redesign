@@ -148,6 +148,7 @@ async function gemini(path, body, timeout = MODEL_TIMEOUT) {
     headers: { "Content-Type": "application/json", "x-goog-api-key": process.env.GEMINI_API_KEY },
     body: JSON.stringify(body),
     signal: AbortSignal.timeout(timeout),
+    redirect: "error",
   });
   if (!response.ok) {
     const error = new Error(`Gemini ${response.status}`);
@@ -163,13 +164,16 @@ async function generateJson(system, contents, schema) {
   const body = {
     systemInstruction: { parts: [{ text: system }] },
     contents,
-    generationConfig: { responseMimeType: "application/json", responseJsonSchema: schema },
+    generationConfig: { responseMimeType: "application/json", responseJsonSchema: schema, maxOutputTokens: 1600 },
   };
   let lastError;
+  const deadline = Date.now() + MODEL_TIMEOUT;
   const models = chatModels();
   for (const model of workingModel ? [workingModel, ...models.filter((item) => item !== workingModel)] : models) {
     try {
-      const data = await gemini(`models/${model}:generateContent`, body);
+      const remaining = deadline - Date.now();
+      if (remaining <= 0) break;
+      const data = await gemini(`models/${model}:generateContent`, body, remaining);
       workingModel = model;
       const text = (data.candidates?.[0]?.content?.parts || []).filter((part) => !part.thought).map((part) => part.text || "").join("");
       return JSON.parse(text);
@@ -236,7 +240,7 @@ function validAction(action, value) {
   return null;
 }
 
-export async function answerQuestion({ message, history = [], page = null }) {
+export async function answerQuestion({ message, history = [], page = null }, { allowActions = true } = {}) {
   const question = clean(message, MAX_QUESTION);
   if (!question) return { ok: false, status: 400, error: "Please type a question." };
   if (!process.env.GEMINI_API_KEY) return { ok: false, status: 503, code: "no_key", error: "The assistant isn't connected yet. Page navigation still works." };
@@ -256,6 +260,7 @@ export async function answerQuestion({ message, history = [], page = null }) {
   const result = await generateJson(CHAT_SYSTEM, [{ role: "user", parts: [{ text: prompt }] }], CHAT_SCHEMA);
 
   const action = validAction(result.action, result.action_value);
+  if (action && !allowActions) return refusal();
   if (action) return { ok: true, grounded: true, answer: clean(result.answer, 200) || "Okay.", sources: [], action };
 
   const cited = chunks.filter((chunk) => (result.source_ids || []).includes(chunk.id));
@@ -311,13 +316,16 @@ export async function transformPage({ page, mode }) {
 
 /* ---------- request handling ---------- */
 const hits = new Map();
+let inFlight = 0;
 function limited(ip) {
   const now = Date.now();
+  for (const [key, times] of hits) if (times.at(-1) <= now - 60000) hits.delete(key);
   const recent = (hits.get(ip) || []).filter((time) => now - time < 60000);
+  if (recent.length >= 20) return true;
+  if (!hits.has(ip) && hits.size >= 5000) return true;
   recent.push(now);
   hits.set(ip, recent);
-  if (hits.size > 5000) hits.clear();
-  return recent.length > 20;
+  return false;
 }
 
 export async function handle(kind, body, { ip = "local", origin, host } = {}) {
@@ -327,12 +335,16 @@ export async function handle(kind, body, { ip = "local", origin, host } = {}) {
     return { status: 403, json: { ok: false, error: "Not allowed." } };
   }
   if (limited(ip)) return { status: 429, json: { ok: false, error: "That's a lot of questions at once. Please wait a minute." } };
+  if (inFlight >= 4) return { status: 429, json: { ok: false, error: "The assistant is busy. Try again shortly." } };
+  inFlight++;
   try {
-    const result = kind === "chat" ? await answerQuestion(body || {}) : await transformPage(body || {});
+    const result = kind === "chat" ? await answerQuestion(body || {}, { allowActions: false }) : await transformPage(body || {});
     return { status: result.ok ? 200 : result.status || 500, json: result };
   } catch (error) {
-    console.error("assistant error:", error.status || error.message, error.cause?.code || error.cause?.message || "");
+    console.error("assistant error:", error.status || error.name);
     const busy = error.status === 429 || error.status === 503 || error.name === "TimeoutError";
     return { status: busy ? 503 : 502, json: { ok: false, error: busy ? "The AI service is busy. Please try again in a minute. Page navigation still works." : "I can't reach the AI service right now. Page navigation still works." } };
+  } finally {
+    inFlight--;
   }
 }

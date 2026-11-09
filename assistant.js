@@ -201,7 +201,7 @@ async function post(path, body) {
 }
 
 export function askServer(message) {
-  const history = state.messages.filter((item) => item.text && !item.sections).slice(-6).map(({ role, text }) => ({ role, text }));
+  const history = state.messages.filter((item) => item.text && !item.sections).slice(-6).map(({ role, text }) => ({ role, text: text.slice(0, 600) }));
   return post("/api/chat", { message, history, page: pagePath() });
 }
 
@@ -338,7 +338,10 @@ const sendButton = iconButton("srm-send", ICONS.send, "Send");
 sendButton.type = "submit";
 form.append(input, micButton, sendButton);
 
-const note = el("p", "srm-note", "AI can make mistakes. Check the linked page before you decide.");
+const note = el("p", "srm-note", "AI questions go to Google Gemini. Keep personal information out of chat. ");
+const privacy = el("a", "", "Privacy details");
+privacy.href = "/privacy";
+note.append(privacy);
 
 const settings = el("div", "srm-settings");
 settings.hidden = true;
@@ -351,7 +354,17 @@ let busy = false;
 let spokenReplies = false;
 
 function safeSources(sources = []) {
-  return sources.filter((source) => /^\/(?!\/)/.test(source.url) || /^https:\/\/([\w-]+\.)*srmist\.edu\.in(\/|$)/.test(source.url));
+  return sources.filter(({ url }) => {
+    if (typeof url !== "string" || /[\\\s]/.test(url)) return false;
+    if (/^\/(?!\/)/.test(url)) return true;
+    try {
+      const parsed = new URL(url);
+      return parsed.protocol === "https:" && !parsed.username && !parsed.password &&
+        !parsed.port && /(^|\.)srmist\.edu\.in$/.test(parsed.hostname);
+    } catch {
+      return false;
+    }
+  });
 }
 
 function renderMessage(message) {
@@ -554,7 +567,16 @@ function buildSettings() {
   reset.addEventListener("click", () => setDisplay("display-reset"));
   const heading = el("h3", "", "Accessibility");
   const hint = el("p", "", "You can also ask in the chat, like “make the text bigger”.");
-  settings.append(heading, size, tools, reset, hint);
+  const clear = el("button", "srm-toggle", "Clear chat");
+  clear.type = "button";
+  clear.addEventListener("click", () => {
+    if (busy) return;
+    state.messages = [];
+    input.value = "";
+    saveState();
+    renderAll();
+  });
+  settings.append(heading, size, tools, reset, clear, hint);
   if (!canSpeak) toggles.push(() => tools.querySelectorAll(".srm-action")[1].remove());
 }
 

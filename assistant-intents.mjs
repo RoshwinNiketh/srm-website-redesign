@@ -12,7 +12,13 @@ export const ROUTES = [
   { id: "research", label: "Research", href: "/research", aliases: ["research"] },
   { id: "about", label: "About SRM", href: "/about", aliases: ["about", "about us", "about srm", "history"] },
   { id: "contact", label: "Contact", href: "/contact", aliases: ["contact", "contact us", "contacts", "phone number", "address"] },
-  { id: "more", label: "More from SRMIST", href: "/more", aliases: ["more", "more resources", "alumni", "international relations"] },
+  { id: "more", label: "More from SRMIST", href: "/more", aliases: ["more", "more resources", "alumni"] },
+  { id: "students", label: "Student Services", href: "/students", aliases: ["students", "student services", "student portal", "student portals"] },
+  { id: "exams", label: "Exams & Results", href: "/exams", aliases: ["exam", "exams", "results", "hall ticket", "examinations"] },
+  { id: "international", label: "International", href: "/international", aliases: ["international", "international relations", "semester abroad", "exchange"] },
+  { id: "visit", label: "Campuses & Visit", href: "/visit", aliases: ["campuses", "visit campus", "visitor information", "directions"] },
+  { id: "disclosures", label: "Public Disclosures", href: "/disclosures", aliases: ["public disclosures", "mandatory disclosures", "ugc", "iqac", "nirf"] },
+  { id: "safety", label: "Safety & Support", href: "/campus-life#safety", aliases: ["safety", "student support", "anti ragging", "grievance", "counselling"] },
   { id: "campus", label: "3D campus", href: "/#campus", aliases: ["campus", "3d campus", "campus explorer", "3d explorer", "campus map", "campus tour", "pick a building", "3d"] },
   { id: "schools", label: "Schools", href: "/#schools", aliases: ["schools", "school list", "paths"] },
   { id: "portal", label: "Application portal", href: "https://applications.srmist.edu.in/", external: true, aliases: ["application portal", "apply now", "application form", "admission portal"] },
@@ -27,7 +33,7 @@ export const ROUTES = [
   { id: "careers", label: "Career Centre", href: `${OFFICIAL}/career-centre/`, external: true, aliases: ["placements", "placement", "career centre", "career center"] },
   { id: "news", label: "News", href: `${OFFICIAL}/news/`, external: true, aliases: ["news"] },
   { id: "events", label: "Events", href: `${OFFICIAL}/events/`, external: true, aliases: ["events"] },
-  { id: "program-finder", label: "Program finder", href: `${OFFICIAL}/program-finder/`, external: true, aliases: ["program finder", "programme finder"] },
+  { id: "program-finder", label: "Program finder", href: "/programmes", aliases: ["program finder", "programme finder"] },
   { id: "virtual-tour", label: "Virtual tour", href: "https://webstor.srmist.edu.in/web_assets/srmist-virtual-tour-vo/index.htm", external: true, aliases: ["virtual tour", "360 tour"] },
 ];
 

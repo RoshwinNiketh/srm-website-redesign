@@ -3,37 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#faf7ee" />
+    <meta name="theme-color" content="#f1f7ff" />
     <meta
       name="description"
       content="Discover a new perspective on SRM. Explore a cinematic campus concept and find your place in engineering, medicine, arts and science."
     />
     <title>SRM — A world of possibilities</title>
     <script src="/assistant-prefs.js"></script>
-    <style>
-      #intro-loading { display: none; }
-      html.intro-pending body > :not(#intro-loading) { visibility: hidden; }
-      html.intro-pending { overflow: hidden; background: #faf7ee; }
-      html.intro-pending #intro-loading {
-        position: fixed;
-        inset: 0;
-        display: grid;
-        place-items: center;
-        background: #faf7ee;
-        color: #172943;
-        font: 16px system-ui, sans-serif;
-      }
-    </style>
-    <script>
-      try {
-        if (!location.hash && !matchMedia("(prefers-reduced-motion: reduce)").matches &&
-            document.documentElement.dataset.a11yMotion !== "off" &&
-            Element.prototype.animate && sessionStorage.getItem("srm-landing-intro-v1") !== "played") {
-          document.documentElement.classList.add("intro-pending");
-          setTimeout(() => document.documentElement.classList.remove("intro-pending"), 20000);
-        }
-      } catch {}
-    </script>
+    <script src="/landing-boot.js"></script>
     <link rel="preload" href="/assets/brand/srm-logo.png" as="image" fetchpriority="high" />
     <link rel="icon" href="/assets/brand/srm-emblem.png" type="image/png" />
     <link rel="preload" href="assets/images/campus-aerial.webp" as="image" />
@@ -57,7 +34,7 @@
       <a class="brand" href="/" aria-label="SRM home">
         <img src="/assets/brand/srm-logo.png" alt="" width="544" height="184" />
       </a>
-      <form class="site-search" role="search">
+      <form class="site-search" role="search" action="/directory">
         <label class="search-label" for="site-search-input">Search SRMIST</label>
         <input id="site-search-input" type="search" placeholder="Search SRMIST" autocomplete="off" aria-controls="site-search-results" />
         <button type="submit" aria-label="Find pages">
@@ -105,7 +82,7 @@
           <h1 id="landing-title" tabindex="-1">A world of<br />possibilities.</h1>
           <p class="hero-motto">Learn. Leap. Lead.</p>
           <a class="primary-button hero-admissions" href="/admissions">
-            Admissions Open <span class="circle-arrow" aria-hidden="true">↗</span>
+            Explore Admissions <span class="circle-arrow" aria-hidden="true">↗</span>
           </a>
         </div>
         <a class="scroll-cue" href="#campus"
@@ -135,9 +112,10 @@
         </div>
       </section>
 
+      <!-- Homepage services -->
       <section id="campus" class="campus" aria-label="3D campus explorer">
         <div class="campus-stage">
-          <img class="campus-fallback" src="assets/images/campus-aerial.webp" alt="" width="1672" height="941" loading="lazy" />
+          <img class="campus-fallback" src="assets/images/campus-official.webp" alt="" width="1024" height="683" loading="lazy" />
           <canvas id="campus-canvas" aria-hidden="true"></canvas>
           <div id="campus-labels" class="campus-labels"></div>
           <div class="campus-intro">
@@ -161,7 +139,7 @@
             <p id="panel-tagline" class="panel-tagline"></p>
             <div class="floor-tabs" role="tablist" aria-label="Building floors" id="floor-tabs"></div>
             <div id="floor-body" class="floor-body" role="tabpanel" tabindex="0"></div>
-            <p class="panel-note">Sample content for this concept. Programmes, fees, and building locations need confirming before launch.</p>
+            <p class="panel-note">Illustrative campus locations. Use the linked university resources for official information.</p>
           </aside>
         </div>
         <div class="school-bar" aria-label="Choose a school">
@@ -203,8 +181,8 @@
             <div class="school-preview-image">
               <img
                 id="school-image"
-                src="assets/images/engineering.webp"
-                alt="Architectural concept of an SRM academic tower"
+                src="assets/images/tech-park.webp"
+                alt="SRM Tech Park at Kattankulathur"
                 width="1672"
                 height="941"
                 loading="lazy"
@@ -259,7 +237,7 @@
       <div class="destination-visual">
         <img
           id="destination-image"
-          src="assets/images/engineering.webp"
+          src="assets/images/tech-park.webp"
           alt=""
           loading="lazy"
           decoding="async"
@@ -293,7 +271,7 @@
       </div>
     </dialog>
     <div class="journey-transition" aria-hidden="true">
-      <img src="assets/images/archgate.webp" alt="" loading="lazy" decoding="async" />
+      <img src="assets/images/campus-official.webp" alt="" loading="lazy" decoding="async" />
       <div></div>
       <span
         >Through the archgate.<br /><strong id="journey-destination"
